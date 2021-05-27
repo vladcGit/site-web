@@ -21,6 +21,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('frontend.urls')),
     path('api/', include('api.urls')),
-    path('signup?firstName=<first_name>&lastName=<last_name>&email=<email>&password=<password>',
-         signup),
 ]

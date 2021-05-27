@@ -66,7 +66,6 @@ function getCookie(name) {
 
 function handleButtonClick(_email,_password,_first_name,_last_name)
 {
-    console.log(_username,_password,_email,_first_name,_last_name)
 
     const requestOptions={
         method:"POST",
@@ -79,15 +78,15 @@ function handleButtonClick(_email,_password,_first_name,_last_name)
         body:JSON.stringify({
         email:_email,
         password:_password,
-        firstName:_first_name,
-        lastName:_last_name,
+        first_name:_first_name,
+        last_name:_last_name,
         },
         )
     };
 
     fetch("/api/create-user",requestOptions)
     .then((response)=>response.json())
-
+    .then((data)=>this.props.history.push("/"))
 
 }
 
