@@ -46,6 +46,38 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+function handleButtonClick(_email,_password)
+{
+
+    const requestOptions={
+        method:"POST",
+        headers:{
+                "Content-Type":"application/json"
+                },
+        body:JSON.stringify({
+        email:_email,
+        password:_password,
+        },
+        )
+    };
+
+    fetch("/api/auth/login/",requestOptions)
+    .then((response)=>response.json())
+    .then((data)=>{
+      if(data.key)
+      {
+        localStorage.clear();
+        localStorage.setItem('token',data.key);
+        window.location.replace('');
+      }
+      else
+      {
+        localStorage.clear();
+      }
+    });
+
+}
+
 export default function SignIn() {
   const classes = useStyles();
 
@@ -87,11 +119,16 @@ export default function SignIn() {
             label="Remember me"
           />
           <Button
-            type="submit"
+
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={()=>
+              handleButtonClick
+                  (document.getElementById("email").value,
+                  document.getElementById("password").value)
+            }
           >
             Sign In
           </Button>

@@ -58,7 +58,7 @@ const MenuAppBar = (props) => {
           <IconButton
             variant="contained"
             color="secondary"
-            onClick={() => handleButtonClick("/pricing")}
+            onClick={() => handleButtonClick("/myaccount")}
           >
             <AccountBox />
           </IconButton>

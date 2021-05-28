@@ -4,6 +4,7 @@ import SignIn from "./Items/Signin";
 import SignUp from "./Items/Signup";
 import Pricing from "./Items/Pricing";
 import Footer from "./Items/Footer";
+import Dashboard from "./Items/Dashboard";
 import HomePageText from "./Items/HomePageText";
 import { Grid, Button, ButtonGroup, Typography, Box } from "@material-ui/core";
 import {
@@ -13,6 +14,7 @@ import {
   Link,
   Redirect,
 } from "react-router-dom";
+
 
 
 export default class HomePage extends Component {
@@ -31,13 +33,16 @@ export default class HomePage extends Component {
               <HomePageText/>
             </Route>
             <Route exact path="/signup">
-              <SignUp />
+            {localStorage.getItem('token') != null? <Redirect to="/myaccount" /> : <SignUp />}
             </Route>
             <Route exact path="/signin">
-              <SignIn />
+            {localStorage.getItem('token') != null? <Redirect to="/myaccount" /> : <SignIn />}
             </Route>
             <Route exact path="/pricing">
               <Pricing />
+            </Route>
+            <Route exact path ="/myaccount">
+              {localStorage.getItem('token') == null? <Redirect to="/signin" /> : <Dashboard />}
             </Route>
           </Switch>
           <Footer />

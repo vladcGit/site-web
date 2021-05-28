@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,6 +12,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+
+
+
 
 function Copyright() {
   return (
@@ -46,47 +49,39 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-// using jQuery
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
 
 function handleButtonClick(_email,_password,_first_name,_last_name)
 {
 
     const requestOptions={
         method:"POST",
-        credentials: "same-origin",
         headers:{
-                "X-CSRFToken": getCookie("csrftoken"),
-                "Accept": "application/json",
                 "Content-Type":"application/json"
                 },
         body:JSON.stringify({
         email:_email,
-        password:_password,
+        password1:_password,
+        password2:_password,
         first_name:_first_name,
         last_name:_last_name,
         },
         )
     };
 
-    fetch("/api/create-user",requestOptions)
+    fetch("/api/auth/register/",requestOptions)
     .then((response)=>response.json())
-    .then((data)=>this.props.history.push("/"))
+    .then((data)=>{
+      if(data.key)
+      {
+        localStorage.clear();
+        localStorage.setItem('token',data.key);
+        window.location.replace('');
+      }
+      else
+      {
+        localStorage.clear();
+      }
+    });
 
 }
 
