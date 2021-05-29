@@ -31,51 +31,44 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
-function handleButtonClick(_email,_password)
-{
+function handleButtonClick(_email, _password) {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: _email,
+      password: _password,
+    }),
+  };
 
-    const requestOptions={
-        method:"POST",
-        headers:{
-                "Content-Type":"application/json"
-                },
-        body:JSON.stringify({
-        email:_email,
-        password:_password,
-        },
-        )
-    };
-
-    fetch("/api/auth/login/",requestOptions)
-    .then((response)=>response.json())
-    .then((data)=>{
-      if(data.key)
-      {
+  fetch("/api/auth/login/", requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.key) {
         localStorage.clear();
-        localStorage.setItem('token',data.key);
-        window.location.replace('');
-      }
-      else
-      {
+        localStorage.setItem("token", data.key);
+        window.location.replace("");
+      } else {
         localStorage.clear();
       }
     });
-
 }
 
 export default function SignIn() {
@@ -119,15 +112,15 @@ export default function SignIn() {
             label="Remember me"
           />
           <Button
-
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={()=>
-              handleButtonClick
-                  (document.getElementById("email").value,
-                  document.getElementById("password").value)
+            onClick={() =>
+              handleButtonClick(
+                document.getElementById("email").value,
+                document.getElementById("password").value
+              )
             }
           >
             Sign In

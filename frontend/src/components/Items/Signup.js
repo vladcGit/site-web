@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,9 +12,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
-
-
 
 function Copyright() {
   return (
@@ -34,60 +31,50 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
+function handleButtonClick(_email, _password, _first_name, _last_name) {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: _email,
+      password1: _password,
+      password2: _password,
+      first_name: _first_name,
+      last_name: _last_name,
+    }),
+  };
 
-function handleButtonClick(_email,_password,_first_name,_last_name)
-{
-
-    const requestOptions={
-        method:"POST",
-        headers:{
-                "Content-Type":"application/json"
-                },
-        body:JSON.stringify({
-        email:_email,
-        password1:_password,
-        password2:_password,
-        first_name:_first_name,
-        last_name:_last_name,
-        },
-        )
-    };
-
-    fetch("/api/auth/register/",requestOptions)
-    .then((response)=>response.json())
-    .then((data)=>{
-      if(data.key)
-      {
+  fetch("/api/auth/register/", requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.key) {
         localStorage.clear();
-        localStorage.setItem('token',data.key);
-        window.location.replace('');
-      }
-      else
-      {
+        localStorage.setItem("token", data.key);
+        window.location.replace("");
+      } else {
         localStorage.clear();
       }
     });
-
 }
 
 export default function SignUp() {
-
-
   const classes = useStyles();
 
   return (
@@ -123,7 +110,6 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
-
               />
             </Grid>
             <Grid item xs={12}>
@@ -135,7 +121,6 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-
               />
             </Grid>
             <Grid item xs={12}>
@@ -148,7 +133,6 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-
               />
             </Grid>
             <Grid item xs={12}>
@@ -159,17 +143,17 @@ export default function SignUp() {
             </Grid>
           </Grid>
           <Button
-
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={()=>
-            handleButtonClick
-                (document.getElementById("email").value,
+            onClick={() =>
+              handleButtonClick(
+                document.getElementById("email").value,
                 document.getElementById("password").value,
                 document.getElementById("firstName").value,
-                document.getElementById("lastName").value)
+                document.getElementById("lastName").value
+              )
             }
           >
             Sign Up

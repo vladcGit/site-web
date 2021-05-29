@@ -14,16 +14,16 @@ import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   MenuButton: {},
   HomeButton: {
     marginLeft: "auto",
-    flex: 1
+    flex: 1,
   },
   title: {
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 }));
 
 const MenuAppBar = (props) => {
@@ -49,10 +49,9 @@ const MenuAppBar = (props) => {
           </div>
 
           <ButtonGroup variant="contained" color="secondary">
-            <Button onClick={() => handleButtonClick("/signup")}>
-              Sign up
-            </Button>
-            <Button onClick={() => handleButtonClick("/signin")}>Login</Button>
+            <Button onClick={() => handleButtonClick("/courses")}> Cursuri </Button>
+            <Button onClick={() => handleButtonClick("/signup")}> Sign up </Button>
+            <Button onClick={() => handleButtonClick("/signin")}> Login </Button>
           </ButtonGroup>
 
           <IconButton

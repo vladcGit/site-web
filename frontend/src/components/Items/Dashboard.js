@@ -1,43 +1,49 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import Button from "@material-ui/core/Button";
+import React, { useState, useEffect, Fragment } from "react";
+import { Button, Grid, Typography } from "@material-ui/core/";
+import { withStyles } from "@material-ui/core/styles";
 
-function handleButtonClick()
-{
-    const requestOptions={
-        method:"POST",
-        headers:{
-                "Content-Type":"application/json",
-                Authorization: `Token ${localStorage.getItem('token')}`,    
-            },
-    };
 
-    fetch("/api/auth/logout/",requestOptions)
-    .then((response)=>response.json())
-    .then((data)=>
-    {
-        localStorage.clear();
-        window.location.replace('');
+const WhiteTextTypography = withStyles({
+  root: {
+    color: "#FFFFFF",
+  },
+})(Typography);
+
+
+function handleButtonClick() {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Token ${localStorage.getItem("token")}`,
+    },
+  };
+
+  fetch("/api/auth/logout/", requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+      localStorage.clear();
+      window.location.replace("");
     });
-
 }
 
 const Dashboard = () => {
-  const [userEmail, setUserEmail] = useState('');
+  const [userEmail, setUserEmail] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (localStorage.getItem('token') === null) {
-      window.location.replace('');
+    if (localStorage.getItem("token") === null) {
+      window.location.replace("");
     } else {
-      fetch('http://127.0.0.1:8000/api/auth/user/', {
-        method: 'GET',
+      fetch("/api/auth/user/", {
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Token ${localStorage.getItem('token')}`
-        }
+          "Content-Type": "application/json",
+          Authorization: `Token ${localStorage.getItem("token")}`,
+        },
       })
-        .then(res => res.json())
-        .then(data => {
+        .then((res) => res.json())
+        .then((data) => {
           setUserEmail(data.email);
           setLoading(false);
         });
@@ -45,23 +51,29 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div>
-      {loading === false && (
-        <Fragment>
-          <h1>Dashboard</h1>
-          <h2>Hello {userEmail}!</h2>
-          <Button
-          fullWidth
+    <Grid
+      container
+      spacing={3}
+      direction="column"
+      alignItems="center"
+      justify="center"
+      style={{ minHeight: "50vh" }}
+    >
+      <Grid item xs={12} align="center">
+        <WhiteTextTypography variant="h4" component="h4">
+          Salut, {userEmail}!
+        </WhiteTextTypography>
+      </Grid>
+      <Grid item xs={12} align="center">
+        <Button
           variant="contained"
           color="primary"
-          onClick={()=>
-            handleButtonClick()
-          }>
-              Logout
-          </Button>
-        </Fragment>
-      )}
-    </div>
+          onClick={() => handleButtonClick()}
+        >
+          Logout
+        </Button>
+      </Grid>
+    </Grid>
   );
 };
 

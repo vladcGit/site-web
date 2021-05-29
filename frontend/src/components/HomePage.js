@@ -15,8 +15,6 @@ import {
   Redirect,
 } from "react-router-dom";
 
-
-
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
@@ -30,19 +28,31 @@ export default class HomePage extends Component {
 
           <Switch>
             <Route exact path="/">
-              <HomePageText/>
+              <HomePageText />
             </Route>
             <Route exact path="/signup">
-            {localStorage.getItem('token') != null? <Redirect to="/myaccount" /> : <SignUp />}
+              {localStorage.getItem("token") !== null ? (
+                <Redirect to="/myaccount" />
+              ) : (
+                <SignUp />
+              )}
             </Route>
             <Route exact path="/signin">
-            {localStorage.getItem('token') != null? <Redirect to="/myaccount" /> : <SignIn />}
+              {localStorage.getItem("token") !== null ? (
+                <Redirect to="/myaccount" />
+              ) : (
+                <SignIn />
+              )}
             </Route>
             <Route exact path="/pricing">
               <Pricing />
             </Route>
-            <Route exact path ="/myaccount">
-              {localStorage.getItem('token') == null? <Redirect to="/signin" /> : <Dashboard />}
+            <Route exact path="/myaccount">
+              {localStorage.getItem("token") === null ? (
+                <Redirect to="/signin" />
+              ) : (
+                <Dashboard />
+              )}
             </Route>
           </Switch>
           <Footer />
