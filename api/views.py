@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import generics, status
+from rest_framework import status
 from .serializers import UserSerializer
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
@@ -11,7 +11,10 @@ from django.http import JsonResponse
 
 
 # Create your views here.
-# @method_decorator(csrf_exempt, name='dispatch')
+
+# incercarea initiala de signup
+
+'''
 class SignupView(APIView):
     serializer_class = UserSerializer
 
@@ -34,3 +37,4 @@ class SignupView(APIView):
                 user.save()
                 return Response({'Success': 'User created'}, status=status.HTTP_201_CREATED)
             return Response({'Bad request': 'User already exists'}, status=status.HTTP_400_BAD_REQUEST)
+'''

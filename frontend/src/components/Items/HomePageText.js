@@ -3,6 +3,8 @@ import { Grid, Button, Typography, Box, Container } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
 
+// face ca textul sa fie alb
+
 const WhiteTextTypography = withStyles({
   root: {
     color: "#FFFFFF",
@@ -12,9 +14,11 @@ const WhiteTextTypography = withStyles({
 const HomePageText = (props) => {
   const { history } = props;
 
+  // functia pentru redirect pe ce pagina vreau
   const handleButtonClick = (pageURL) => {
     history.push(pageURL);
   };
+  
   return (
     <Grid
       container

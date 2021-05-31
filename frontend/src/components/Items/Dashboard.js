@@ -10,7 +10,10 @@ const WhiteTextTypography = withStyles({
 })(Typography);
 
 
-function handleButtonClick() {
+// handler buton de logout
+// doar da logout, nu face nimic altceva
+function handleButtonClick() 
+{
   const requestOptions = {
     method: "POST",
     headers: {
@@ -27,10 +30,14 @@ function handleButtonClick() {
     });
 }
 
-const Dashboard = () => {
-  const [userEmail, setUserEmail] = useState("");
-  const [loading, setLoading] = useState(true);
 
+const Dashboard = () => {
+  // variabila care retine numele utilizatorului conectat
+  const [userEmail, setUserEmail] = useState("");
+
+  // verifica daca un user e logat
+  // si retine email-ul sau
+  
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
       window.location.replace("");
@@ -45,7 +52,6 @@ const Dashboard = () => {
         .then((res) => res.json())
         .then((data) => {
           setUserEmail(data.email);
-          setLoading(false);
         });
     }
   }, []);

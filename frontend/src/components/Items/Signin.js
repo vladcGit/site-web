@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
+//functia care afiseaza copyright in josul paginii
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -46,7 +47,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function handleButtonClick(_email, _password) {
+// functia responsabila pentru signin
+// seteaza un token in browserul clientului
+function handleButtonClick(_email, _password) 
+{
   const requestOptions = {
     method: "POST",
     headers: {

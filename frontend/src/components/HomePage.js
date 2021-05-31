@@ -20,6 +20,9 @@ export default class HomePage extends Component {
     super(props);
   }
 
+
+  // aici se face redirect in principal si
+  // se verifica daca utilizatorul e conectat pentru anumite actiuni
   render() {
     return (
       <div>

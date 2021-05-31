@@ -46,6 +46,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// functia responsabila pentru signup
+// seteaza un token in browserul clientului
 function handleButtonClick(_email, _password, _first_name, _last_name) {
   const requestOptions = {
     method: "POST",

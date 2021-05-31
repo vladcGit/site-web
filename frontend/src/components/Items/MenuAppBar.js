@@ -30,6 +30,7 @@ const MenuAppBar = (props) => {
   const { history } = props;
   const classes = useStyles();
 
+  // functia pentru redirect pe ce pagina vreau
   const handleButtonClick = (pageURL) => {
     history.push(pageURL);
   };
