@@ -15,40 +15,42 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 
+import { loadStripe } from "@stripe/stripe-js";
+
 const useStyles = makeStyles((theme) => ({
   "@global": {
     ul: {
       margin: 0,
       padding: 0,
-      listStyle: "none"
-    }
+      listStyle: "none",
+    },
   },
   appBar: {
-    borderBottom: `1px solid ${theme.palette.divider}`
+    borderBottom: `1px solid ${theme.palette.divider}`,
   },
   toolbar: {
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   toolbarTitle: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   link: {
-    margin: theme.spacing(1, 1.5)
+    margin: theme.spacing(1, 1.5),
   },
   heroContent: {
-    padding: theme.spacing(8, 0, 6)
+    padding: theme.spacing(8, 0, 6),
   },
   cardHeader: {
     backgroundColor:
       theme.palette.type === "light"
         ? theme.palette.grey[200]
-        : theme.palette.grey[700]
+        : theme.palette.grey[700],
   },
   cardPricing: {
     display: "flex",
     justifyContent: "center",
     alignItems: "baseline",
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   footer: {
     borderTop: `1px solid ${theme.palette.divider}`,
@@ -57,9 +59,9 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(3),
     [theme.breakpoints.up("sm")]: {
       paddingTop: theme.spacing(6),
-      paddingBottom: theme.spacing(6)
-    }
-  }
+      paddingBottom: theme.spacing(6),
+    },
+  },
 }));
 
 const tiers = [
@@ -70,10 +72,10 @@ const tiers = [
       "10 users included",
       "2 GB of storage",
       "Help center access",
-      "Email support"
+      "Email support",
     ],
     buttonText: "Sign up for free",
-    buttonVariant: "outlined"
+    buttonVariant: "outlined",
   },
   {
     title: "Pro",
@@ -83,10 +85,10 @@ const tiers = [
       "20 users included",
       "10 GB of storage",
       "Help center access",
-      "Priority email support"
+      "Priority email support",
     ],
     buttonText: "Get started",
-    buttonVariant: "contained"
+    buttonVariant: "contained",
   },
   {
     title: "Enterprise",
@@ -95,21 +97,39 @@ const tiers = [
       "50 users included",
       "30 GB of storage",
       "Help center access",
-      "Phone & email support"
+      "Phone & email support",
     ],
     buttonText: "Contact us",
-    buttonVariant: "outlined"
-  }
+    buttonVariant: "outlined",
+  },
 ];
+
+function handleButtonClick() {
+  fetch("subscribe/config/")
+    .then((result) => result.json())
+    .then(async (data) => {
+      const stripePromise = loadStripe(data.publicKey);
+
+      const stripe = await stripePromise;
+
+      fetch("subscribe/create-checkout-session/")
+        .then((result) => result.json())
+        .then((data) => {
+          console.log(data);
+          return stripe.redirectToCheckout({ sessionId: data.sessionId });
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    });
+}
 
 export default function Pricing() {
   const classes = useStyles();
 
   return (
     <React.Fragment>
-      <CssBaseline />
-
-      {/* Hero unit */}
+      <CssBaseline /> {/* Hero unit */}{" "}
       <Container maxWidth="sm" component="main" className={classes.heroContent}>
         <Typography
           component="h1"
@@ -118,8 +138,8 @@ export default function Pricing() {
           color="textPrimary"
           gutterBottom
         >
-          Pricing
-        </Typography>
+          Pricing{" "}
+        </Typography>{" "}
         <Typography
           variant="h5"
           align="center"
@@ -127,13 +147,14 @@ export default function Pricing() {
           component="p"
         >
           Quickly build an effective pricing table for your potential customers
-          with this layout. It&apos;s built with default Material-UI components
-          with little customization.
-        </Typography>
-      </Container>
-      {/* End hero unit */}
+          with this layout.It & apos; s built with default Material - UI
+          components with little customization.{" "}
+        </Typography>{" "}
+      </Container>{" "}
+      {/* End hero unit */}{" "}
       <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
+          {" "}
           {tiers.map((tier) => (
             // Enterprise card is full width at sm breakpoint
             <Grid
@@ -147,21 +168,26 @@ export default function Pricing() {
                 <CardHeader
                   title={tier.title}
                   subheader={tier.subheader}
-                  titleTypographyProps={{ align: "center" }}
-                  subheaderTypographyProps={{ align: "center" }}
+                  titleTypographyProps={{
+                    align: "center",
+                  }}
+                  subheaderTypographyProps={{
+                    align: "center",
+                  }}
                   action={tier.title === "Pro" ? <StarIcon /> : null}
                   className={classes.cardHeader}
-                />
+                />{" "}
                 <CardContent>
                   <div className={classes.cardPricing}>
                     <Typography component="h2" variant="h3" color="textPrimary">
-                      ${tier.price}
-                    </Typography>
+                      $ {tier.price}{" "}
+                    </Typography>{" "}
                     <Typography variant="h6" color="textSecondary">
-                      /mo
-                    </Typography>
-                  </div>
+                      /mo{" "}
+                    </Typography>{" "}
+                  </div>{" "}
                   <ul>
+                    {" "}
                     {tier.description.map((line) => (
                       <Typography
                         component="li"
@@ -169,25 +195,28 @@ export default function Pricing() {
                         align="center"
                         key={line}
                       >
-                        {line}
+                        {" "}
+                        {line}{" "}
                       </Typography>
-                    ))}
-                  </ul>
-                </CardContent>
+                    ))}{" "}
+                  </ul>{" "}
+                </CardContent>{" "}
                 <CardActions>
                   <Button
                     fullWidth
                     variant={tier.buttonVariant}
                     color="primary"
+                    onClick={() => handleButtonClick()}
                   >
-                    {tier.buttonText}
-                  </Button>
-                </CardActions>
-              </Card>
+                    {" "}
+                    {tier.buttonText}{" "}
+                  </Button>{" "}
+                </CardActions>{" "}
+              </Card>{" "}
             </Grid>
-          ))}
-        </Grid>
-      </Container>
+          ))}{" "}
+        </Grid>{" "}
+      </Container>{" "}
     </React.Fragment>
   );
 }

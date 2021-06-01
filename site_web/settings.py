@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'corsheaders',  # new
 
     'api',
+    'subscriptions.apps.SubscriptionsConfig'
 ]
 
 MIDDLEWARE = [
@@ -153,3 +154,10 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
+
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51IxFpNG3BrIJ6aWB49fVDuCu6JvnlLcCYz81cfS1KQ178aIrDRjHHAM0tvrVLN9RwbHlg9PxxlaQkYbgfVFZHKie00VNyfzXPW'
+
+STRIPE_SECRET_KEY = 'sk_test_51IxFpNG3BrIJ6aWBDqn3SbjMcMNaVNbMFMyHdfP0QGGPRzlxby0DS7o6JUc2SMf22DnKxhAyobVaq4WuClwIzNDt00sEI9ZbUR'
+
+STRIPE_PRICE_ID = 'price_1IxFu2G3BrIJ6aWBH5Bch0wk'
