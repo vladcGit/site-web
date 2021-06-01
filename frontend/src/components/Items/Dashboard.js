@@ -2,18 +2,15 @@ import React, { useState, useEffect, Fragment } from "react";
 import { Button, Grid, Typography } from "@material-ui/core/";
 import { withStyles } from "@material-ui/core/styles";
 
-
 const WhiteTextTypography = withStyles({
   root: {
     color: "#FFFFFF",
   },
 })(Typography);
 
-
 // handler buton de logout
 // doar da logout, nu face nimic altceva
-function handleButtonClick() 
-{
+function handleButtonClick() {
   const requestOptions = {
     method: "POST",
     headers: {
@@ -30,18 +27,20 @@ function handleButtonClick()
     });
 }
 
-
 const Dashboard = () => {
   // variabila care retine numele utilizatorului conectat
+  // si tipul de abonat
   const [userEmail, setUserEmail] = useState("");
+  const [userSubscription, setUserSubscription] = useState("");
 
   // verifica daca un user e logat
   // si retine email-ul sau
-  
+
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
       window.location.replace("");
     } else {
+      //get user email
       fetch("/api/auth/user/", {
         method: "GET",
         headers: {
@@ -52,6 +51,15 @@ const Dashboard = () => {
         .then((res) => res.json())
         .then((data) => {
           setUserEmail(data.email);
+        });
+
+      //get subscription status
+      fetch("/subscribe/get_subscription_details/")
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+          if(data.hasOwnProperty('Error')) setUserSubscription("Cont gratis")
+          else setUserSubscription(data.subscription);
         });
     }
   }, []);
@@ -68,6 +76,9 @@ const Dashboard = () => {
       <Grid item xs={12} align="center">
         <WhiteTextTypography variant="h4" component="h4">
           Salut, {userEmail}!
+        </WhiteTextTypography>
+        <WhiteTextTypography variant="h4" component="h4">
+          {userSubscription}
         </WhiteTextTypography>
       </Grid>
       <Grid item xs={12} align="center">

@@ -14,6 +14,7 @@ import {
   Link,
   Redirect,
 } from "react-router-dom";
+import Cancel from "./Items/Cancel";
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -56,6 +57,9 @@ export default class HomePage extends Component {
               ) : (
                 <Dashboard />
               )}
+            </Route>
+            <Route exact path="/cancel">
+              <Cancel/>
             </Route>
           </Switch>
           <Footer />
