@@ -26,6 +26,7 @@
     "@material-ui/icons": "^4.11.2",
     "@stripe/react-stripe-js": "^1.4.1",
     "@stripe/stripe-js": "^1.15.0",
+    "react-player": "^2.9.0",
     "react-router-dom": "^5.2.0"
   }
 }

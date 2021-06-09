@@ -8,4 +8,6 @@ urlpatterns = [
     path('pricing', index),
     path('myaccount', index),
     path('cancel', index),
+    path('courses', index),
+    path('courses/<str:course>/<str:lesson>', index)
 ]

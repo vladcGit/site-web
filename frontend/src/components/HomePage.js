@@ -6,6 +6,8 @@ import Pricing from "./Items/Pricing";
 import Footer from "./Items/Footer";
 import Dashboard from "./Items/Dashboard";
 import HomePageText from "./Items/HomePageText";
+import Courses from "./Items/Courses";
+import Lesson from "./Items/Lesson";
 import { Grid, Button, ButtonGroup, Typography, Box } from "@material-ui/core";
 import {
   BrowserRouter as Router,
@@ -20,7 +22,6 @@ export default class HomePage extends Component {
   constructor(props) {
     super(props);
   }
-
 
   // aici se face redirect in principal si
   // se verifica daca utilizatorul e conectat pentru anumite actiuni
@@ -59,8 +60,16 @@ export default class HomePage extends Component {
               )}
             </Route>
             <Route exact path="/cancel">
-              <Cancel/>
+              <Cancel />
             </Route>
+            <Route exact path="/courses">
+              <Courses />
+            </Route>
+            <Route
+              exact
+              path="/courses/:course_name/:lesson_title"
+              component={Lesson}
+            />
           </Switch>
           <Footer />
         </Router>

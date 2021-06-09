@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'corsheaders',  # new
 
     'api',
-    'subscriptions.apps.SubscriptionsConfig'
+    'subscriptions.apps.SubscriptionsConfig',
+    'courses',
 ]
 
 MIDDLEWARE = [
