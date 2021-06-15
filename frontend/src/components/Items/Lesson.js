@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 //import { Card, CardMedia } from "@material-ui/core";
 import ReactPlayer from "react-player";
+import { Typography, Grid } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+
+const WhiteTextTypography = withStyles({
+  root: {
+    color: "#FFFFFF",
+  },
+})(Typography);
 
 export default class Lesson extends Component {
   constructor(props) {
@@ -28,16 +36,27 @@ export default class Lesson extends Component {
 
   render() {
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "40vh",
-        }}
+      <Grid
+        container
+        xs={12}
+        spacing={3}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: "70vh" }}
       >
-        <ReactPlayer url={this.state.lectie.link} />
-      </div>
+        <WhiteTextTypography component="h1" variant="h2" gutterBottom>
+          {this.state.lectie.title}
+        </WhiteTextTypography>
+        <div
+          style={{
+            height: "40vh",
+          }}
+        >
+          <ReactPlayer url={this.state.lectie.link} />
+        </div>
+        <WhiteTextTypography>{this.state.lectie.details}</WhiteTextTypography>
+      </Grid>
     );
   }
 }

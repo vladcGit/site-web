@@ -8,6 +8,7 @@ import Dashboard from "./Items/Dashboard";
 import HomePageText from "./Items/HomePageText";
 import Courses from "./Items/Courses";
 import Lesson from "./Items/Lesson";
+import Lessons from "./Items/Lessons";
 import { Grid, Button, ButtonGroup, Typography, Box } from "@material-ui/core";
 import {
   BrowserRouter as Router,
@@ -17,6 +18,17 @@ import {
   Redirect,
 } from "react-router-dom";
 import Cancel from "./Items/Cancel";
+
+function canViewLesson() {
+  if (localStorage.getItem("token") === null) return false;
+  fetch("/subscribe/get_full_subscription_details/")
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.hasOwnProperty("Error")) return false;
+      if (data.subscription != "active") return false;
+      return true;
+    });
+}
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -70,6 +82,7 @@ export default class HomePage extends Component {
               path="/courses/:course_name/:lesson_title"
               component={Lesson}
             />
+            <Route exact path="/courses/:course_name" component={Lessons} />
           </Switch>
           <Footer />
         </Router>

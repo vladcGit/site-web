@@ -11,8 +11,8 @@ def get_courses(request):
     return JsonResponse(c, safe=False)
 
 
-def get_lessons(request):
-    c = Courses.objects.get(name=request.title)
+def get_lessons(request,course_title):
+    c = Courses.objects.get(name=course_title)
     lectii = list(Lessons.objects.filter(course=c).values())
     return JsonResponse(lectii, safe=False)
 
