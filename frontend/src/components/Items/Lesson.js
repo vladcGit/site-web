@@ -10,34 +10,12 @@ const WhiteTextTypography = withStyles({
   },
 })(Typography);
 
-function canView() {
-  fetch(
-    "http://" +
-      window.location.host +
-      "/subscribe/get_full_subscription_details/"
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      //console.log(data);
-      console.log(data.subscription.status);
-      let bool = false;
-      if (data.hasOwnProperty("Error")) return false;
-      if (data.subscription.status == "active") bool = true;
-      //console.log(bool);
-      return bool;
-    });
-
-    return true;
-}
-
-
-
 export default class Lesson extends Component {
   constructor(props) {
     super(props);
   }
 
-  state = { lectie: [] };
+  state = { lectie: [], activeSubscriber: false };
 
   componentDidMount() {
     const url =
@@ -53,6 +31,20 @@ export default class Lesson extends Component {
       .then((response) => response.json())
       .then((data) => {
         this.setState({ lectie: data });
+      })
+      .then(() => {
+        fetch(
+          "http://" +
+            window.location.host +
+            "/subscribe/get_full_subscription_details/"
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.hasOwnProperty("Error"))
+              this.setState({ activeSubscriber: false });
+            else if (data.subscription.status == "active")
+              this.setState({ activeSubscriber: true });
+          });
       });
   }
 
@@ -81,7 +73,7 @@ export default class Lesson extends Component {
       </Grid>
     );
   }
-  
+
   renderNotOk() {
     return (
       <Grid
@@ -100,7 +92,7 @@ export default class Lesson extends Component {
   }
 
   render() {
-    return canView() ? this.renderOk() : this.renderNotOk();
+    return this.state.activeSubscriber ? this.renderOk() : this.renderNotOk();
   }
 }
 
@@ -115,3 +107,25 @@ export default class Lesson extends Component {
           />
         </Card>
       </div>*/
+
+/*
+async function canView() {
+await fetch(
+"http://" +
+window.location.host +
+"/subscribe/get_full_subscription_details/"
+)
+.then((response) => response.json())
+.then((data) => {
+//console.log(data);
+let bool = false;
+console.log(data.subscription.status);
+if (data.hasOwnProperty("Error")) return false;
+if (data.subscription.status == "active") bool = true;
+//console.log(bool);
+return bool;
+});
+
+return true;
+}
+*/
