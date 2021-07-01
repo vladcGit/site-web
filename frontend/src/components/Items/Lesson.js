@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 //import { Card, CardMedia } from "@material-ui/core";
 import ReactPlayer from "react-player";
-import { Typography, Grid } from "@material-ui/core";
+import { Typography, Grid, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 const WhiteTextTypography = withStyles({
   root: {
@@ -87,6 +88,14 @@ export default class Lesson extends Component {
         <Typography component="h1" variant="h2">
           Nu aveti acces
         </Typography>
+        <Button
+          variant="contained"
+          color="secondary"
+          component={Link}
+          to={"/pricing"}
+        >
+          Spre pagina de subscribe
+        </Button>
       </Grid>
     );
   }

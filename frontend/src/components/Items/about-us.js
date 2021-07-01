@@ -1,20 +1,14 @@
 import React from "react";
-import DreptunghiNegru from "../dreptunghiNegru";
-import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
-import StarIcon from "@material-ui/icons/StarBorder";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import Box from "@material-ui/core/Box";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CssBaseline,
+  Grid,
+  Typography,
+  makeStyles,
+  Container,
+} from "@material-ui/core";
 
 /*
 const AboutPage = () => {
@@ -82,7 +76,7 @@ const tiers = [
       "Pentru ca ne dorim un viitor",
       "mai bun si vrem sa ajutam la",
       "construirea lui",
-      ""
+      "",
     ],
   },
   {
@@ -90,7 +84,7 @@ const tiers = [
     description: [
       "Oferim invatamant de calitate",
       "la preturi reduse",
-      "in mediul online"
+      "in mediul online",
     ],
   },
   {
@@ -121,7 +115,7 @@ const AboutPage = () => {
         <Typography
           variant="h4"
           align="center"
-          color="textSecondary"
+          color="textPrimary"
           component="p"
         >
           Suntem un grup de studenti care vor sa revolutioneze modul in care

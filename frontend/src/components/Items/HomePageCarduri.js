@@ -1,16 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import Box from "@material-ui/core/Box";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  CssBaseline,
+  Grid,
+  Typography,
+  makeStyles,
+  Container,
+  Box,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -148,9 +150,9 @@ export default function HomePageCarduri() {
                     ))}{" "}
                   </ul>{" "}
                 </CardContent>{" "}
-                <CardActions>
+                <CardActions style={{ justifyContent: "center" }}>
                   <Button
-                    fullWidth
+                    //fullWidth
                     variant={tier.buttonVariant}
                     color="primary"
                     component={Link}

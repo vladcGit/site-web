@@ -11,7 +11,7 @@ import HomePageCarduri from "./Items/HomePageCarduri";
 import Courses from "./Items/Courses";
 import Lesson from "./Items/Lesson";
 import Lessons from "./Items/Lessons";
-import { Grid, Button, ButtonGroup, Typography, Box } from "@material-ui/core";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -85,7 +85,12 @@ export default class HomePage extends Component {
               exact
               path="/courses/:course_name/:lesson_title"
               component={Lesson}
-            />
+            >
+              {localStorage.getItem("token") === null ? (
+                <Redirect to="/signin" />
+              ) : null}
+            </Route>
+
             <Route exact path="/courses/:course_name" component={Lessons} />
           </Switch>
           <Footer />

@@ -1,28 +1,32 @@
-import React, { Component } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import Box from "@material-ui/core/Box";
-import MenuIcon from "@material-ui/icons/Menu";
+import React from "react";
 import AccountBox from "@material-ui/icons/AccountBox";
-import Icon from "@material-ui/core/Icon";
 import { withRouter } from "react-router-dom";
+import {
+  AppBar,
+  ButtonGroup,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Avatar,
+  makeStyles,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   MenuButton: {},
-  HomeButton: {
+  leftSide: {
     marginLeft: "auto",
     flex: 1,
+    display: "flex",
   },
   title: {
     flexGrow: 1,
+  },
+  logo: {
+    marginLeft: theme.spacing(5),
   },
 }));
 
@@ -39,7 +43,7 @@ const MenuAppBar = (props) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <div className={classes.HomeButton}>
+          <div className={classes.leftSide}>
             <Button
               variant="contained"
               size="large"
@@ -47,12 +51,27 @@ const MenuAppBar = (props) => {
             >
               Icar Academy
             </Button>
+            <Avatar
+              className={classes.logo}
+              alt="Logo prima pagina"
+              src="/static/images/sun logo.png"
+              style={{ border: "3px solid lightseagreen" }}
+            />
           </div>
 
           <ButtonGroup variant="contained" color="secondary">
-            <Button onClick={() => handleButtonClick("/courses")}> Cursuri </Button>
-            <Button onClick={() => handleButtonClick("/signup")}> Sign up </Button>
-            <Button onClick={() => handleButtonClick("/signin")}> Login </Button>
+            <Button onClick={() => handleButtonClick("/courses")}>
+              {" "}
+              Cursuri{" "}
+            </Button>
+            <Button onClick={() => handleButtonClick("/signup")}>
+              {" "}
+              Sign up{" "}
+            </Button>
+            <Button onClick={() => handleButtonClick("/signin")}>
+              {" "}
+              Login{" "}
+            </Button>
           </ButtonGroup>
 
           <IconButton
