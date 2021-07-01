@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from django.http.response import JsonResponse,HttpResponse
-from .models import CustomUser,StripeCustomer
+from django.http.response import JsonResponse, HttpResponse
+from .models import CustomUser, StripeCustomer
 
 
 # Create your views here.
@@ -87,24 +87,26 @@ def stripe_webhook(request):
 
 
 # varianta in care sunt mai multe tipuri de abonari
+# @login_required(login_url='http://127.0.0.1:8000/signin/')
 def get_subscription_details_multiple_subscriptions(request):
     try:
         # Retrieve the subscription & product
         stripe_customer = StripeCustomer.objects.get(user=request.user)
         stripe.api_key = settings.STRIPE_SECRET_KEY
-        subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
+        subscription = stripe.Subscription.retrieve(
+            stripe_customer.stripeSubscriptionId)
         product = stripe.Product.retrieve(subscription.plan.product)
 
         return JsonResponse({
             'subscription': subscription,
-            'product': product,})
+            'product': product, })
     except StripeCustomer.DoesNotExist:
-        return JsonResponse({'Error':'Customer does not exist'})
+        return JsonResponse({'Error': 'Customer does not exist'})
 
+
+# @login_required
 def get_subscription_details(request):
     if StripeCustomer.objects.filter(user=request.user).exists():
-        return JsonResponse({'subscription': 'active',})
+        return JsonResponse({'subscription': 'active', })
     else:
-        return JsonResponse({'Error':'Customer does not exist'})
-        
-
+        return JsonResponse({'Error': 'Customer does not exist'})

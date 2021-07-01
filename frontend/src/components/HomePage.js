@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import MenuAppBar from "./Items/MenuAppBar";
+import AboutPage from "./Items/about-us";
 import SignIn from "./Items/Signin";
 import SignUp from "./Items/Signup";
 import Pricing from "./Items/Pricing";
 import Footer from "./Items/Footer";
 import Dashboard from "./Items/Dashboard";
 import HomePageText from "./Items/HomePageText";
+import HomePageCarduri from "./Items/HomePageCarduri";
 import Courses from "./Items/Courses";
 import Lesson from "./Items/Lesson";
 import Lessons from "./Items/Lessons";
@@ -25,7 +27,7 @@ function canViewLesson() {
     .then((response) => response.json())
     .then((data) => {
       if (data.hasOwnProperty("Error")) return false;
-      if (data.subscription != "active") return false;
+      if (data.subscription.status != "active") return false;
       return true;
     });
 }
@@ -42,10 +44,12 @@ export default class HomePage extends Component {
       <div>
         <Router>
           <MenuAppBar />
-
           <Switch>
             <Route exact path="/">
-              <HomePageText />
+              <HomePageCarduri />
+            </Route>
+            <Route exact path="/about-us">
+              <AboutPage />
             </Route>
             <Route exact path="/signup">
               {localStorage.getItem("token") !== null ? (

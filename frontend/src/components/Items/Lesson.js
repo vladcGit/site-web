@@ -10,6 +10,28 @@ const WhiteTextTypography = withStyles({
   },
 })(Typography);
 
+function canView() {
+  fetch(
+    "http://" +
+      window.location.host +
+      "/subscribe/get_full_subscription_details/"
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      //console.log(data);
+      console.log(data.subscription.status);
+      let bool = false;
+      if (data.hasOwnProperty("Error")) return false;
+      if (data.subscription.status == "active") bool = true;
+      //console.log(bool);
+      return bool;
+    });
+
+    return true;
+}
+
+
+
 export default class Lesson extends Component {
   constructor(props) {
     super(props);
@@ -34,7 +56,7 @@ export default class Lesson extends Component {
       });
   }
 
-  render() {
+  renderOk() {
     return (
       <Grid
         container
@@ -53,11 +75,32 @@ export default class Lesson extends Component {
             height: "40vh",
           }}
         >
-          <ReactPlayer url={this.state.lectie.link} />
+          <ReactPlayer url={this.state.lectie.link} controls />
         </div>
         <WhiteTextTypography>{this.state.lectie.details}</WhiteTextTypography>
       </Grid>
     );
+  }
+  
+  renderNotOk() {
+    return (
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: "70vh" }}
+      >
+        <Typography component="h1" variant="h2">
+          Nu aveti acces
+        </Typography>
+      </Grid>
+    );
+  }
+
+  render() {
+    return canView() ? this.renderOk() : this.renderNotOk();
   }
 }
 

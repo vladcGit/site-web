@@ -22,14 +22,14 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(3),
     [theme.breakpoints.up("sm")]: {
       paddingTop: theme.spacing(6),
-      paddingBottom: theme.spacing(6)
-    }
-  }
+      paddingBottom: theme.spacing(6),
+    },
+  },
 }));
 const footers = [
   {
     title: "Company",
-    description: ["Team", "History", "Contact us", "Locations"]
+    description: ["Our team", "About us", "Contact us"],
   },
   {
     title: "Features",
@@ -38,8 +38,8 @@ const footers = [
       "Random feature",
       "Team feature",
       "Developer stuff",
-      "Another one"
-    ]
+      "Another one",
+    ],
   },
   {
     title: "Resources",
@@ -47,13 +47,13 @@ const footers = [
       "Resource",
       "Resource name",
       "Another resource",
-      "Final resource"
-    ]
+      "Final resource",
+    ],
   },
   {
     title: "Legal",
-    description: ["Privacy policy", "Terms of use"]
-  }
+    description: ["Privacy policy", "Terms of use"],
+  },
 ];
 
 function Copyright() {
@@ -82,7 +82,15 @@ export default function Footer() {
             <ul>
               {footer.description.map((item) => (
                 <li key={item}>
-                  <Link href="#" variant="subtitle1" color="textSecondary">
+                  <Link
+                    href={`/${
+                      item.split(" ")[0].toLowerCase() +
+                      "-" +
+                      item.split(" ")[1]
+                    }`}
+                    variant="subtitle1"
+                    color="textSecondary"
+                  >
                     {item}
                   </Link>
                 </li>
