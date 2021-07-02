@@ -12,7 +12,16 @@ import {
   makeStyles,
   Container,
   Box,
+  PaperProps,
+  withStyles,
 } from "@material-ui/core";
+
+
+const WhiteTextTypography = withStyles({
+  root: {
+    color: "#FFFFFF",
+  },
+})(Typography);
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -35,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1, 1.5),
   },
   heroContent: {
-    padding: theme.spacing(8, 0, 6),
+    padding: theme.spacing(4, 0, 6),
   },
   cardHeader: {
     backgroundColor:
@@ -66,9 +75,9 @@ const tiers = [
     title: "Icar Academy",
     subtitle: "Ca meditatiile, dar mai bine si mai ieftin",
     description: [
+      "Promitem rezultate rapide",
       "Cu noi invatatul nu va fi un chin",
       "Metode verificate de invatare si aprofundare",
-      "Gata cu metodele de predare depasite",
       "Apropiere de studenti (si noi suntem studenti)",
       "Si nu in ultimul rand, te vei distra invatand",
     ],
@@ -83,24 +92,26 @@ export default function HomePageCarduri() {
   return (
     <React.Fragment>
       <CssBaseline /> {/* Hero unit */}{" "}
-      <Container maxWidth="sm" component="main" className={classes.heroContent}>
-        <Typography
+      <Container maxWidth="md" component="main" className={classes.heroContent}>
+        <WhiteTextTypography
           component="h1"
           variant="h1"
           align="center"
           color="textPrimary"
           gutterBottom
         >
-          Icar Academy{" "}
-        </Typography>{" "}
-        <Typography
+          <Box fontWeight="fontWeightBold" m={1}>
+            Icar Academy{" "}
+          </Box>
+        </WhiteTextTypography>{" "}
+        <WhiteTextTypography
           variant="h4"
           align="center"
           color="textPrimary"
           component="p"
         >
-          Ca meditatiile dar mai bine si mai ieftin.{" "}
-        </Typography>{" "}
+          Ca meditatiile, dar mai bine si mai ieftin!{" "}
+        </WhiteTextTypography>{" "}
       </Container>{" "}
       {/* End hero unit */}{" "}
       <Container maxWidth="lg" component="main">
@@ -129,8 +140,13 @@ export default function HomePageCarduri() {
                       color="textPrimary"
                       gutterBottom
                     >
-                      <Box fontWeight="fontWeightRegular" m={1}>
-                        Promitem Rezultate imediate{" "}
+                      <Box fontWeight="fontWeightRegular" m={1} align="center" >
+                        Aducem eficienta, cooperarea 
+                        {" "}
+                      </Box>
+                      <Box fontWeight="fontWeightRegular" m={1} align="center" >
+                        si simplitatea in educatie
+                        {" "}
                       </Box>
                     </Typography>{" "}
                   </div>{" "}

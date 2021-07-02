@@ -41,7 +41,7 @@ const MenuAppBar = (props) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static"  style={{backgroundColor:"#7F47A6"}}>
         <Toolbar>
           <div className={classes.leftSide}>
             <Button
@@ -54,7 +54,7 @@ const MenuAppBar = (props) => {
             <Avatar
               className={classes.logo}
               alt="Logo prima pagina"
-              src="/static/images/sun logo.png"
+              src="/static/images/logo.jpeg"
               style={{ border: "3px solid lightseagreen" }}
             />
           </div>

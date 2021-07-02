@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Box,
   Card,
   CardContent,
   CardHeader,
@@ -8,6 +9,7 @@ import {
   Typography,
   makeStyles,
   Container,
+  withStyles,
 } from "@material-ui/core";
 
 /*
@@ -21,6 +23,12 @@ const AboutPage = () => {
   );
 };
 */
+
+const WhiteTextTypography = withStyles({
+  root: {
+    color: "#FFFFFF",
+  },
+})(Typography);
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -76,7 +84,6 @@ const tiers = [
       "Pentru ca ne dorim un viitor",
       "mai bun si vrem sa ajutam la",
       "construirea lui",
-      "",
     ],
   },
   {
@@ -90,9 +97,9 @@ const tiers = [
   {
     title: "Cum facem?",
     description: [
-      "Cursuri asa cum am fi vrut sa",
-      "avem si noi, precum si metode de invatare",
-      "sustinute de ultimele studii realizate",
+      "Creand cursuri eficiente ",
+      "sustinute de ultimele studii",
+      "in educatie",
     ],
   },
 ];
@@ -103,16 +110,18 @@ const AboutPage = () => {
     <React.Fragment>
       <CssBaseline /> {/* Hero unit */}{" "}
       <Container maxWidth="sm" component="main" className={classes.heroContent}>
-        <Typography
+        <WhiteTextTypography
           component="h1"
           variant="h2"
           align="center"
           color="textPrimary"
           gutterBottom
         >
-          Despre noi{" "}
-        </Typography>{" "}
-        <Typography
+          <Box fontWeight="fontWeightBold" m={1}>
+            Despre noi{" "}
+          </Box>
+        </WhiteTextTypography>{" "}
+        <WhiteTextTypography
           variant="h4"
           align="center"
           color="textPrimary"
@@ -120,7 +129,7 @@ const AboutPage = () => {
         >
           Suntem un grup de studenti care vor sa revolutioneze modul in care
           inveti.{" "}
-        </Typography>{" "}
+        </WhiteTextTypography>{" "}
       </Container>{" "}
       {/* End hero unit */}{" "}
       <Container maxWidth="lg" component="main">
@@ -147,8 +156,9 @@ const AboutPage = () => {
                     align: "center",
                   }}
                   className={classes.cardHeader}
+                  style={{backgroundColor: "#C0C0C0"}}
                 />{" "}
-                <CardContent>
+                <CardContent style={{backgroundColor: "#FFFFFF"}}>
                   <ul>
                     {" "}
                     {tier.description.map((line) => (

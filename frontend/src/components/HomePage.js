@@ -21,6 +21,7 @@ import {
 } from "react-router-dom";
 import Cancel from "./Items/Cancel";
 
+
 function canViewLesson() {
   if (localStorage.getItem("token") === null) return false;
   fetch("/subscribe/get_full_subscription_details/")
