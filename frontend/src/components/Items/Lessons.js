@@ -1,5 +1,17 @@
 import React, { Component } from "react";
-import { Grid, Button, ButtonGroup, Typography, Box } from "@material-ui/core";
+import {
+  Grid,
+  Button,
+  ButtonGroup,
+  Typography,
+  Box,
+  makeStyles,
+  Container,
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+} from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 export default class Lesson extends Component {
@@ -24,6 +36,50 @@ export default class Lesson extends Component {
       });
   }
 
+  render() {
+    return (
+      <Grid
+        container
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: "50vh" }}
+      >
+        <Container maxWidth="lg" component="main">
+          <Grid container spacing={5} alignItems="flex-end">
+            {this.state.lectii.map((value) => (
+              <Grid item key={value} xs={12} sm={12} md={4}>
+                <Card>
+                  <CardHeader
+                    title={value.title}
+                    titleTypographyProps={{
+                      align: "center",
+                      variant: "h5",
+                    }}
+                    style={{ backgroundColor: "#C0C0C0" }}
+                  />
+                  <CardContent style={{ backgroundColor: "#FFFFFF" }}>
+                    <CardActions style={{ justifyContent: "center" }}>
+                      <Button
+                        component={Link}
+                        to={`/courses/${this.props.match.params.course_name}/${value.title}`}
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                      >
+                        Acceseaza
+                      </Button>
+                    </CardActions>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Grid>
+    );
+  }
+
+  /*
   render() {
     return (
         <Grid
@@ -53,4 +109,5 @@ export default class Lesson extends Component {
     </Grid>
     );
   }
+  */
 }

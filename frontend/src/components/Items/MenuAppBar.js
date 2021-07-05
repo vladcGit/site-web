@@ -16,7 +16,10 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  MenuButton: {},
+  MenuButton: {
+    //borderRadius: 30,
+    backgroundColor: "#edb90e",
+  },
   leftSide: {
     marginLeft: "auto",
     flex: 1,
@@ -41,7 +44,7 @@ const MenuAppBar = (props) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static"  style={{backgroundColor:"#7F47A6"}}>
+      <AppBar position="static" style={{ backgroundColor: "#7F47A6" }}>
         <Toolbar>
           <div className={classes.leftSide}>
             <Button
@@ -59,16 +62,25 @@ const MenuAppBar = (props) => {
             />
           </div>
 
-          <ButtonGroup variant="contained" color="secondary">
-            <Button onClick={() => handleButtonClick("/courses")}>
+          <ButtonGroup variant="contained">
+            <Button
+              onClick={() => handleButtonClick("/courses")}
+              className={classes.MenuButton}
+            >
               {" "}
               Cursuri{" "}
             </Button>
-            <Button onClick={() => handleButtonClick("/signup")}>
+            <Button
+              onClick={() => handleButtonClick("/signup")}
+              className={classes.MenuButton}
+            >
               {" "}
               Sign up{" "}
             </Button>
-            <Button onClick={() => handleButtonClick("/signin")}>
+            <Button
+              onClick={() => handleButtonClick("/signin")}
+              className={classes.MenuButton}
+            >
               {" "}
               Login{" "}
             </Button>
@@ -76,8 +88,9 @@ const MenuAppBar = (props) => {
 
           <IconButton
             variant="contained"
-            color="secondary"
+            //color="secondary"
             onClick={() => handleButtonClick("/myaccount")}
+            className={classes.MenuButton}
           >
             <AccountBox />
           </IconButton>

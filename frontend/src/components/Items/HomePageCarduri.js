@@ -16,7 +16,6 @@ import {
   withStyles,
 } from "@material-ui/core";
 
-
 const WhiteTextTypography = withStyles({
   root: {
     color: "#FFFFFF",
@@ -47,10 +46,13 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(4, 0, 6),
   },
   cardHeader: {
+    /*
     backgroundColor:
       theme.palette.type === "light"
-        ? theme.palette.grey[200]
-        : theme.palette.grey[700],
+        ? theme.palette.primary
+        : theme.palette.primary,
+        */
+    backgroundImage: "linear-gradient(45deg, #eda277 5%, #8b72d4 90%)",
   },
   cardPricing: {
     display: "flex",
@@ -91,7 +93,7 @@ export default function HomePageCarduri() {
 
   return (
     <React.Fragment>
-      <CssBaseline /> {/* Hero unit */}{" "}
+      <CssBaseline /> {/* Hero unit */}
       <Container maxWidth="md" component="main" className={classes.heroContent}>
         <WhiteTextTypography
           component="h1"
@@ -101,88 +103,89 @@ export default function HomePageCarduri() {
           gutterBottom
         >
           <Box fontWeight="fontWeightBold" m={1}>
-            Icar Academy{" "}
+            Icar Academy
           </Box>
-        </WhiteTextTypography>{" "}
+        </WhiteTextTypography>
         <WhiteTextTypography
           variant="h4"
           align="center"
           color="textPrimary"
           component="p"
         >
-          Ca meditatiile, dar mai bine si mai ieftin!{" "}
-        </WhiteTextTypography>{" "}
-      </Container>{" "}
-      {/* End hero unit */}{" "}
+          Ca meditatiile, dar mai bine si mai ieftin!
+        </WhiteTextTypography>
+      </Container>
+      {/* End hero unit */}
       <Container maxWidth="lg" component="main">
         <Grid container spacing={5} alignItems="flex-end">
-          {" "}
+          
           {tiers.map((tier) => (
             // Enterprise card is full width at sm breakpoint
             <Grid item key={tier.title} xs={12} md={12}>
-              <Card>
-                <CardHeader
-                  //title={tier.title}
-                  //subheader={tier.subheader}
-                  titleTypographyProps={{
-                    align: "center",
+              <Card style={{borderRadius:45,borderStyle:'solid',borderColor:'#ffffff'}}>
+                <CardContent
+                  style={{
+                    backgroundImage:
+                      //"linear-gradient(45deg, #eda277 30%, #8b72d4 90%)",
+                      "linear-gradient(45deg, #7F47A6 30%, #bf6bfa 90%)"
                   }}
-                  subheaderTypographyProps={{
-                    align: "center",
-                  }}
-                  className={classes.cardHeader}
-                />{" "}
-                <CardContent>
+                >
                   <div className={classes.cardPricing}>
-                    <Typography
+                    <WhiteTextTypography
                       component="h2"
                       variant="h2"
                       color="textPrimary"
                       gutterBottom
                     >
-                      <Box fontWeight="fontWeightRegular" m={1} align="center" >
-                        Aducem eficienta, cooperarea 
-                        {" "}
+                      <Box fontWeight="fontWeightRegular" m={1} align="center">
+                        Aducem eficienta, cooperarea
                       </Box>
-                      <Box fontWeight="fontWeightRegular" m={1} align="center" >
+                      <Box fontWeight="fontWeightRegular" m={1} align="center">
                         si simplitatea in educatie
-                        {" "}
                       </Box>
-                    </Typography>{" "}
-                  </div>{" "}
+                    </WhiteTextTypography>
+                  </div>
                   <ul>
-                    {" "}
+                    
                     {tier.description.map((line) => (
-                      <Typography
+                      <WhiteTextTypography
                         component="h3"
                         variant="h4"
                         align="center"
                         gutterBottom
                         key={line}
                       >
-                        {" "}
-                        {line}{" "}
-                      </Typography>
-                    ))}{" "}
-                  </ul>{" "}
-                </CardContent>{" "}
-                <CardActions style={{ justifyContent: "center" }}>
+                        
+                        {line}
+                      </WhiteTextTypography>
+                    ))}
+                  </ul>
+                </CardContent>
+                <CardActions
+                  style={{
+                    justifyContent: "center",
+                    backgroundImage:
+                      //"linear-gradient(45deg, #eda277 60%, #8b72d4 110%)",
+                      "linear-gradient(45deg, #7F47A6 60%, #bf6bfa 110%)"
+                  }}
+                >
                   <Button
                     //fullWidth
                     variant={tier.buttonVariant}
-                    color="primary"
+                    //color="primary"
                     component={Link}
                     to="/about-us"
+                    style={{backgroundColor: "#edb90e",borderRadius:20}} 
                   >
-                    {" "}
-                    {tier.buttonText}{" "}
-                  </Button>{" "}
-                </CardActions>{" "}
-              </Card>{" "}
+                    
+                    {tier.buttonText}
+                  </Button>
+                </CardActions>
+              </Card>
             </Grid>
-          ))}{" "}
-        </Grid>{" "}
-      </Container>{" "}
+          ))}
+        </Grid>
+      </Container>
     </React.Fragment>
   );
 }

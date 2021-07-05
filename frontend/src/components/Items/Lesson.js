@@ -1,8 +1,21 @@
 import React, { Component } from "react";
 //import { Card, CardMedia } from "@material-ui/core";
 import ReactPlayer from "react-player";
-import { Typography, Grid, Button } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  CssBaseline,
+  Grid,
+  Typography,
+  makeStyles,
+  Container,
+  Box,
+  PaperProps,
+  withStyles,
+} from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 const WhiteTextTypography = withStyles({
@@ -48,7 +61,7 @@ export default class Lesson extends Component {
           });
       });
   }
-
+  
   renderOk() {
     return (
       <Grid
@@ -74,7 +87,58 @@ export default class Lesson extends Component {
       </Grid>
     );
   }
-
+  
+ /*
+  renderOk() {
+    return (
+      <React.Fragment>
+        <CssBaseline /> {" "}
+        <Container maxWidth="md" component="main">
+          <WhiteTextTypography
+            component="h1"
+            variant="h1"
+            align="center"
+            color="textPrimary"
+            gutterBottom
+          >
+            <Box fontWeight="fontWeightBold" m={1}>
+              {this.state.lectie.title}{" "}
+            </Box>
+          </WhiteTextTypography>{" "}
+        </Container>{" "}
+        <Container maxWidth="md" component="main">
+          <Grid container spacing={5} alignItems="flex-end">
+            {" "}
+            <Grid item xs={12} md={12}>
+              <Card>
+                <CardHeader
+                  titleTypographyProps={{
+                    align: "center",
+                  }}
+                  subheaderTypographyProps={{
+                    align: "center",
+                  }}
+                  title={this.state.lectie.title}
+                />{" "}
+                <CardContent>
+                  <div
+                    style={{
+                      height: "40vh",
+                    }}
+                    align="center"
+                  >
+                    <ReactPlayer url={this.state.lectie.link} controls />
+                  </div>
+                </CardContent>{" "}
+              </Card>{" "}
+            </Grid>
+            ))}{" "}
+          </Grid>{" "}
+        </Container>{" "}
+      </React.Fragment>
+    );
+  }
+*/
   renderNotOk() {
     return (
       <Grid
