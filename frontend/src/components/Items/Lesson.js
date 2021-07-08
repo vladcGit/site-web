@@ -41,7 +41,17 @@ export default class Lesson extends Component {
       this.props.match.params.lesson_title +
       "/";
 
-    fetch(url)
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cod:"220620006969",
+        }),
+      };
+
+    fetch(url,requestOptions)
       .then((response) => response.json())
       .then((data) => {
         this.setState({ lectie: data });
