@@ -31,6 +31,21 @@ function getCourses() {
     });
 }
 
+function tokenizeTitle(s)
+{
+  //let s = "economie_pentru_bac";
+  let rez="";
+
+  for(var i=0;i<s.split("_").length;i++)
+    {
+      let aux = s.split("_")[i];
+      if(i==0) aux=aux.charAt(0).toUpperCase() + aux.slice(1)
+      rez+=aux;
+      if(i!=s.split("_").length-1) rez+=" ";
+    }
+  return rez;
+}
+
 const useStyles = makeStyles((theme) => ({
   cardHeader: {
     backgroundColor:
@@ -72,9 +87,9 @@ const Courses = () => {
           
           {cursuri.map((value) => (
             <Grid item key={value} xs={12} sm={12} md={4}>
-              <Card>
+              <Card style={{borderRadius:25,borderStyle:'solid',borderColor:'#c7c7c7'}}>
                 <CardHeader
-                  title={value}
+                  title={tokenizeTitle(value)}
                   titleTypographyProps={{
                     align: "center",
                     variant: "h5",

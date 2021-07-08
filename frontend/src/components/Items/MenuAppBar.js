@@ -25,9 +25,6 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
     display: "flex",
   },
-  title: {
-    flexGrow: 1,
-  },
   logo: {
     marginLeft: theme.spacing(5),
   },
@@ -62,7 +59,7 @@ const MenuAppBar = (props) => {
             />
           </div>
 
-          <ButtonGroup variant="contained">
+          <ButtonGroup variant="contained" color="secondary">
             <Button
               onClick={() => handleButtonClick("/courses")}
               className={classes.MenuButton}
@@ -84,9 +81,7 @@ const MenuAppBar = (props) => {
               {" "}
               Login{" "}
             </Button>
-          </ButtonGroup>
-
-          <IconButton
+            <IconButton
             variant="contained"
             //color="secondary"
             onClick={() => handleButtonClick("/myaccount")}
@@ -94,6 +89,9 @@ const MenuAppBar = (props) => {
           >
             <AccountBox />
           </IconButton>
+          </ButtonGroup>
+
+          
         </Toolbar>
       </AppBar>
     </div>

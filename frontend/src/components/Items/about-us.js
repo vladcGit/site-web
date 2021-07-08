@@ -144,7 +144,7 @@ const AboutPage = () => {
               sm={tier.title === "Enterprise" ? 12 : 6}
               md={4}
             >
-              <Card>
+              <Card style={{borderRadius:25,borderStyle:'solid',borderColor:'#c7c7c7'}}>
                 <CardHeader
                   title={tier.title}
                   subheader={tier.subheader}
