@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'api',
     'subscriptions.apps.SubscriptionsConfig',
     'courses',
+
+    'sslserver',
 ]
 
 MIDDLEWARE = [

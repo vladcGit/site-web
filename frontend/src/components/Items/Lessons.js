@@ -38,7 +38,7 @@ export default class Lesson extends Component {
 
   componentDidMount() {
     const url =
-      "http://" +
+      "https://" +
       window.location.host +
       "/courses/api/getlessons/" +
       this.props.match.params.course_name +

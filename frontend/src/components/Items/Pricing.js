@@ -2,7 +2,6 @@ import React from "react";
 import StarIcon from "@material-ui/icons/StarBorder";
 import { makeStyles } from "@material-ui/core/styles";
 import {
-  AppBar,
   Button,
   Card,
   CardActions,
@@ -11,10 +10,8 @@ import {
   CssBaseline,
   Grid,
   Typography,
-  Link,
-  Toolbar,
   Container,
-  Box,
+  withStyles
 } from "@material-ui/core";
 
 import { loadStripe } from "@stripe/stripe-js";
@@ -66,44 +63,51 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const WhiteTextTypography = withStyles({
+  root: {
+    color: "#FFFFFF",
+  },
+})(Typography);
+
 const tiers = [
   {
-    title: "Free",
+    title: "Incepator",
     price: "0",
     description: [
-      "10 users included",
-      "2 GB of storage",
-      "Help center access",
-      "Email support",
+      "Free trial de 7 zile anulabil oricand;",
+      "Dupa 7 zile se activeaza abonamentul de tip \"Student\".",
     ],
-    buttonText: "Sign up for free",
-    buttonVariant: "outlined",
-  },
-  {
-    title: "Pro",
-    subheader: "Most popular",
-    price: "15",
-    description: [
-      "20 users included",
-      "10 GB of storage",
-      "Help center access",
-      "Priority email support",
-    ],
-    buttonText: "Get started",
+    buttonText: "Incearca gratuit",
     buttonVariant: "contained",
+    unitateTemporara:"",
   },
   {
-    title: "Enterprise",
-    price: "30",
+    title: "Entuziast",
+    price: "999",
     description: [
-      "50 users included",
-      "30 GB of storage",
-      "Help center access",
-      "Phone & email support",
+      "Potrivit pentru studentii cei mai silitori;",
+      "Acces nelimitat la toate cursurile;",
+      "Abilitatea de a trimite oricate intrebari;",
+      "Cea mai buna valoare pentru banii tai."
     ],
-    buttonText: "Contact us",
-    buttonVariant: "outlined",
+    buttonText: "Incepe sa inveti pe bune",
+    buttonVariant: "contained",
+    unitateTemporara:"/an",
   },
+  {
+    title: "Student (cel mai popular)",
+    //subheader: "Cel mai popular",
+    price: "100",
+    description: [
+      "Potrivit pentru majoritatea studentilor;",
+      "Acces nelimitat la toate cursurile;",
+      "Un mare pas in directia invatarii."
+    ],
+    buttonText: "Incepe calatoria",
+    buttonVariant: "contained",
+    unitateTemporara:"/luna",
+  },
+  
 ];
 
 function handleButtonClick() {
@@ -132,29 +136,48 @@ export default function Pricing() {
   return (
     <React.Fragment>
       <CssBaseline /> {/* Hero unit */}{" "}
-      <Container maxWidth="sm" component="main" className={classes.heroContent}>
-        <Typography
+      <Container maxWidth="md" component="main" className={classes.heroContent}>
+        <WhiteTextTypography
           component="h1"
           variant="h2"
           align="center"
           color="textPrimary"
           gutterBottom
         >
-          Pricing{" "}
-        </Typography>{" "}
-        <Typography
+          Preturile noastre{" "}
+        </WhiteTextTypography>{" "}
+        <WhiteTextTypography
           variant="h5"
           align="center"
           color="textSecondary"
           component="p"
+          gutterBottom
         >
-          Quickly build an effective pricing table for your potential customers
-          with this layout.It & apos; s built with default Material - UI
-          components with little customization.{" "}
-        </Typography>{" "}
+          Ofertele noastre de invatare.
+        </WhiteTextTypography>{" "}
+        <WhiteTextTypography
+          variant="h5"
+          align="center"
+          color="textSecondary"
+          component="p"
+          gutterBottom
+        >
+          Daca nu mai esti multumit poti anula abonamentul oricand.
+          
+        </WhiteTextTypography>{" "}
+        <WhiteTextTypography
+          variant="h5"
+          align="center"
+          color="textSecondary"
+          component="p"
+          gutterBottom
+        >
+          Procesam platile prin intermediul Stripe, cel mai mare serviciu de plati online din lume;
+          in traducere libera, cardul tau e in siguranta.
+        </WhiteTextTypography>{" "}
       </Container>{" "}
       {/* End hero unit */}{" "}
-      <Container maxWidth="md" component="main">
+      <Container maxWidth="lg" component="main">
         <Grid container spacing={5} alignItems="flex-end">
           {" "}
           {tiers.map((tier) => (
@@ -163,7 +186,7 @@ export default function Pricing() {
               item
               key={tier.title}
               xs={12}
-              sm={tier.title === "Enterprise" ? 12 : 6}
+              sm={tier.title === "Entuziast" ? 12 : 6}
               md={4}
             >
               <Card>
@@ -176,16 +199,16 @@ export default function Pricing() {
                   subheaderTypographyProps={{
                     align: "center",
                   }}
-                  action={tier.title === "Pro" ? <StarIcon /> : null}
+                  action={tier.title === "Entuziast" ? <StarIcon /> : null}
                   className={classes.cardHeader}
                 />{" "}
                 <CardContent>
                   <div className={classes.cardPricing}>
                     <Typography component="h2" variant="h3" color="textPrimary">
-                      $ {tier.price}{" "}
+                      {tier.price}{" "} Lei
                     </Typography>{" "}
                     <Typography variant="h6" color="textSecondary">
-                      /mo{" "}
+                      {tier.unitateTemporara}{" "}
                     </Typography>{" "}
                   </div>{" "}
                   <ul>

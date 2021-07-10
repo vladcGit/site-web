@@ -1,5 +1,12 @@
 import React from "react";
-import { Typography, Grid } from "@material-ui/core/";
+import {Link} from "react-router-dom";
+import { Button, Typography, Grid, withStyles } from "@material-ui/core/";
+
+const WhiteTextTypography = withStyles({
+  root: {
+    color: "#FFFFFF",
+  },
+})(Typography);
 
 export default function Cancel() {
   return (
@@ -9,11 +16,14 @@ export default function Cancel() {
       direction="column"
       alignItems="center"
       justify="center"
-      style={{ minHeight: "50vh" }}
+      style={{ minHeight: "70vh" }}
     >
-      <Typography component="h1" variant="h1">
+      <WhiteTextTypography component="h1" variant="h2">
         Ceva nu a functionat la efectuarea platii :(
-      </Typography>
+      </WhiteTextTypography>
+      <Button variant="contained" color="primary" component={Link} to={"/"}>
+        Spre pagina de pornire
+      </Button>
     </Grid>
   );
 }

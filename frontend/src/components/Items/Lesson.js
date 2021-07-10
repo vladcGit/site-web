@@ -33,7 +33,7 @@ export default class Lesson extends Component {
 
   componentDidMount() {
     const url =
-      "http://" +
+      "https://" +
       window.location.host +
       "/courses/api/getlesson/" +
       this.props.match.params.course_name +
@@ -41,24 +41,24 @@ export default class Lesson extends Component {
       this.props.match.params.lesson_title +
       "/";
 
-      const requestOptions = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          cod:"220620006969",
-        }),
-      };
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cod: "220620006969",
+      }),
+    };
 
-    fetch(url,requestOptions)
+    fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => {
         this.setState({ lectie: data });
       })
       .then(() => {
         fetch(
-          "http://" +
+          "https://" +
             window.location.host +
             "/subscribe/get_full_subscription_details/"
         )
@@ -71,7 +71,7 @@ export default class Lesson extends Component {
           });
       });
   }
-  
+
   renderOk() {
     return (
       <Grid
@@ -97,8 +97,8 @@ export default class Lesson extends Component {
       </Grid>
     );
   }
-  
- /*
+
+  /*
   renderOk() {
     return (
       <React.Fragment>
@@ -159,9 +159,9 @@ export default class Lesson extends Component {
         justify="center"
         style={{ minHeight: "70vh" }}
       >
-        <Typography component="h1" variant="h2">
+        <WhiteTextTypography component="h1" variant="h2">
           Nu aveti acces
-        </Typography>
+        </WhiteTextTypography>
         <Button
           variant="contained"
           color="secondary"
@@ -173,6 +173,51 @@ export default class Lesson extends Component {
       </Grid>
     );
   }
+  /*
+  renderNotOk() {
+    return (
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: "50vh" }}
+      >
+              <Card
+                style={{
+                  borderRadius: 25,
+                  borderStyle: "solid",
+                  borderColor: "#c7c7c7",
+                }}
+              >
+                <CardHeader
+                  title="Nu aveti acces"
+                  titleTypographyProps={{
+                    align: "center",
+                    variant: "h5",
+                  }}
+                  //className={classes.cardHeader}
+                  style={{ backgroundColor: "#C0C0C0" }}
+                />
+                <CardContent style={{ backgroundColor: "#FFFFFF" }}>
+                  <CardActions style={{ justifyContent: "center" }}>
+                    <Button
+                      component={Link}
+                      to={"/pricing"}
+                      variant="contained"
+                      color="secondary"
+                      fullWidth
+                    >
+                      Spre pagina de abonare
+                    </Button>
+                  </CardActions>
+                </CardContent>
+              </Card>
+            </Grid>
+    );
+  }
+  */
 
   render() {
     return this.state.activeSubscriber ? this.renderOk() : this.renderNotOk();
@@ -194,7 +239,7 @@ export default class Lesson extends Component {
 /*
 async function canView() {
 await fetch(
-"http://" +
+"https://" +
 window.location.host +
 "/subscribe/get_full_subscription_details/"
 )

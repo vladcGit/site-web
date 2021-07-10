@@ -23,8 +23,8 @@ def create_checkout_session(request):
     if request.method == 'GET':
         # varianta care nu e hardcoded poate da erori la
         # create checkout session
-        domain_url = 'http://' + request.META['HTTP_HOST'] + '/'
-        #domain_url = 'http://127.0.0.1:8000/'
+        domain_url = 'https://' + request.META['HTTP_HOST'] + '/'
+        #domain_url = 'https://127.0.0.1:8000/'
         print(domain_url)
         stripe.api_key = settings.STRIPE_SECRET_KEY
         try:
@@ -87,7 +87,7 @@ def stripe_webhook(request):
 
 
 # varianta in care sunt mai multe tipuri de abonari
-# @login_required(login_url='http://127.0.0.1:8000/signin/')
+# @login_required(login_url='https://127.0.0.1:8000/signin/')
 def get_subscription_details_multiple_subscriptions(request):
     try:
         # Retrieve the subscription & product
