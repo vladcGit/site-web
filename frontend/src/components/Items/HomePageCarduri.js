@@ -97,7 +97,7 @@ export default function HomePageCarduri() {
       <Container maxWidth="md" component="main" className={classes.heroContent}>
         <WhiteTextTypography
           component="h1"
-          variant="h1"
+          variant={window.innerWidth<=768?"h2":"h1"}
           align="center"
           color="textPrimary"
           gutterBottom

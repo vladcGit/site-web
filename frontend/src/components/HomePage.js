@@ -20,18 +20,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import Cancel from "./Items/Cancel";
-
-
-function canViewLesson() {
-  if (localStorage.getItem("token") === null) return false;
-  fetch("/subscribe/get_full_subscription_details/")
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.hasOwnProperty("Error")) return false;
-      if (data.subscription.status != "active") return false;
-      return true;
-    });
-}
+import AppBar_telefon from "./Items/AppBar_telefon";
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -44,7 +33,7 @@ export default class HomePage extends Component {
     return (
       <div>
         <Router>
-          <MenuAppBar />
+          {window.innerWidth<=768? <AppBar_telefon/> : <MenuAppBar/>}
           <Switch>
             <Route exact path="/">
               <HomePageCarduri />

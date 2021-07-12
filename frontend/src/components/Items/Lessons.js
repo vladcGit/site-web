@@ -13,21 +13,7 @@ import {
   CardActions,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-
-
-function tokenizeTitle(s)//la fel ca in cursuri
-{
-  let rez="";
-
-  for(var i=0;i<s.split("_").length;i++)
-    {
-      let aux = s.split("_")[i];
-      if(i==0) aux=aux.charAt(0).toUpperCase() + aux.slice(1)
-      rez+=aux;
-      if(i!=s.split("_").length-1) rez+=" ";
-    }
-  return rez;
-}
+import { tokenizeTitle } from "./Util";
 
 export default class Lesson extends Component {
   constructor(props) {
@@ -63,7 +49,13 @@ export default class Lesson extends Component {
           <Grid container spacing={5} alignItems="flex-end">
             {this.state.lectii.map((value) => (
               <Grid item key={value} xs={12} sm={12} md={4}>
-                <Card style={{borderRadius:25,borderStyle:'solid',borderColor:'#c7c7c7'}}>
+                <Card
+                  style={{
+                    borderRadius: 25,
+                    borderStyle: "solid",
+                    borderColor: "#c7c7c7",
+                  }}
+                >
                   <CardHeader
                     title={tokenizeTitle(value.title)}
                     titleTypographyProps={{

@@ -78,7 +78,7 @@ const Dashboard = () => {
           Salut, {userEmail}!
         </WhiteTextTypography>
         <WhiteTextTypography variant="h4" component="h4">
-          {userSubscription}
+          {userSubscription === "active"? "Abonament activ" : "Cont gratuit"}
         </WhiteTextTypography>
       </Grid>
       <Grid item xs={12} align="center">

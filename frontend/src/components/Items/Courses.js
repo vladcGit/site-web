@@ -13,6 +13,7 @@ import {
   CardActions,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { tokenizeTitle } from "./Util";
 
 function getCourses() {
   fetch("courses/api/getcourses/")
@@ -29,21 +30,6 @@ function getCourses() {
       console.log(nume);
       return nume;
     });
-}
-
-function tokenizeTitle(s)
-{
-  //let s = "economie_pentru_bac";
-  let rez="";
-
-  for(var i=0;i<s.split("_").length;i++)
-    {
-      let aux = s.split("_")[i];
-      if(i==0) aux=aux.charAt(0).toUpperCase() + aux.slice(1)
-      rez+=aux;
-      if(i!=s.split("_").length-1) rez+=" ";
-    }
-  return rez;
 }
 
 const useStyles = makeStyles((theme) => ({

@@ -17,6 +17,7 @@ import {
   withStyles,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { tokenizeTitle } from "./Util";
 
 const WhiteTextTypography = withStyles({
   root: {
@@ -84,15 +85,21 @@ export default class Lesson extends Component {
         style={{ minHeight: "70vh" }}
       >
         <WhiteTextTypography component="h1" variant="h2" gutterBottom>
-          {this.state.lectie.title}
+          {tokenizeTitle(this.state.lectie.title)}
         </WhiteTextTypography>
         <div
           style={{
             height: "40vh",
           }}
         >
-          <ReactPlayer url={this.state.lectie.link} controls />
+          <ReactPlayer
+            url={this.state.lectie.link}
+            //url={[{ src: `${this.state.lectie.link}`, type: "video/mp4" }]}
+            controls
+            type="video/mp4"
+          />
         </div>
+
         <WhiteTextTypography>{this.state.lectie.details}</WhiteTextTypography>
       </Grid>
     );
