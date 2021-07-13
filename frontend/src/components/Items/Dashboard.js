@@ -30,7 +30,7 @@ function handleButtonClick() {
 const Dashboard = () => {
   // variabila care retine numele utilizatorului conectat
   // si tipul de abonat
-  const [userEmail, setUserEmail] = useState("");
+  const [userName, setUserName] = useState("");
   const [userSubscription, setUserSubscription] = useState("");
 
   // verifica daca un user e logat
@@ -50,15 +50,15 @@ const Dashboard = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          setUserEmail(data.email);
+          setUserName(data.first_name + " " + data.last_name);
         });
 
       //get subscription status
       fetch("/subscribe/get_subscription_details/")
         .then((response) => response.json())
         .then((data) => {
-          console.log(data)
-          if(data.hasOwnProperty('Error')) setUserSubscription("Cont gratis")
+          console.log(data);
+          if (data.hasOwnProperty("Error")) setUserSubscription("Cont gratis");
           else setUserSubscription(data.subscription);
         });
     }
@@ -75,10 +75,10 @@ const Dashboard = () => {
     >
       <Grid item xs={12} align="center">
         <WhiteTextTypography variant="h4" component="h4">
-          Salut, {userEmail}!
+          Salut, {userName}!
         </WhiteTextTypography>
         <WhiteTextTypography variant="h4" component="h4">
-          {userSubscription === "active"? "Abonament activ" : "Cont gratuit"}
+          {userSubscription === "active" ? "Abonament activ" : "Cont gratuit"}
         </WhiteTextTypography>
       </Grid>
       <Grid item xs={12} align="center">

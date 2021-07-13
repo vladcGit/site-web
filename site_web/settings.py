@@ -143,7 +143,7 @@ REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'api.serializers.RegisterSerializer',
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
@@ -156,6 +156,18 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+LOGIN_URL = 'https://127.0.0.1:8000/signin'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'icaracademyro@gmail.com'
+EMAIL_HOST_PASSWORD = 'sfantulsava69'
+
 
 REST_FRAMEWORK = {
     'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P",
@@ -170,5 +182,7 @@ STRIPE_PUBLISHABLE_KEY = 'pk_test_51IxFpNG3BrIJ6aWB49fVDuCu6JvnlLcCYz81cfS1KQ178
 STRIPE_SECRET_KEY = 'sk_test_51IxFpNG3BrIJ6aWBDqn3SbjMcMNaVNbMFMyHdfP0QGGPRzlxby0DS7o6JUc2SMf22DnKxhAyobVaq4WuClwIzNDt00sEI9ZbUR'
 
 STRIPE_PRICE_ID = 'price_1IxFu2G3BrIJ6aWBH5Bch0wk'
+
+STRIPE_TRIAL_PRICE = 'price_1JCVfHG3BrIJ6aWBgtvhhEFn'
 
 STRIPE_ENDPOINT_SECRET = 'whsec_BzAiRlqXiumckbS3X0L3vzLLJUlFxNBB'

@@ -80,6 +80,7 @@ const tiers = [
     buttonText: "Incearca gratuit",
     buttonVariant: "contained",
     unitateTemporara:"",
+    stripePriceId:"price_1JCVfHG3BrIJ6aWBgtvhhEFn",
   },
   {
     title: "Entuziast",
@@ -93,6 +94,7 @@ const tiers = [
     buttonText: "Incepe sa inveti pe bune",
     buttonVariant: "contained",
     unitateTemporara:"/an",
+    stripePriceId:"price_1JCVdoG3BrIJ6aWBgCVaC51t",
   },
   {
     title: "Student (cel mai popular)",
@@ -106,11 +108,12 @@ const tiers = [
     buttonText: "Incepe calatoria",
     buttonVariant: "contained",
     unitateTemporara:"/luna",
+    stripePriceId:"price_1IxFu2G3BrIJ6aWBH5Bch0wk",
   },
   
 ];
 
-function handleButtonClick() {
+function handleButtonClick(stripePriceId) {
   fetch("subscribe/config/")
     .then((result) => result.json())
     .then(async (data) => {
@@ -118,7 +121,7 @@ function handleButtonClick() {
 
       const stripe = await stripePromise;
 
-      fetch("subscribe/create-checkout-session/")
+      fetch("subscribe/create-checkout-session/"+stripePriceId+"/")
         .then((result) => result.json())
         .then((data) => {
           console.log(data);
@@ -231,7 +234,7 @@ export default function Pricing() {
                     fullWidth
                     variant={tier.buttonVariant}
                     color="primary"
-                    onClick={() => handleButtonClick()}
+                    onClick={() => handleButtonClick(tier.stripePriceId)}
                   >
                     {" "}
                     {tier.buttonText}{" "}
