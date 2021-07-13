@@ -15,12 +15,7 @@ import {
   PaperProps,
   withStyles,
 } from "@material-ui/core";
-
-const WhiteTextTypography = withStyles({
-  root: {
-    color: "#FFFFFF",
-  },
-})(Typography);
+import { WhiteTextTypography } from "./Util";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {

@@ -11,6 +11,7 @@ import {
   Container,
   withStyles,
 } from "@material-ui/core";
+import { WhiteTextTypography } from "./Util";
 
 /*
 const AboutPage = () => {
@@ -23,12 +24,6 @@ const AboutPage = () => {
   );
 };
 */
-
-const WhiteTextTypography = withStyles({
-  root: {
-    color: "#FFFFFF",
-  },
-})(Typography);
 
 const useStyles = makeStyles((theme) => ({
   "@global": {

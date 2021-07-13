@@ -1,12 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Button, Grid, Typography } from "@material-ui/core/";
 import { withStyles } from "@material-ui/core/styles";
-
-const WhiteTextTypography = withStyles({
-  root: {
-    color: "#FFFFFF",
-  },
-})(Typography);
+import { WhiteTextTypography } from "./Util";
 
 // handler buton de logout
 // doar da logout, nu face nimic altceva

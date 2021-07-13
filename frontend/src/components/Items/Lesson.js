@@ -17,13 +17,7 @@ import {
   withStyles,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { tokenizeTitle } from "./Util";
-
-const WhiteTextTypography = withStyles({
-  root: {
-    color: "#FFFFFF",
-  },
-})(Typography);
+import { tokenizeTitle, WhiteTextTypography } from "./Util";
 
 export default class Lesson extends Component {
   constructor(props) {

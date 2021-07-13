@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 
 import { loadStripe } from "@stripe/stripe-js";
+import { WhiteTextTypography } from "./Util";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -62,12 +63,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-const WhiteTextTypography = withStyles({
-  root: {
-    color: "#FFFFFF",
-  },
-})(Typography);
 
 const tiers = [
   {

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {withStyles,Typography} from '@material-ui/core';
 
 function tokenizeTitle(s)
 {
@@ -27,4 +28,10 @@ function canViewLesson() {
     });
 }
 
-export { tokenizeTitle };
+const WhiteTextTypography = withStyles({
+  root: {
+    color: "#FFFFFF",
+  },
+})(Typography);
+
+export { tokenizeTitle, WhiteTextTypography };

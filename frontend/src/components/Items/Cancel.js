@@ -1,12 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import { Button, Typography, Grid, withStyles } from "@material-ui/core/";
-
-const WhiteTextTypography = withStyles({
-  root: {
-    color: "#FFFFFF",
-  },
-})(Typography);
+import { WhiteTextTypography } from "./Util";
 
 export default function Cancel() {
   return (
