@@ -18,8 +18,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="/">
+        Icar Academy
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -118,7 +118,7 @@ export default function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Inregistrare
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -130,7 +130,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="firstName"
-                label="First Name"
+                label="Prenume"
                 autoFocus
               />
             </Grid>
@@ -140,7 +140,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="lastName"
-                label="Last Name"
+                label="Nume"
                 name="lastName"
                 autoComplete="lname"
               />
@@ -151,7 +151,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Adresa de Email"
                 name="email"
                 autoComplete="email"
               />
@@ -162,16 +162,10 @@ export default function SignUp() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Parola"
                 type="password"
                 id="password"
                 autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
               />
             </Grid>
           </Grid>
@@ -189,12 +183,12 @@ export default function SignUp() {
               )
             }
           >
-            Sign Up
+            Inregistrare
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="/signin" variant="body2">
-                Already have an account? Sign in
+                Deja ai cont? Spre pagina de autentificare
               </Link>
             </Grid>
           </Grid>
@@ -203,6 +197,7 @@ export default function SignUp() {
           <Snackbar
             open={error}
             autoHideDuration={6000}
+            onClose={()=>setError(false)}
             message={errorMessage}
             ContentProps={{
               "aria-describedby": "message-id",

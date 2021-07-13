@@ -33,7 +33,7 @@ export default class HomePage extends Component {
     return (
       <div>
         <Router>
-          {window.innerWidth<=768? <AppBar_telefon/> : <MenuAppBar/>}
+          {window.innerWidth <= 768 ? <AppBar_telefon /> : <MenuAppBar />}
           <Switch>
             <Route exact path="/">
               <HomePageCarduri />
@@ -56,7 +56,11 @@ export default class HomePage extends Component {
               )}
             </Route>
             <Route exact path="/pricing">
-              <Pricing />
+              {localStorage.getItem("token") === null ? (
+                <Redirect to="/signin" />
+              ) : (
+                <Pricing />
+              )}
             </Route>
             <Route exact path="/myaccount">
               {localStorage.getItem("token") === null ? (
