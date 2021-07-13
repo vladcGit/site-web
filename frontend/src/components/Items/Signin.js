@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { Collapse, Snackbar, SnackbarContent } from "@material-ui/core";
 
 //functia care afiseaza copyright in josul paginii
 function Copyright() {
@@ -45,38 +46,65 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  snackbarStyleViaContentProps: {
+    backgroundColor: "#b71c1c"
+  },
 }));
-
-// functia responsabila pentru signin
-// seteaza un token in browserul clientului
-function handleButtonClick(_email, _password) 
-{
-  const requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: _email,
-      password: _password,
-    }),
-  };
-
-  fetch("/api/auth/login/", requestOptions)
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.key) {
-        localStorage.clear();
-        localStorage.setItem("token", data.key);
-        window.location.replace("");
-      } else {
-        localStorage.clear();
-      }
-    });
-}
 
 export default function SignIn() {
   const classes = useStyles();
+  const [error, setError] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState(
+    "Eroare la autentificare"
+  );
+
+  useEffect(() => {
+    const listener = (event) => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        event.preventDefault();
+        // callMyFunction();
+        handleButtonClick(
+          document.getElementById("email").value,
+          document.getElementById("password").value
+        );
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, []);
+
+  // functia responsabila pentru signin
+  // seteaza un token in browserul clientului
+  function handleButtonClick(_email, _password) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: _email,
+        password: _password,
+      }),
+    };
+
+    fetch("/api/auth/login/", requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.key) {
+          localStorage.clear();
+          localStorage.setItem("token", data.key);
+          window.location.replace("");
+        } else {
+          localStorage.clear();
+          setError(true);
+          var firstKey = Object.keys(data)[0];
+          var message = data[firstKey];
+          setErrorMessage(firstKey + ": " + message);
+        }
+      });
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -142,6 +170,18 @@ export default function SignIn() {
             </Grid>
           </Grid>
         </form>
+
+        <Collapse in={error}>
+          <Snackbar
+            open={error}
+            autoHideDuration={6000}
+            message={errorMessage}
+            ContentProps={{
+              "aria-describedby": "message-id",
+              className: classes.snackbarStyleViaContentProps
+            }}
+          ></Snackbar>
+        </Collapse>
       </div>
       <Box mt={8}>
         <Copyright />

@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { Collapse, Snackbar, SnackbarContent } from "@material-ui/core";
 
 function Copyright() {
   return (
@@ -44,40 +45,70 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  snackbarStyleViaContentProps: {
+    backgroundColor: "#b71c1c",
+  },
 }));
-
-// functia responsabila pentru signup
-// seteaza un token in browserul clientului
-function handleButtonClick(_email, _password, _first_name, _last_name) {
-  const requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: _email,
-      password1: _password,
-      password2: _password,
-      first_name: _first_name,
-      last_name: _last_name,
-    }),
-  };
-
-  fetch("/api/auth/register/", requestOptions)
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.key) {
-        localStorage.clear();
-        localStorage.setItem("token", data.key);
-        window.location.replace("");
-      } else {
-        localStorage.clear();
-      }
-    });
-}
 
 export default function SignUp() {
   const classes = useStyles();
+  const [error, setError] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState(
+    "Eroare la autentificare"
+  );
+
+  useEffect(() => {
+    const listener = (event) => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        event.preventDefault();
+        // callMyFunction();
+        handleButtonClick(
+          document.getElementById("email").value,
+          document.getElementById("password").value,
+          document.getElementById("firstName").value,
+          document.getElementById("lastName").value
+        );
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, []);
+
+  // functia responsabila pentru signup
+  // seteaza un token in browserul clientului
+  function handleButtonClick(_email, _password, _first_name, _last_name) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: _email,
+        password1: _password,
+        password2: _password,
+        first_name: _first_name,
+        last_name: _last_name,
+      }),
+    };
+
+    fetch("/api/auth/register/", requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.key) {
+          localStorage.clear();
+          localStorage.setItem("token", data.key);
+          window.location.replace("");
+        } else {
+          localStorage.clear();
+          setError(true);
+          var firstKey = Object.keys(data)[0];
+          var message = data[firstKey];
+          setErrorMessage(firstKey + ": " + message);
+        }
+      });
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -168,6 +199,17 @@ export default function SignUp() {
             </Grid>
           </Grid>
         </form>
+        <Collapse in={error}>
+          <Snackbar
+            open={error}
+            autoHideDuration={6000}
+            message={errorMessage}
+            ContentProps={{
+              "aria-describedby": "message-id",
+              className: classes.snackbarStyleViaContentProps,
+            }}
+          ></Snackbar>
+        </Collapse>
       </div>
       <Box mt={5}>
         <Copyright />
