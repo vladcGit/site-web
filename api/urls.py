@@ -10,4 +10,5 @@ urlpatterns = [
     path('auth/', include('rest_auth.urls')),
     path('auth/register/', include('rest_auth.registration.urls')),
     path('accounts/', include('allauth.urls')),
+    path('password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
 ]

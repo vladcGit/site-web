@@ -8,9 +8,12 @@ import Footer from "./Items/Footer";
 import Dashboard from "./Items/Dashboard";
 import HomePageText from "./Items/HomePageText";
 import HomePageCarduri from "./Items/HomePageCarduri";
-import Courses from "./Items/Courses";
-import Lesson from "./Items/Lesson";
-import Lessons from "./Items/Lessons";
+import Courses from "./Items/Courses and Lessons/Courses";
+import Lesson from "./Items/Courses and Lessons/Lesson";
+import Lessons from "./Items/Courses and Lessons/Lessons";
+import PasswordResetForm from "./Items/Password Reset/PasswordResetForm";
+import NewPasswordForm from "./Items/Password Reset/NewPasswordForm";
+import ResetPasswordEmailSent from "./Items/Password Reset/ResetPasswordEmailSent";
 
 import {
   BrowserRouter as Router,
@@ -55,6 +58,11 @@ export default class HomePage extends Component {
                 <SignIn />
               )}
             </Route>
+            <Route exact path="/reset_password">
+              <PasswordResetForm/>
+            </Route>
+            <Route exact path="/new_password/:token" component={NewPasswordForm}/>
+            <Route exact path="/reset_successful"><ResetPasswordEmailSent/></Route>
             <Route exact path="/pricing">
               {localStorage.getItem("token") === null ? (
                 <Redirect to="/signin" />

@@ -13,7 +13,7 @@ import {
   CardActions,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { tokenizeTitle } from "./Util";
+import { tokenizeTitle } from "../Util";
 
 export default class Lesson extends Component {
   constructor(props) {

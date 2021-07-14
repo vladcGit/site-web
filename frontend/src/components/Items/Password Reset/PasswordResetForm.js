@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function PasswordResetForm() {
   const classes = useStyles();
   const [error, setError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState(
@@ -64,8 +64,7 @@ export default function SignIn() {
         event.preventDefault();
         // callMyFunction();
         handleButtonClick(
-          document.getElementById("email").value,
-          document.getElementById("password").value
+          document.getElementById("email").value
         );
       }
     };
@@ -77,7 +76,7 @@ export default function SignIn() {
 
   // functia responsabila pentru signin
   // seteaza un token in browserul clientului
-  function handleButtonClick(_email, _password) {
+  function handleButtonClick(_email) {
     const requestOptions = {
       method: "POST",
       headers: {
@@ -85,17 +84,15 @@ export default function SignIn() {
       },
       body: JSON.stringify({
         email: _email,
-        password: _password,
       }),
     };
 
-    fetch("/api/auth/login/", requestOptions)
+    fetch("/api/password_reset/", requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        if (data.key) {
-          localStorage.clear();
-          localStorage.setItem("token", data.key);
-          window.location.replace("");
+          console.log(data);
+        if (data.status == 'OK') {
+          window.location.replace("/reset_successful");
         } else {
           localStorage.clear();
           setError(true);
@@ -114,7 +111,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Autentificare
+          Schimbare parola
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -128,17 +125,6 @@ export default function SignIn() {
             autoComplete="email"
             autoFocus
           />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Parola"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
           <Button
             fullWidth
             variant="contained"
@@ -147,24 +133,11 @@ export default function SignIn() {
             onClick={() =>
               handleButtonClick(
                 document.getElementById("email").value,
-                document.getElementById("password").value
               )
             }
           >
-            Autentificare
+            Trimitere mail
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="/reset_password" variant="body2">
-                Am uitat parola
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="/signup" variant="body2">
-                {"Nu ai cont? Inregistreaza-te"}
-              </Link>
-            </Grid>
-          </Grid>
         </form>
 
         <Collapse in={error}>

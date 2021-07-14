@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Collapse, Snackbar, SnackbarContent } from "@material-ui/core";
+import { useParams } from "react-router-dom";
 
 //functia care afiseaza copyright in josul paginii
 function Copyright() {
@@ -51,7 +52,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function NewPasswordForm() {
+  let { token } = useParams();
   const classes = useStyles();
   const [error, setError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState(
@@ -64,8 +66,8 @@ export default function SignIn() {
         event.preventDefault();
         // callMyFunction();
         handleButtonClick(
-          document.getElementById("email").value,
-          document.getElementById("password").value
+            token,
+            document.getElementById("password").value
         );
       }
     };
@@ -77,25 +79,24 @@ export default function SignIn() {
 
   // functia responsabila pentru signin
   // seteaza un token in browserul clientului
-  function handleButtonClick(_email, _password) {
+  function handleButtonClick(token, _password) {
     const requestOptions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: _email,
         password: _password,
+        token:token
       }),
     };
 
-    fetch("/api/auth/login/", requestOptions)
+    fetch("/api/password_reset/confirm/", requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        if (data.key) {
-          localStorage.clear();
-          localStorage.setItem("token", data.key);
-          window.location.replace("");
+          console.log(data);
+        if (data.status == 'OK') {
+          window.location.replace("/signin");
         } else {
           localStorage.clear();
           setError(true);
@@ -114,21 +115,10 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Autentificare
+          Schimbare parola
         </Typography>
         <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Adresa de Email"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
+        <TextField
             variant="outlined"
             margin="normal"
             required
@@ -146,25 +136,13 @@ export default function SignIn() {
             className={classes.submit}
             onClick={() =>
               handleButtonClick(
-                document.getElementById("email").value,
+                token,
                 document.getElementById("password").value
               )
             }
           >
-            Autentificare
+            Schimbare parola
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="/reset_password" variant="body2">
-                Am uitat parola
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="/signup" variant="body2">
-                {"Nu ai cont? Inregistreaza-te"}
-              </Link>
-            </Grid>
-          </Grid>
         </form>
 
         <Collapse in={error}>

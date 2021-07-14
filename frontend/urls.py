@@ -12,4 +12,7 @@ urlpatterns = [
     path('courses/<str:course>/<str:lesson>', index),
     path('courses/<str:course>', index),
     path('about-us', index),
+    path('reset_password',index),
+    path('new_password/<str:token>',index),
+    path('reset_successful',index),
 ]

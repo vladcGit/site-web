@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',  # new
     'rest_auth.registration',  # new
     'corsheaders',  # new
+    'django_rest_passwordreset',
 
     'api',
     'subscriptions.apps.SubscriptionsConfig',
@@ -143,7 +144,7 @@ REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'api.serializers.RegisterSerializer',
 }
 
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
@@ -156,18 +157,22 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+ACCOUNT_EMAIL_VERIFICATION = 'optional' #mandatory daca vreau sa fie obligatorie confirmarea
 LOGIN_URL = 'https://127.0.0.1:8000/signin'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#mail trimis pe bune
+'''
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'icaracademyro@gmail.com'
 EMAIL_HOST_PASSWORD = 'sfantulsava69'
-
+'''
 
 REST_FRAMEWORK = {
     'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P",
