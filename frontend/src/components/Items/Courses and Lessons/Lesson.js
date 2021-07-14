@@ -24,10 +24,11 @@ export default class Lesson extends Component {
     super(props);
   }
 
-  state = { lectie: [], activeSubscriber: false };
+  state = { lectie: [], activeSubscriber: false, time:0.0, url:"" };
+
 
   componentDidMount() {
-    const url =
+    this.state.url =
       "https://" +
       window.location.host +
       "/courses/api/getlesson/" +
@@ -46,7 +47,7 @@ export default class Lesson extends Component {
       }),
     };
 
-    fetch(url, requestOptions)
+    fetch(this.state.url, requestOptions)
       .then((response) => response.json())
       .then((data) => {
         this.setState({ lectie: data });
@@ -65,6 +66,25 @@ export default class Lesson extends Component {
               this.setState({ activeSubscriber: true });
           });
       });
+  }
+
+  componentWillUnmount()
+  {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cod: "220620006969",
+        time:this.state.time,
+      }),
+    };
+    fetch(this.state.url+"add/", requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
   }
 
   renderOk() {
@@ -91,6 +111,7 @@ export default class Lesson extends Component {
             //url={[{ src: `${this.state.lectie.link}`, type: "video/mp4" }]}
             controls
             type="video/mp4"
+            onProgress = {(progress)=>this.state.time = progress.playedSeconds}
           />
         </div>
 

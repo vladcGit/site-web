@@ -126,6 +126,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+SITE_NAME = 'https://127.0.0.1:8000'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -159,7 +161,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 
 ACCOUNT_EMAIL_VERIFICATION = 'optional' #mandatory daca vreau sa fie obligatorie confirmarea
-LOGIN_URL = 'https://127.0.0.1:8000/signin'
+LOGIN_URL = SITE_NAME+'/signin'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 
 
@@ -191,3 +193,5 @@ STRIPE_PRICE_ID = 'price_1IxFu2G3BrIJ6aWBH5Bch0wk'
 STRIPE_TRIAL_PRICE = 'price_1JCVfHG3BrIJ6aWBgtvhhEFn'
 
 STRIPE_ENDPOINT_SECRET = 'whsec_BzAiRlqXiumckbS3X0L3vzLLJUlFxNBB'
+
+

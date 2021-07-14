@@ -17,6 +17,7 @@ class Lessons(models.Model):
     title = models.CharField(max_length=50, null=False)
     link = models.CharField(max_length=100, null=False)
     details = models.CharField(max_length=400, null=True)
+    time_played = models.FloatField(default=0,null=False)
 
     def __str__(self):
         return self.title
