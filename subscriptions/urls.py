@@ -9,4 +9,5 @@ urlpatterns = [
     path('get_subscription_details/', get_subscription_details),
     path('get_full_subscription_details/',
          get_subscription_details_multiple_subscriptions),
+    path('cancel-subscription/', cancel_subscription),
 ]

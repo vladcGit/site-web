@@ -11,7 +11,7 @@ import {
   Container,
   withStyles,
 } from "@material-ui/core";
-import { WhiteTextTypography } from "./Util";
+import { WhiteTextTypography, colors } from "./Util";
 
 /*
 const AboutPage = () => {
@@ -70,6 +70,9 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: theme.spacing(6),
     },
   },
+  cardTitle:{
+    color: "#ffffff"
+  }
 }));
 
 const tiers = [
@@ -139,7 +142,7 @@ const AboutPage = () => {
               sm={tier.title === "Enterprise" ? 12 : 6}
               md={4}
             >
-              <Card style={{borderRadius:25,borderStyle:'solid',borderColor:'#c7c7c7'}}>
+              <Card style={{borderRadius:25,borderStyle:'solid',borderColor:colors.griDeschis}}>
                 <CardHeader
                   title={tier.title}
                   subheader={tier.subheader}
@@ -151,9 +154,13 @@ const AboutPage = () => {
                     align: "center",
                   }}
                   className={classes.cardHeader}
-                  style={{backgroundColor: "#C0C0C0"}}
+                  classes={{
+                    //text alb in titlu
+                    //title:classes.cardTitle
+                  }}
+                  style={{backgroundColor: colors.gri}}
                 />{" "}
-                <CardContent style={{backgroundColor: "#FFFFFF"}}>
+                <CardContent style={{backgroundColor: colors.alb}}>
                   <ul>
                     {" "}
                     {tier.description.map((line) => (

@@ -11,6 +11,7 @@ import {
   Avatar,
   makeStyles,
 } from "@material-ui/core";
+import {colors} from "./Util";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   MenuButton: {
     //borderRadius: 30,
-    backgroundColor: "#edb90e",
+    backgroundColor: colors.galbenInchis,
   },
   leftSide: {
     marginLeft: "auto",
@@ -41,7 +42,7 @@ const MenuAppBar = (props) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ backgroundColor: "#7F47A6" }}>
+      <AppBar position="static" style={{ backgroundColor: colors.mov }}>
         <Toolbar>
           <div className={classes.leftSide}>
             <Button

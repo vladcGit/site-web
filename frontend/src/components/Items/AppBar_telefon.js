@@ -14,8 +14,7 @@ import {
   MenuItem,
   withStyles,
 } from "@material-ui/core";
-
-const culoareGalbena = "#edb90e";
+import { colors } from "./Util";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
   },
   MenuButton: {
     //borderRadius: 30,
-    backgroundColor: culoareGalbena,
+    backgroundColor: colors.galbenInchis,
+	
   },
   leftSide: {
     marginLeft: "auto",
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
-    backgroundColor: culoareGalbena,
+    backgroundColor: colors.galbenInchis,
   },
 })((props) => (
   <Menu
@@ -77,7 +77,7 @@ const MenuAppBar = (props) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ backgroundColor: "#7F47A6" }}>
+      <AppBar position="static" style={{ backgroundColor: colors.mov }}>
         <Toolbar>
           <div className={classes.leftSide}>
             <Button

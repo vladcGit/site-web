@@ -1,5 +1,5 @@
 import App from "./components/App";
-
+import { colors as culoriJson } from "./components/Items/Util" ;
 
 
 var colors = new Array(
@@ -23,11 +23,24 @@ var colors = new Array(
   [242,107,23],
    [250,245,88],
    */
-
+  /*
    [237,185,14],
    [242,107,23],
    [127,71,166],
    [162,116,164],
+   */
+  /*
+  [239, 249, 218],
+  [249, 235, 223],
+  [249, 216, 214],
+  [214, 205, 234]
+  */
+ culoriJson.galbenInchisRgb,
+ culoriJson.portocaliuRgb,
+ culoriJson.movRgb,
+ //[254,228,64]
+ //[245,0,87]
+ culoriJson.movDeschisRgb
    );
 
   var step = 0;

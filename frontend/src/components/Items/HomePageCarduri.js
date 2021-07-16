@@ -15,7 +15,7 @@ import {
   PaperProps,
   withStyles,
 } from "@material-ui/core";
-import { WhiteTextTypography } from "./Util";
+import { WhiteTextTypography,colors } from "./Util";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
         ? theme.palette.primary
         : theme.palette.primary,
         */
-    backgroundImage: "linear-gradient(45deg, #eda277 5%, #8b72d4 90%)",
+    //backgroundImage: "linear-gradient(45deg, #34435e 5%, #6369d1 90%)",
   },
   cardPricing: {
     display: "flex",
@@ -85,14 +85,13 @@ const tiers = [
 
 export default function HomePageCarduri() {
   const classes = useStyles();
-
   return (
     <React.Fragment>
       <CssBaseline /> {/* Hero unit */}
       <Container maxWidth="md" component="main" className={classes.heroContent}>
         <WhiteTextTypography
           component="h1"
-          variant={window.innerWidth<=768?"h2":"h1"}
+          variant={window.innerWidth<=768?"h3":"h2"}
           align="center"
           color="textPrimary"
           gutterBottom
@@ -111,24 +110,25 @@ export default function HomePageCarduri() {
         </WhiteTextTypography>
       </Container>
       {/* End hero unit */}
-      <Container maxWidth="lg" component="main">
+      <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
           
           {tiers.map((tier) => (
             // Enterprise card is full width at sm breakpoint
             <Grid item key={tier.title} xs={12} md={12}>
-              <Card style={{borderRadius:45,borderStyle:'solid',borderColor:'#ffffff'}}>
+              <Card style={{borderRadius:45,borderStyle:'solid',borderColor:'#ffffff'}}
+              >
                 <CardContent
                   style={{
-                    backgroundImage:
-                      //"linear-gradient(45deg, #eda277 30%, #8b72d4 90%)",
-                      "linear-gradient(45deg, #7F47A6 30%, #bf6bfa 90%)"
+                    
+                    backgroundImage:`linear-gradient(45deg, ${colors.mov} 5%, ${colors.violetDeschis} 90%)`,
+                    //backgroundColor:colors.portocaliu
                   }}
                 >
                   <div className={classes.cardPricing}>
                     <WhiteTextTypography
                       component="h2"
-                      variant="h2"
+                      variant="h3"
                       color="textPrimary"
                       gutterBottom
                     >
@@ -145,7 +145,7 @@ export default function HomePageCarduri() {
                     {tier.description.map((line) => (
                       <WhiteTextTypography
                         component="h3"
-                        variant="h4"
+                        variant="h5"
                         align="center"
                         gutterBottom
                         key={line}
@@ -159,9 +159,8 @@ export default function HomePageCarduri() {
                 <CardActions
                   style={{
                     justifyContent: "center",
-                    backgroundImage:
-                      //"linear-gradient(45deg, #eda277 60%, #8b72d4 110%)",
-                      "linear-gradient(45deg, #7F47A6 60%, #bf6bfa 110%)"
+                    //backgroundColor: colors.portocaliu
+                    backgroundImage:`linear-gradient(45deg, ${colors.mov} 30%, ${colors.violetDeschis} 90%)`,
                   }}
                 >
                   <Button
@@ -170,7 +169,7 @@ export default function HomePageCarduri() {
                     //color="primary"
                     component={Link}
                     to="/about-us"
-                    style={{backgroundColor: "#edb90e",borderRadius:20}} 
+                    style={{borderRadius:20, backgroundColor:colors.galbenInchis}} 
                   >
                     
                     {tier.buttonText}

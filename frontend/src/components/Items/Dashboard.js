@@ -1,11 +1,12 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Button, Grid, Typography } from "@material-ui/core/";
+import { Button, Grid, Typography, Box } from "@material-ui/core/";
 import { withStyles } from "@material-ui/core/styles";
 import { WhiteTextTypography } from "./Util";
+import { Link } from "react-router-dom";
 
 // handler buton de logout
 // doar da logout, nu face nimic altceva
-function handleButtonClick() {
+function handleLogoutButton() {
   const requestOptions = {
     method: "POST",
     headers: {
@@ -22,11 +23,20 @@ function handleButtonClick() {
     });
 }
 
+function handleCancelButton() {
+  fetch("subscribe/cancel-subscription/")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
+}
+
 const Dashboard = () => {
   // variabila care retine numele utilizatorului conectat
   // si tipul de abonat
   const [userName, setUserName] = useState("");
   const [userSubscription, setUserSubscription] = useState("");
+  const [userMail, setUserMail] = useState("");
 
   // verifica daca un user e logat
   // si retine email-ul sau
@@ -46,6 +56,7 @@ const Dashboard = () => {
         .then((res) => res.json())
         .then((data) => {
           setUserName(data.first_name + " " + data.last_name);
+          setUserMail(data.email);
         });
 
       //get subscription status
@@ -76,14 +87,35 @@ const Dashboard = () => {
           {userSubscription === "active" ? "Abonament activ" : "Cont gratuit"}
         </WhiteTextTypography>
       </Grid>
-      <Grid item xs={12} align="center">
+      <Grid container align="center" direction="column" spacing={10}>
+        <Grid item>
         <Button
           variant="contained"
-          color="primary"
-          onClick={() => handleButtonClick()}
+          color="secondary"
+          onClick={() => handleLogoutButton()}
         >
           Logout
         </Button>
+        </Grid>
+        <Box display={userSubscription === "active" ? "inline":"none"}>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => handleCancelButton()}
+          >
+            Anulare abonament
+          </Button>
+        </Box>
+        <Box display={userSubscription !== "active" ? "inline":"none"}>
+          <Button
+            variant="contained"
+            color="secondary"
+            component={Link}
+            to="/pricing"
+          >
+            Aboneaza-te
+          </Button>
+        </Box>
       </Grid>
     </Grid>
   );

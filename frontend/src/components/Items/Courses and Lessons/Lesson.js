@@ -17,14 +17,14 @@ import {
   withStyles,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { tokenizeTitle, WhiteTextTypography } from "../Util";
+import { tokenizeTitle, WhiteTextTypography, getStringDateFromUnixTime } from "../Util";
 
 export default class Lesson extends Component {
   constructor(props) {
     super(props);
   }
 
-  state = { lectie: [], activeSubscriber: false, time:0.0, url:"" };
+  state = { lectie: [], activeSubscriber: false, time:0.0, url:"", unixTimestamp:0 };
 
 
   componentDidMount() {
@@ -60,10 +60,12 @@ export default class Lesson extends Component {
         )
           .then((response) => response.json())
           .then((data) => {
+            console.log(data);
             if (data.hasOwnProperty("Error"))
               this.setState({ activeSubscriber: false });
             else if (data.subscription.status == "active")
               this.setState({ activeSubscriber: true });
+              this.setState({unixTimestamp:data.subscription.current_period_end});
           });
       });
   }
@@ -116,6 +118,9 @@ export default class Lesson extends Component {
         </div>
 
         <WhiteTextTypography>{this.state.lectie.details}</WhiteTextTypography>
+        <WhiteTextTypography>
+          Abonamentul se incheie la date de {getStringDateFromUnixTime(this.state.unixTimestamp)}
+        </WhiteTextTypography>
       </Grid>
     );
   }

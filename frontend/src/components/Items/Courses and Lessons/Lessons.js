@@ -13,7 +13,7 @@ import {
   CardActions,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { tokenizeTitle } from "../Util";
+import { tokenizeTitle, colors } from "../Util";
 
 export default class Lesson extends Component {
   constructor(props) {
@@ -64,7 +64,7 @@ export default class Lesson extends Component {
                     }}
                     style={{ backgroundColor: "#C0C0C0" }}
                   />
-                  <CardContent style={{ backgroundColor: "#FFFFFF" }}>
+                  <CardContent style={{ backgroundColor: colors.alb }}>
                     <CardActions style={{ justifyContent: "center" }}>
                       <Button
                         component={Link}

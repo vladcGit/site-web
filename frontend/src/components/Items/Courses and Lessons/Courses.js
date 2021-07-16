@@ -13,7 +13,7 @@ import {
   CardActions,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { tokenizeTitle } from "../Util";
+import { tokenizeTitle, colors } from "../Util";
 
 function getCourses() {
   fetch("courses/api/getcourses/")
@@ -39,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
         ? theme.palette.grey[200]
         : theme.palette.grey[700],
   },
+  cardTitle:{
+    color: "#ffffff"
+  }
 }));
 
 const Courses = () => {
@@ -73,7 +76,7 @@ const Courses = () => {
           
           {cursuri.map((value) => (
             <Grid item key={value} xs={12} sm={12} md={4}>
-              <Card style={{borderRadius:25,borderStyle:'solid',borderColor:'#c7c7c7'}}>
+              <Card style={{borderRadius:25,borderStyle:'solid',borderColor:colors.griDeschis}}>
                 <CardHeader
                   title={tokenizeTitle(value)}
                   titleTypographyProps={{
@@ -81,9 +84,12 @@ const Courses = () => {
                     variant: "h5",
                   }}
                   className={classes.cardHeader}
-                  style={{ backgroundColor: "#C0C0C0" }}
+                  style={{ backgroundColor: colors.gri }}
+                  classes={{
+                    //title:classes.cardTitle
+                  }}
                 />
-                <CardContent style={{ backgroundColor: "#FFFFFF" }}>
+                <CardContent style={{ backgroundColor: colors.alb }}>
                   <CardActions style={{ justifyContent: "center" }}>
                     <Button
                       component={Link}

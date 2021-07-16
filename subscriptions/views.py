@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse, HttpResponse
 from .models import CustomUser, StripeCustomer
+from json import loads
 
 
 # Create your views here.
@@ -115,3 +116,15 @@ def get_subscription_details(request):
         return JsonResponse({'subscription': 'active', })
     else:
         return JsonResponse({'Error': 'Customer does not exist'})
+
+def cancel_subscription(request):
+    if request.method == 'GET' and request.user.is_authenticated:
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        user = CustomUser.objects.get(id=request.user.id)
+        client = StripeCustomer.objects.get(user=user)
+        stripe.Subscription.delete(client.stripeSubscriptionId)
+        client.delete()
+        return JsonResponse({'Succes':'OK'});
+    return JsonResponse({'Error':'Bad Request'});
+
+
