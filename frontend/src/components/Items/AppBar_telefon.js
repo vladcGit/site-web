@@ -14,7 +14,8 @@ import {
   MenuItem,
   withStyles,
 } from "@material-ui/core";
-import { colors } from "./Util";
+import MenuIcon from "@material-ui/icons/Menu";
+import { colors, WhiteTextTypography } from "./Util";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,23 +23,24 @@ const useStyles = makeStyles((theme) => ({
   },
   MenuButton: {
     //borderRadius: 30,
-    backgroundColor: colors.galbenInchis,
-	
-  },
-  leftSide: {
-    marginLeft: "auto",
-    flex: 1,
-    display: "flex",
+    //backgroundColor: colors.galbenInchis,
+    marginRight:theme.spacing(2),
   },
   logo: {
-    marginLeft: theme.spacing(5),
+    //marginLeft: theme.spacing(13),
+    flexGrow:1,
+  },
+  sizeLogo:
+  {
+    height: '50px',
+    width: '50px',
   },
 }));
 
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
-    backgroundColor: colors.galbenInchis,
+    //backgroundColor: colors.galbenInchis,
   },
 })((props) => (
   <Menu
@@ -77,33 +79,31 @@ const MenuAppBar = (props) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ backgroundColor: colors.mov }}>
+      <AppBar
+        position="static"
+        style={{ background: "transparent", boxShadow: "none" }}
+        elevation={0}
+      >
         <Toolbar>
-          <div className={classes.leftSide}>
-            <Button
-              variant="contained"
-              size="large"
-              onClick={() => handleButtonClick("/")}
-            >
-              Icar Academy
-            </Button>
-            <Avatar
-              className={classes.logo}
-              alt="Logo prima pagina"
-              src="/static/images/logo.jpeg"
-              style={{ border: "3px solid lightseagreen" }}
-            />
-          </div>
-
-          <div>
-            <Button
+            <IconButton
               aria-controls="simple-menu"
               aria-haspopup="true"
               onClick={handleClick}
+              variant="contained"
               className={classes.MenuButton}
+              style={{ color: colors.alb }}
             >
-              Meniu
-            </Button>
+              <MenuIcon />
+            </IconButton>
+            <IconButton className={classes.logo} onClick={() => handleButtonClick("/")}>
+              <Avatar
+                className={classes.sizeLogo}
+                alt="Logo prima pagina"
+                src="/static/images/logo.jpeg"
+                style={{ border: "3px solid lightseagreen" }}
+              />
+            </IconButton>
+
             <StyledMenu
               id="simple-menu"
               anchorEl={anchorEl}
@@ -114,8 +114,8 @@ const MenuAppBar = (props) => {
               <MenuItem onClick={() => handleButtonClick("/courses")}>
                 Cursuri
               </MenuItem>
-              <MenuItem onClick={() => handleButtonClick("/signin")}>
-                Login
+              <MenuItem onClick={() => handleButtonClick("/pricing")}>
+                Preturi
               </MenuItem>
               <MenuItem onClick={() => handleButtonClick("/signup")}>
                 Sign up
@@ -124,7 +124,13 @@ const MenuAppBar = (props) => {
                 Contul meu
               </MenuItem>
             </StyledMenu>
-          </div>
+            <Button
+              style={{ color: colors.alb }}
+              variant="text"
+              onClick={() => handleButtonClick("/signin")}
+            >
+              Login
+            </Button>
         </Toolbar>
       </AppBar>
     </div>
