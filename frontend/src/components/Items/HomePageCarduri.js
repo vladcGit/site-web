@@ -70,7 +70,7 @@ const tiers = [
       "Doar atat."
     ],
     buttonText: "Afla mai multe despre noi",
-    image: "/static/images/carte_vector.png",
+    image: "/static/images/watercolour.jpg",
     link: "/about-us",
   },
   {
