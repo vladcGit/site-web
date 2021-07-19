@@ -181,7 +181,6 @@ export default function SignIn() {
         </Collapse>
       </div>
       <Box mt={8}>
-        <Copyright />
       </Box>
     </Container>
   );

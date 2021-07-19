@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Collapse, Snackbar, SnackbarContent } from "@material-ui/core";
+import { WhiteTextTypography, colors } from "./Util";
 
 function Copyright() {
   return (
@@ -47,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
   },
   snackbarStyleViaContentProps: {
     backgroundColor: "#b71c1c",
+  },
+  paperContainer: {
+    backgroundImage: `url(${"static/images/biblioteca.jpg"})`,
   },
 }));
 
@@ -197,7 +201,7 @@ export default function SignUp() {
           <Snackbar
             open={error}
             autoHideDuration={6000}
-            onClose={()=>setError(false)}
+            onClose={() => setError(false)}
             message={errorMessage}
             ContentProps={{
               "aria-describedby": "message-id",
@@ -206,9 +210,7 @@ export default function SignUp() {
           ></Snackbar>
         </Collapse>
       </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
+      <Box mt={5}></Box>
     </Container>
   );
 }

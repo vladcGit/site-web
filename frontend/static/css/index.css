@@ -11,6 +11,7 @@ body {
   height: 100%;
   left: 0;
   top: 0;
+  transform: skewY(-10deg);
 }
 
 #app {
@@ -27,6 +28,12 @@ body {
 }*/
 
 #gradient {
-  height: auto;
-  min-height: 100vh !important;
+  
+  /*height: auto;
+  min-height: 100vh !important;*/
+  /*height: 40%;*/
+  height: 60%;
+  transform: skewY(10deg);
+
 }
+

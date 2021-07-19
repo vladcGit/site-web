@@ -14,6 +14,9 @@ import Lessons from "./Items/Courses and Lessons/Lessons";
 import PasswordResetForm from "./Items/Password Reset/PasswordResetForm";
 import NewPasswordForm from "./Items/Password Reset/NewPasswordForm";
 import ResetPasswordEmailSent from "./Items/Password Reset/ResetPasswordEmailSent";
+import PaginaDezabonare from "./Items/PaginaDezabonare";
+
+import homePageIncercare from "./Items/homePageIncercare";
 
 import {
   BrowserRouter as Router,
@@ -94,6 +97,11 @@ export default class HomePage extends Component {
             </Route>
 
             <Route exact path="/courses/:course_name" component={Lessons} />
+            <Route exact path="/unsubscribe">
+              {localStorage.getItem("token") === null?(
+                <Redirect to ="signin" />
+              ) : <PaginaDezabonare/>}
+            </Route>
           </Switch>
           <Footer />
         </Router>

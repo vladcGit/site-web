@@ -11,7 +11,7 @@ import {
   Container,
   withStyles,
 } from "@material-ui/core";
-import { WhiteTextTypography, colors } from "./Util";
+import { WhiteTextTypography, colors, StyledCard } from "./Util";
 
 /*
 const AboutPage = () => {
@@ -70,9 +70,9 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: theme.spacing(6),
     },
   },
-  cardTitle:{
-    color: "#ffffff"
-  }
+  cardTitle: {
+    color: "#ffffff",
+  },
 }));
 
 const tiers = [
@@ -142,41 +142,36 @@ const AboutPage = () => {
               sm={tier.title === "Enterprise" ? 12 : 6}
               md={4}
             >
-              <Card style={{borderRadius:25,borderStyle:'solid',borderColor:colors.griDeschis}}>
-                <CardHeader
-                  title={tier.title}
-                  subheader={tier.subheader}
-                  titleTypographyProps={{
-                    align: "center",
-                    variant: "h4",
-                  }}
-                  subheaderTypographyProps={{
-                    align: "center",
-                  }}
-                  className={classes.cardHeader}
-                  classes={{
-                    //text alb in titlu
-                    //title:classes.cardTitle
-                  }}
-                  style={{backgroundColor: colors.gri}}
-                />{" "}
-                <CardContent style={{backgroundColor: colors.alb}}>
+              <StyledCard>
+                <CardContent>
+                  <div className={classes.cardPricing}>
+                    <Typography
+                      component="h3"
+                      variant="h4"
+                      color="textPrimary"
+                      gutterBottom
+                    >
+                      <Box fontWeight="fontWeightBold" m={1} align="center">
+                        {tier.title}
+                      </Box>
+                    </Typography>
+                  </div>
                   <ul>
-                    {" "}
                     {tier.description.map((line) => (
                       <Typography
-                        component="li"
-                        variant="h5"
+                        component="h5"
+                        variant="h6"
                         align="center"
                         key={line}
                       >
-                        {" "}
-                        {line}{" "}
+                        <Box fontWeight="fontWeightLight" m={1}>
+                          {line}
+                        </Box>
                       </Typography>
-                    ))}{" "}
-                  </ul>{" "}
+                    ))}
+                  </ul>
                 </CardContent>{" "}
-              </Card>{" "}
+              </StyledCard>{" "}
             </Grid>
           ))}{" "}
         </Grid>{" "}

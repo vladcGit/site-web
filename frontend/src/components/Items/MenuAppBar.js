@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import AccountBox from "@material-ui/icons/AccountBox";
 import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   AppBar,
   ButtonGroup,
@@ -11,7 +12,7 @@ import {
   Avatar,
   makeStyles,
 } from "@material-ui/core";
-import {colors} from "./Util";
+import { colors, StyledButton } from "./Util";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   MenuButton: {
     //borderRadius: 30,
-    backgroundColor: colors.galbenInchis,
+    //backgroundColor: colors.galbenInchis,
   },
   leftSide: {
     marginLeft: "auto",
@@ -40,15 +41,25 @@ const MenuAppBar = (props) => {
     history.push(pageURL);
   };
 
+  const [onFocus,setOnFocus] = React.useState(false);
+  const onMouseAction = () => {setOnFocus(!onFocus)};
+
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ backgroundColor: colors.mov }}>
+      <AppBar
+        position="static"
+        style={{ background: "transparent", boxShadow: "none" }}
+        elevation={0}
+      >
         <Toolbar>
           <div className={classes.leftSide}>
             <Button
               variant="contained"
               size="large"
               onClick={() => handleButtonClick("/")}
+              onMouseOver={onMouseAction}
+              onMouseOut={onMouseAction}
+              color = {onFocus? "primary" : "default"}
             >
               Icar Academy
             </Button>
@@ -60,39 +71,36 @@ const MenuAppBar = (props) => {
             />
           </div>
 
-          <ButtonGroup variant="contained" color="secondary">
-            <Button
-              onClick={() => handleButtonClick("/courses")}
+          <ButtonGroup color="primary">
+            <StyledButton
+              to="/courses"
               className={classes.MenuButton}
             >
               {" "}
               Cursuri{" "}
-            </Button>
-            <Button
-              onClick={() => handleButtonClick("/signup")}
+            </StyledButton>
+            <StyledButton
+              to="/signup"
               className={classes.MenuButton}
             >
               {" "}
               Sign up{" "}
-            </Button>
-            <Button
-              onClick={() => handleButtonClick("/signin")}
+            </StyledButton>
+            <StyledButton
+            to="/signin"
               className={classes.MenuButton}
             >
               {" "}
               Login{" "}
-            </Button>
+            </StyledButton>
             <IconButton
-            variant="contained"
-            //color="secondary"
-            onClick={() => handleButtonClick("/myaccount")}
-            className={classes.MenuButton}
-          >
-            <AccountBox />
-          </IconButton>
+              //color="secondary"
+              onClick={() => handleButtonClick("/myaccount")}
+              className={classes.MenuButton}
+            >
+              <AccountBox />
+            </IconButton>
           </ButtonGroup>
-
-          
         </Toolbar>
       </AppBar>
     </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Button, Grid, Typography, Box } from "@material-ui/core/";
 import { withStyles } from "@material-ui/core/styles";
-import { WhiteTextTypography } from "./Util";
+import { WhiteTextTypography,StyledButton } from "./Util";
 import { Link } from "react-router-dom";
 
 // handler buton de logout
@@ -101,7 +101,8 @@ const Dashboard = () => {
           <Button
             variant="contained"
             color="secondary"
-            onClick={() => handleCancelButton()}
+            component={Link}
+            to="/unsubscribe"
           >
             Anulare abonament
           </Button>

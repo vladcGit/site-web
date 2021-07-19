@@ -42,7 +42,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="/">
+      <Link color="primary" href="/">
         Icar Academy
       </Link>{" "}
       {new Date().getFullYear()}
@@ -71,7 +71,7 @@ export default function Footer() {
                       item.split(" ")[1]
                     }`}
                     variant="subtitle1"
-                    color="textSecondary"
+                    color="primary"
                   >
                     {item}
                   </Link>

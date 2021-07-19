@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { withStyles, Typography } from "@material-ui/core";
-import { useParams } from "react-router-dom";
+import React, { useState, Component } from "react";
+import { withStyles, Typography, Card, Button } from "@material-ui/core";
+import { useParams, Link } from "react-router-dom";
 
 function tokenizeTitle(s) {
   let rez = "";
@@ -88,10 +88,65 @@ function SimpleTextPage()
   );
 }
 
+class StyledCard extends Component {
+
+  state= {onFocus:false}
+  onMouseOver = () => this.setState({ onFocus:true });
+
+  onMouseOut = () => this.setState({ onFocus:false });
+
+  render() {
+    return (
+      <Card 
+        onMouseOver={this.onMouseOver}
+        onMouseOut={this.onMouseOut}
+        raised = {this.state.onFocus}
+        style={{
+          borderRadius: 25,
+          borderStyle: "solid",
+          borderColor: colors.alb,
+        }}
+        elevation={this.state.onFocus?10:0}
+        variant={this.state.onFocus?"elevation":"outlined"}
+      >
+        {this.props.children}
+      </Card>
+    );
+  }
+}
+
+class StyledButton extends Component {
+
+  state= {onFocus:false}
+  onMouseOver = () => this.setState({ onFocus:true });
+
+  onMouseOut = () => this.setState({ onFocus:false });
+
+  render() {
+    return (
+      <Button 
+        onMouseOver={this.onMouseOver}
+        onMouseOut={this.onMouseOut}
+        variant = {this.state.onFocus?"contained":"text"}
+        color="primary"
+        component={Link}
+        to={this.props.to}
+        style={{
+          borderRadius: this.props.border===undefined? 0 : this.props.border /*backgroundColor:colors.galbenInchis*/,
+        }}
+      >
+        {this.props.children}
+      </Button>
+    );
+  }
+}
+
 export {
   tokenizeTitle,
   WhiteTextTypography,
   getStringDateFromUnixTime,
   colors,
   SimpleTextPage,
+  StyledCard,
+  StyledButton,
 };

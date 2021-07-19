@@ -1,21 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
   CssBaseline,
   Grid,
-  Typography,
   makeStyles,
   Container,
   Box,
-  PaperProps,
-  withStyles,
 } from "@material-ui/core";
-import { WhiteTextTypography,colors } from "./Util";
+import { WhiteTextTypography } from "./Util";
+import CardWithButton from "./CardWithButton";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -38,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1, 1.5),
   },
   heroContent: {
-    padding: theme.spacing(4, 0, 6),
+    padding: theme.spacing(3, 0, 5),
   },
   cardHeader: {
     /*
@@ -65,21 +57,39 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: theme.spacing(6),
     },
   },
+  spacingItem: {
+    padding: theme.spacing(2, 0, 2),
+  },
 }));
 
 const tiers = [
   {
-    title: "Icar Academy",
-    subtitle: "Ca meditatiile, dar mai bine si mai ieftin",
+    title: "Misiunea noastra",
     description: [
-      "Promitem rezultate rapide",
-      "Cu noi invatatul nu va fi un chin",
-      "Metode verificate de invatare si aprofundare",
-      "Apropiere de studenti (si noi suntem studenti)",
-      "Si nu in ultimul rand, te vei distra invatand",
+      "Ne propunem sa facem invatamantul de calitate accesibil oricui.",
+      "Doar atat."
     ],
     buttonText: "Afla mai multe despre noi",
-    buttonVariant: "contained",
+    image: "/static/images/carte_vector.png",
+    link: "/about-us",
+  },
+  {
+    title: "Incearca gratuit oferta noastra",
+    description: [
+      "Primele 7 zile sunt gratuite; daca nu esti multumit te poti dezabona cu o simpla apasare de buton.",
+    ],
+    buttonText: "Inregistreaza-te",
+    image: "/static/images/palms.jpg",
+    link: "/signup",
+  },
+  {
+    title: "Lista noastra de cursuri",
+    description: [
+      "Fie ca te pregatesti sa devii medic, inginer sau programator, ti-am pregatit o oferta foarte buna.",
+    ],
+    buttonText: "Cursurile noastre",
+    image: "/static/images/forme.jpg",
+    link: "/courses",
   },
 ];
 
@@ -91,7 +101,7 @@ export default function HomePageCarduri() {
       <Container maxWidth="md" component="main" className={classes.heroContent}>
         <WhiteTextTypography
           component="h1"
-          variant={window.innerWidth<=768?"h3":"h2"}
+          variant={window.innerWidth <= 768 ? "h3" : "h2"}
           align="center"
           color="textPrimary"
           gutterBottom
@@ -110,73 +120,24 @@ export default function HomePageCarduri() {
         </WhiteTextTypography>
       </Container>
       {/* End hero unit */}
-      <Container maxWidth="md" component="main">
-        <Grid container spacing={5} alignItems="flex-end">
-          
+      <Container maxWidth="lg" component="main">
+        <WhiteTextTypography
+          component="h2"
+          variant={window.innerWidth <= 768 ? "subtitle1" : "h6"}
+          align="center"
+          color="textPrimary"
+          gutterBottom
+          className={classes.spacingItem}
+        >
+          <Box fontWeight="fontWeightBold" m={1}>
+            Aducem eficienta, cooperarea si simplitatea in educatie.
+          </Box>
+          <Box fontWeight="fontWeightBold" m={1}></Box>
+        </WhiteTextTypography>
+        <Grid container spacing={5} alignItems="stretch">
           {tiers.map((tier) => (
             // Enterprise card is full width at sm breakpoint
-            <Grid item key={tier.title} xs={12} md={12}>
-              <Card style={{borderRadius:45,borderStyle:'solid',borderColor:'#ffffff'}}
-              >
-                <CardContent
-                  style={{
-                    
-                    backgroundImage:`linear-gradient(45deg, ${colors.mov} 5%, ${colors.violetDeschis} 90%)`,
-                    //backgroundColor:colors.portocaliu
-                  }}
-                >
-                  <div className={classes.cardPricing}>
-                    <WhiteTextTypography
-                      component="h2"
-                      variant="h3"
-                      color="textPrimary"
-                      gutterBottom
-                    >
-                      <Box fontWeight="fontWeightRegular" m={1} align="center">
-                        Aducem eficienta, cooperarea
-                      </Box>
-                      <Box fontWeight="fontWeightRegular" m={1} align="center">
-                        si simplitatea in educatie
-                      </Box>
-                    </WhiteTextTypography>
-                  </div>
-                  <ul>
-                    
-                    {tier.description.map((line) => (
-                      <WhiteTextTypography
-                        component="h3"
-                        variant="h5"
-                        align="center"
-                        gutterBottom
-                        key={line}
-                      >
-                        
-                        {line}
-                      </WhiteTextTypography>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardActions
-                  style={{
-                    justifyContent: "center",
-                    //backgroundColor: colors.portocaliu
-                    backgroundImage:`linear-gradient(45deg, ${colors.mov} 30%, ${colors.violetDeschis} 90%)`,
-                  }}
-                >
-                  <Button
-                    //fullWidth
-                    variant={tier.buttonVariant}
-                    //color="primary"
-                    component={Link}
-                    to="/about-us"
-                    style={{borderRadius:20, backgroundColor:colors.galbenInchis}} 
-                  >
-                    
-                    {tier.buttonText}
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
+            <CardWithButton {...tier}/>
           ))}
         </Grid>
       </Container>

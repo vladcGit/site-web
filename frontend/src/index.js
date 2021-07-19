@@ -11,36 +11,11 @@ var colors = new Array(
     [255,0,255],
     [255,128,0]
     */
-   /*
-   [52,58,64],
-   [121,82,179],
-   [255,193,7],
-   [255,0,255],
-   */
-  /*
-  [38,1,52],
-  [237,185,14],
-  [242,107,23],
-   [250,245,88],
-   */
-  /*
-   [237,185,14],
-   [242,107,23],
-   [127,71,166],
-   [162,116,164],
-   */
-  /*
-  [239, 249, 218],
-  [249, 235, 223],
-  [249, 216, 214],
-  [214, 205, 234]
-  */
- culoriJson.galbenInchisRgb,
- culoriJson.portocaliuRgb,
- culoriJson.movRgb,
- //[254,228,64]
- //[245,0,87]
- culoriJson.movDeschisRgb
+   [219, 80, 74],
+   [227, 181, 5],
+   [81, 203, 32],
+   [99, 154, 136],
+
    );
 
   var step = 0;
@@ -52,7 +27,7 @@ var colors = new Array(
   var colorIndices = [0,1,2,3];
 
   //transition speed
-  var gradientSpeed = 0.002;
+  var gradientSpeed = 0.004;
 
   function updateGradient()
   {
@@ -95,3 +70,5 @@ var colors = new Array(
   }
 
   setInterval(updateGradient,10);
+
+

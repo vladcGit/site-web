@@ -14,13 +14,14 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { tokenizeTitle, colors } from "../Util";
+import CardWithButton from "../CardWithButton";
 
 export default class Lesson extends Component {
   constructor(props) {
     super(props);
   }
 
-  state = { lectii: [] };
+  state = { lectii: [], tiers: [] };
 
   componentDidMount() {
     const url =
@@ -34,7 +35,23 @@ export default class Lesson extends Component {
       .then((response) => response.json())
       .then((data) => {
         this.setState({ lectii: data });
+
+        //fac tiers pentru fiecare nume de curs
+        var lista=[];
+        for(var i=0;i<data.length;i++)
+        {
+          var obj = {};
+          obj.title=tokenizeTitle(data[i].title);
+          obj.description = [];
+          obj.buttonText = "Acceseaza";
+          obj.link=`/courses/${this.props.match.params.course_name}/${data[i].title}`;
+          //obj.image="/static/images/carte_vector.png"
+          lista.push(obj);
+        }
+        this.setState({tiers:lista});
+        console.log(this.state.tiers);
       });
+
   }
 
   render() {
@@ -47,38 +64,8 @@ export default class Lesson extends Component {
       >
         <Container maxWidth="lg" component="main">
           <Grid container spacing={5} alignItems="flex-end">
-            {this.state.lectii.map((value) => (
-              <Grid item key={value} xs={12} sm={12} md={4}>
-                <Card
-                  style={{
-                    borderRadius: 25,
-                    borderStyle: "solid",
-                    borderColor: "#c7c7c7",
-                  }}
-                >
-                  <CardHeader
-                    title={tokenizeTitle(value.title)}
-                    titleTypographyProps={{
-                      align: "center",
-                      variant: "h5",
-                    }}
-                    style={{ backgroundColor: "#C0C0C0" }}
-                  />
-                  <CardContent style={{ backgroundColor: colors.alb }}>
-                    <CardActions style={{ justifyContent: "center" }}>
-                      <Button
-                        component={Link}
-                        to={`/courses/${this.props.match.params.course_name}/${value.title}`}
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                      >
-                        Acceseaza
-                      </Button>
-                    </CardActions>
-                  </CardContent>
-                </Card>
-              </Grid>
+            {this.state.tiers.map((tier) => (
+              <CardWithButton {...tier}/>
             ))}
           </Grid>
         </Container>
