@@ -16,8 +16,6 @@ import NewPasswordForm from "./Items/Password Reset/NewPasswordForm";
 import ResetPasswordEmailSent from "./Items/Password Reset/ResetPasswordEmailSent";
 import PaginaDezabonare from "./Items/PaginaDezabonare";
 
-import homePageIncercare from "./Items/homePageIncercare";
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -67,11 +65,7 @@ export default class HomePage extends Component {
             <Route exact path="/new_password/:token" component={NewPasswordForm}/>
             <Route exact path="/reset_successful"><ResetPasswordEmailSent/></Route>
             <Route exact path="/pricing">
-              {localStorage.getItem("token") === null ? (
-                <Redirect to="/signin" />
-              ) : (
-                <Pricing />
-              )}
+              <Pricing/>
             </Route>
             <Route exact path="/myaccount">
               {localStorage.getItem("token") === null ? (

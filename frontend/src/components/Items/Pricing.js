@@ -1,6 +1,7 @@
 import React from "react";
 import StarIcon from "@material-ui/icons/StarBorder";
-import { makeStyles } from "@material-ui/core/styles";
+import Alert from "@material-ui/lab/Alert";
+import CloseIcon from "@material-ui/icons/Close";
 import {
   Button,
   Card,
@@ -11,7 +12,9 @@ import {
   Grid,
   Typography,
   Container,
-  withStyles
+  Collapse,
+  IconButton,
+  makeStyles
 } from "@material-ui/core";
 
 import { loadStripe } from "@stripe/stripe-js";
@@ -24,18 +27,6 @@ const useStyles = makeStyles((theme) => ({
       padding: 0,
       listStyle: "none",
     },
-  },
-  appBar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  toolbar: {
-    flexWrap: "wrap",
-  },
-  toolbarTitle: {
-    flexGrow: 1,
-  },
-  link: {
-    margin: theme.spacing(1, 1.5),
   },
   heroContent: {
     padding: theme.spacing(8, 0, 6),
@@ -52,16 +43,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "baseline",
     marginBottom: theme.spacing(2),
   },
-  footer: {
-    borderTop: `1px solid ${theme.palette.divider}`,
-    marginTop: theme.spacing(8),
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-    [theme.breakpoints.up("sm")]: {
-      paddingTop: theme.spacing(6),
-      paddingBottom: theme.spacing(6),
-    },
-  },
 }));
 
 const tiers = [
@@ -70,12 +51,12 @@ const tiers = [
     price: "0",
     description: [
       "Free trial de 7 zile anulabil oricand;",
-      "Dupa 7 zile se activeaza abonamentul de tip \"Student\".",
+      'Dupa 7 zile se activeaza abonamentul de tip "Student".',
     ],
     buttonText: "Incearca gratuit",
     buttonVariant: "contained",
-    unitateTemporara:"",
-    stripePriceId:"price_1JCVfHG3BrIJ6aWBgtvhhEFn",
+    unitateTemporara: "",
+    stripePriceId: "price_1JCVfHG3BrIJ6aWBgtvhhEFn",
   },
   {
     title: "Entuziast",
@@ -84,12 +65,12 @@ const tiers = [
       "Potrivit pentru studentii cei mai silitori;",
       "Acces nelimitat la toate cursurile;",
       "Abilitatea de a trimite oricate intrebari;",
-      "Cea mai buna valoare pentru banii tai."
+      "Cea mai buna valoare pentru banii tai.",
     ],
     buttonText: "Incepe sa inveti pe bune",
     buttonVariant: "contained",
-    unitateTemporara:"/an",
-    stripePriceId:"price_1JCVdoG3BrIJ6aWBgCVaC51t",
+    unitateTemporara: "/an",
+    stripePriceId: "price_1JCVdoG3BrIJ6aWBgCVaC51t",
   },
   {
     title: "Student (cel mai popular)",
@@ -98,42 +79,44 @@ const tiers = [
     description: [
       "Potrivit pentru majoritatea studentilor;",
       "Acces nelimitat la toate cursurile;",
-      "Un mare pas in directia invatarii."
+      "Un mare pas in directia invatarii.",
     ],
     buttonText: "Incepe calatoria",
     buttonVariant: "contained",
-    unitateTemporara:"/luna",
-    stripePriceId:"price_1IxFu2G3BrIJ6aWBH5Bch0wk",
+    unitateTemporara: "/luna",
+    stripePriceId: "price_1IxFu2G3BrIJ6aWBH5Bch0wk",
   },
-  
 ];
-
-function handleButtonClick(stripePriceId) {
-  fetch("subscribe/config/")
-    .then((result) => result.json())
-    .then(async (data) => {
-      const stripePromise = loadStripe(data.publicKey);
-
-      const stripe = await stripePromise;
-
-      fetch("subscribe/create-checkout-session/"+stripePriceId+"/")
-        .then((result) => result.json())
-        .then((data) => {
-          console.log(data);
-          return stripe.redirectToCheckout({ sessionId: data.sessionId });
-        })
-        .then((res) => {
-          console.log(res);
-        });
-    });
-}
 
 export default function Pricing() {
   const classes = useStyles();
+  const [error, setError] = React.useState(false);
+
+  function handleButtonClick(stripePriceId) {
+    if (localStorage.getItem("token") !== null) {
+      fetch("subscribe/config/")
+        .then((result) => result.json())
+        .then(async (data) => {
+          const stripePromise = loadStripe(data.publicKey);
+
+          const stripe = await stripePromise;
+
+          fetch("subscribe/create-checkout-session/" + stripePriceId + "/")
+            .then((result) => result.json())
+            .then((data) => {
+              console.log(data);
+              return stripe.redirectToCheckout({ sessionId: data.sessionId });
+            })
+            .then((res) => {
+              console.log(res);
+            });
+        });
+    } else setError(true);
+  }
 
   return (
     <React.Fragment>
-      <CssBaseline /> {/* Hero unit */}{" "}
+      <CssBaseline /> {/* Hero unit */}
       <Container maxWidth="md" component="main" className={classes.heroContent}>
         <WhiteTextTypography
           component="h1"
@@ -142,8 +125,8 @@ export default function Pricing() {
           color="textPrimary"
           gutterBottom
         >
-          Preturile noastre{" "}
-        </WhiteTextTypography>{" "}
+          Preturile noastre
+        </WhiteTextTypography>
         <WhiteTextTypography
           variant="h5"
           align="center"
@@ -152,7 +135,7 @@ export default function Pricing() {
           gutterBottom
         >
           Ofertele noastre de invatare.
-        </WhiteTextTypography>{" "}
+        </WhiteTextTypography>
         <WhiteTextTypography
           variant="h5"
           align="center"
@@ -161,8 +144,7 @@ export default function Pricing() {
           gutterBottom
         >
           Daca nu mai esti multumit poti anula abonamentul oricand.
-          
-        </WhiteTextTypography>{" "}
+        </WhiteTextTypography>
         <WhiteTextTypography
           variant="h5"
           align="center"
@@ -170,14 +152,13 @@ export default function Pricing() {
           component="p"
           gutterBottom
         >
-          Procesam platile prin intermediul Stripe, cel mai mare serviciu de plati online din lume;
-          in traducere libera, cardul tau e in siguranta.
-        </WhiteTextTypography>{" "}
-      </Container>{" "}
-      {/* End hero unit */}{" "}
+          Procesam platile prin intermediul Stripe, cel mai mare serviciu de
+          plati online din lume; in traducere libera, cardul tau e in siguranta.
+        </WhiteTextTypography>
+      </Container>
+      {/* End hero unit */}
       <Container maxWidth="lg" component="main">
         <Grid container spacing={5} alignItems="flex-end">
-          {" "}
           {tiers.map((tier) => (
             // Enterprise card is full width at sm breakpoint
             <Grid
@@ -199,18 +180,17 @@ export default function Pricing() {
                   }}
                   action={tier.title === "Entuziast" ? <StarIcon /> : null}
                   className={classes.cardHeader}
-                />{" "}
+                />
                 <CardContent>
                   <div className={classes.cardPricing}>
                     <Typography component="h2" variant="h3" color="textPrimary">
-                      {tier.price}{" "} Lei
-                    </Typography>{" "}
+                      {tier.price} Lei
+                    </Typography>
                     <Typography variant="h6" color="textSecondary">
-                      {tier.unitateTemporara}{" "}
-                    </Typography>{" "}
-                  </div>{" "}
+                      {tier.unitateTemporara}
+                    </Typography>
+                  </div>
                   <ul>
-                    {" "}
                     {tier.description.map((line) => (
                       <Typography
                         component="li"
@@ -218,12 +198,11 @@ export default function Pricing() {
                         align="center"
                         key={line}
                       >
-                        {" "}
-                        {line}{" "}
+                        {line}
                       </Typography>
-                    ))}{" "}
-                  </ul>{" "}
-                </CardContent>{" "}
+                    ))}
+                  </ul>
+                </CardContent>
                 <CardActions>
                   <Button
                     fullWidth
@@ -231,15 +210,34 @@ export default function Pricing() {
                     color="primary"
                     onClick={() => handleButtonClick(tier.stripePriceId)}
                   >
-                    {" "}
-                    {tier.buttonText}{" "}
-                  </Button>{" "}
-                </CardActions>{" "}
-              </Card>{" "}
+                    {tier.buttonText}
+                  </Button>
+                </CardActions>
+              </Card>
             </Grid>
-          ))}{" "}
-        </Grid>{" "}
-      </Container>{" "}
+          ))}
+        </Grid>
+        <Collapse in={error}>
+          <Alert
+            severity="warning"
+            variant="filled"
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setError(false);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+          >
+            Trebuie sa fii logat ca sa poti accesa pagina de plati.
+          </Alert>
+        </Collapse>
+      </Container>
     </React.Fragment>
   );
 }

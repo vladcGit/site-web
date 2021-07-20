@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
+import React, { useEffect } from "react";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { Collapse, Snackbar, SnackbarContent } from "@material-ui/core";
-import { WhiteTextTypography, colors } from "./Util";
+import {
+  Collapse,
+  Snackbar,
+  IconButton,
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  makeStyles,
+  Container,
+} from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+import CloseIcon from "@material-ui/icons/Close";
 
 function Copyright() {
   return (
@@ -45,9 +48,6 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-  },
-  snackbarStyleViaContentProps: {
-    backgroundColor: "#b71c1c",
   },
   paperContainer: {
     backgroundImage: `url(${"static/images/biblioteca.jpg"})`,
@@ -100,12 +100,10 @@ export default function SignUp() {
     fetch("/api/auth/register/", requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        if (data.key) {
-          localStorage.clear();
-          localStorage.setItem("token", data.key);
-          window.location.replace("");
+        localStorage.clear();
+        if (data.detail && data.detail === "Verification e-mail sent.") {
+          window.location.replace("/reset_successful");
         } else {
-          localStorage.clear();
           setError(true);
           var firstKey = Object.keys(data)[0];
           var message = data[firstKey];
@@ -197,17 +195,25 @@ export default function SignUp() {
             </Grid>
           </Grid>
         </form>
-        <Collapse in={error}>
-          <Snackbar
-            open={error}
-            autoHideDuration={6000}
-            onClose={() => setError(false)}
-            message={errorMessage}
-            ContentProps={{
-              "aria-describedby": "message-id",
-              className: classes.snackbarStyleViaContentProps,
-            }}
-          ></Snackbar>
+        <Collapse in={error} style={{ marginTop: "20px" }}>
+          <Alert
+            severity="error"
+            variant="filled"
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setError(false);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+          >
+            {errorMessage}
+          </Alert>
         </Collapse>
       </div>
       <Box mt={5}></Box>

@@ -48,8 +48,8 @@ export default class Lesson extends Component {
           //obj.image="/static/images/carte_vector.png"
           lista.push(obj);
         }
+        this.state.tiers=lista;
         this.setState({tiers:lista});
-        console.log(this.state.tiers);
       });
 
   }
@@ -72,36 +72,4 @@ export default class Lesson extends Component {
       </Grid>
     );
   }
-
-  /*
-  render() {
-    return (
-        <Grid
-      container
-      xs={12}
-      spacing={5}
-      direction="column"
-      alignItems="center"
-      justify="center"
-      style={{ minHeight: "50vh" }}
-    >
-      {this.state.lectii.map((value) => {
-        return (
-          <Grid item>
-            <Typography>{value.title}</Typography>
-            <Button
-              component={Link}
-              to={`/courses/${this.props.match.params.course_name}/${value.title}`}
-              variant="contained"
-              color="primary"
-            >
-              Go
-            </Button>
-          </Grid>
-        );
-      })}
-    </Grid>
-    );
-  }
-  */
 }

@@ -3,7 +3,7 @@ from django.http.response import JsonResponse
 from django.shortcuts import render
 from .models import Courses, Lessons
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from json import loads
 # Create your views here.
 

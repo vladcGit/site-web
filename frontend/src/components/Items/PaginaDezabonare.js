@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Button ,makeStyles} from "@material-ui/core";
+import { Grid, Button, makeStyles } from "@material-ui/core";
 import { WhiteTextTypography, StyledButton } from "./Util";
 
 const lines = [
@@ -18,11 +18,12 @@ function handleCancelButton() {
     .then((data) => {
       console.log(data);
     });
+  window.location.replace("/myaccount");
 }
 
 const useStyles = makeStyles((theme) => ({
   spacingItem: {
-    marginTop:160
+    marginTop: 160,
   },
 }));
 
@@ -50,7 +51,7 @@ export default function PaginaDezabonare() {
         size="large"
         onClick={() => handleCancelButton()}
       >
-        Dezabonare
+        Confirma Dezabonare
       </Button>
     </Grid>
   );

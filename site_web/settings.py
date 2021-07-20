@@ -160,7 +160,7 @@ ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 
-ACCOUNT_EMAIL_VERIFICATION = 'optional' #mandatory daca vreau sa fie obligatorie confirmarea
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory' #mandatory daca vreau sa fie obligatorie confirmarea
 LOGIN_URL = SITE_NAME+'/signin'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 

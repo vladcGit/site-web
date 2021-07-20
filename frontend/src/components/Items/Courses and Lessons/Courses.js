@@ -17,7 +17,7 @@ import { tokenizeTitle, colors } from "../Util";
 import CardWithButton from "../CardWithButton";
 
 const Courses = () => {
-  const [tiers,setTiers] = React.useState([]);
+  const [tiers, setTiers] = React.useState([]);
   useEffect(() => {
     fetch("courses/api/getcourses/")
       .then((result) => result.json())
@@ -31,14 +31,13 @@ const Courses = () => {
         }
 
         //fac tiers pentru fiecare nume de curs
-        var lista=[];
-        for(var i=0;i<nume.length;i++)
-        {
+        var lista = [];
+        for (var i = 0; i < nume.length; i++) {
           var obj = {};
-          obj.title=tokenizeTitle(nume[i]);
+          obj.title = tokenizeTitle(nume[i]);
           obj.description = [];
           obj.buttonText = "Acceseaza";
-          obj.link="/courses/"+nume[i];
+          obj.link = "/courses/" + nume[i];
           //obj.image="/static/images/carte_vector.png"
           lista.push(obj);
         }
@@ -57,9 +56,8 @@ const Courses = () => {
     >
       <Container maxWidth="lg" component="main">
         <Grid container spacing={5} alignItems="flex-end">
-          
-        {tiers.map((tier) => (
-            <CardWithButton {...tier}/>
+          {tiers.map((tier) => (
+            <CardWithButton {...tier} />
           ))}
         </Grid>
       </Container>

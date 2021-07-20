@@ -1,31 +1,26 @@
-import React, { Component } from "react";
-//import { Card, CardMedia } from "@material-ui/core";
+import React, { Component, useEffect,Suspense } from "react";
 import ReactPlayer from "react-player";
+import { Button, Grid } from "@material-ui/core";
+import { Link, useParams } from "react-router-dom";
 import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  CssBaseline,
-  Grid,
-  Typography,
-  makeStyles,
-  Container,
-  Box,
-  PaperProps,
-  withStyles,
-} from "@material-ui/core";
-import { Link } from "react-router-dom";
-import { tokenizeTitle, WhiteTextTypography, getStringDateFromUnixTime } from "../Util";
+  tokenizeTitle,
+  WhiteTextTypography,
+  getStringDateFromUnixTime,
+} from "../Util";
+
 
 export default class Lesson extends Component {
   constructor(props) {
     super(props);
   }
 
-  state = { lectie: [], activeSubscriber: false, time:0.0, url:"", unixTimestamp:0 };
-
+  state = {
+    lectie: [],
+    activeSubscriber: false,
+    time: 0.0,
+    url: "",
+    unixTimestamp: 0,
+  };
 
   componentDidMount() {
     this.state.url =
@@ -62,16 +57,15 @@ export default class Lesson extends Component {
           .then((data) => {
             console.log(data);
             if (data.hasOwnProperty("Error"))
-              this.setState({ activeSubscriber: false });
-            else if (data.subscription.status == "active")
-              this.setState({ activeSubscriber: true });
-              this.setState({unixTimestamp:data.subscription.current_period_end});
+              this.state.activeSubscriber = false;
+            else if (data.subscription.status == "active") {
+              this.setState({activeSubscriber:true,unixTimestamp:data.subscription.current_period_end})
+            }
           });
       });
   }
 
-  componentWillUnmount()
-  {
+  componentWillUnmount() {
     const requestOptions = {
       method: "POST",
       headers: {
@@ -79,14 +73,14 @@ export default class Lesson extends Component {
       },
       body: JSON.stringify({
         cod: "220620006969",
-        time:this.state.time,
+        time: this.state.time,
       }),
     };
-    fetch(this.state.url+"add/", requestOptions)
+    fetch(this.state.url + "add/", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-      })
+      });
   }
 
   renderOk() {
@@ -113,69 +107,21 @@ export default class Lesson extends Component {
             //url={[{ src: `${this.state.lectie.link}`, type: "video/mp4" }]}
             controls
             type="video/mp4"
-            onProgress = {(progress)=>this.state.time = progress.playedSeconds}
+            onProgress={(progress) =>
+              (this.state.time = progress.playedSeconds)
+            }
           />
         </div>
 
         <WhiteTextTypography>{this.state.lectie.details}</WhiteTextTypography>
         <WhiteTextTypography>
-          Abonamentul se incheie la date de {getStringDateFromUnixTime(this.state.unixTimestamp)}
+          Abonamentul se incheie la date de{" "}
+          {getStringDateFromUnixTime(this.state.unixTimestamp)}
         </WhiteTextTypography>
       </Grid>
     );
   }
 
-  /*
-  renderOk() {
-    return (
-      <React.Fragment>
-        <CssBaseline /> {" "}
-        <Container maxWidth="md" component="main">
-          <WhiteTextTypography
-            component="h1"
-            variant="h1"
-            align="center"
-            color="textPrimary"
-            gutterBottom
-          >
-            <Box fontWeight="fontWeightBold" m={1}>
-              {this.state.lectie.title}{" "}
-            </Box>
-          </WhiteTextTypography>{" "}
-        </Container>{" "}
-        <Container maxWidth="md" component="main">
-          <Grid container spacing={5} alignItems="flex-end">
-            {" "}
-            <Grid item xs={12} md={12}>
-              <Card>
-                <CardHeader
-                  titleTypographyProps={{
-                    align: "center",
-                  }}
-                  subheaderTypographyProps={{
-                    align: "center",
-                  }}
-                  title={this.state.lectie.title}
-                />{" "}
-                <CardContent>
-                  <div
-                    style={{
-                      height: "40vh",
-                    }}
-                    align="center"
-                  >
-                    <ReactPlayer url={this.state.lectie.link} controls />
-                  </div>
-                </CardContent>{" "}
-              </Card>{" "}
-            </Grid>
-            ))}{" "}
-          </Grid>{" "}
-        </Container>{" "}
-      </React.Fragment>
-    );
-  }
-*/
   renderNotOk() {
     return (
       <Grid
@@ -200,8 +146,126 @@ export default class Lesson extends Component {
       </Grid>
     );
   }
-  /*
-  renderNotOk() {
+
+  render() {
+    var flag = this.state.activeSubscriber;
+    return flag ? this.renderOk() : this.renderNotOk();
+  }
+}
+
+
+//component functional
+
+/*
+export default function Lesson() {
+  const [lectie, setLectie] = React.useState([]);
+  const [activeSubscriber, setActiveSubscriber] = React.useState(false);
+  const [time, setTime] = React.useState(0.0);
+  const [url, setUrl] = React.useState("");
+  const [unixTimestamp, setUnixTimestamp] = React.useState(0);
+  const [functie,setFunctie] = React.useState(()=>void 0);
+  let { course_name,lesson_title } = useParams();
+  useEffect(() => {
+    const myUrl = "https://" +
+    window.location.host +
+    "/courses/api/getlesson/" +
+    course_name +
+    "/" +
+    lesson_title +
+    "/";
+
+    setUrl(myUrl);
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cod: "220620006969",
+      }),
+    };
+
+    fetch(myUrl, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        setLectie(data);
+      })
+      .then(() => {
+        fetch(
+          "https://" +
+            window.location.host +
+            "/subscribe/get_full_subscription_details/"
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            if (data.hasOwnProperty("Error")) setActiveSubscriber(false);
+            else if (data.subscription.status == "active") {
+              setActiveSubscriber(true);
+              setUnixTimestamp(data.subscription.current_period_end);
+            }
+            if(activeSubscriber) setFunctie(renderOk);
+            else setFunctie(renderNotOk);
+          });
+      });
+    return function setTimeWatched() {
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cod: "220620006969",
+          time: time,
+        }),
+      };
+      fetch(myUrl + "add/", requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        });
+    };
+  },[]);
+
+  const renderOk = () => {
+    return (
+      <Grid
+        container
+        xs={12}
+        spacing={3}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: "70vh" }}
+      >
+        <WhiteTextTypography component="h1" variant="h2" gutterBottom>
+          {tokenizeTitle(lectie.title)}
+        </WhiteTextTypography>
+        <div
+          style={{
+            height: "40vh",
+          }}
+        >
+          <ReactPlayer
+            url={lectie.link}
+            //url={[{ src: `${this.state.lectie.link}`, type: "video/mp4" }]}
+            controls
+            type="video/mp4"
+            onProgress={(progress) => setTime(progress.playedSeconds)}
+          />
+        </div>
+
+        <WhiteTextTypography>{lectie.details}</WhiteTextTypography>
+        <WhiteTextTypography>
+          Abonamentul se incheie la date de{" "}
+          {getStringDateFromUnixTime(unixTimestamp)}
+        </WhiteTextTypography>
+      </Grid>
+    );
+  };
+
+  const renderNotOk = () => {
     return (
       <Grid
         container
@@ -209,78 +273,26 @@ export default class Lesson extends Component {
         direction="column"
         alignItems="center"
         justify="center"
-        style={{ minHeight: "50vh" }}
+        style={{ minHeight: "70vh" }}
       >
-              <Card
-                style={{
-                  borderRadius: 25,
-                  borderStyle: "solid",
-                  borderColor: "#c7c7c7",
-                }}
-              >
-                <CardHeader
-                  title="Nu aveti acces"
-                  titleTypographyProps={{
-                    align: "center",
-                    variant: "h5",
-                  }}
-                  //className={classes.cardHeader}
-                  style={{ backgroundColor: "#C0C0C0" }}
-                />
-                <CardContent style={{ backgroundColor: "#FFFFFF" }}>
-                  <CardActions style={{ justifyContent: "center" }}>
-                    <Button
-                      component={Link}
-                      to={"/pricing"}
-                      variant="contained"
-                      color="secondary"
-                      fullWidth
-                    >
-                      Spre pagina de abonare
-                    </Button>
-                  </CardActions>
-                </CardContent>
-              </Card>
-            </Grid>
+        <WhiteTextTypography component="h1" variant="h2">
+          Nu aveti acces
+        </WhiteTextTypography>
+        <Button
+          variant="contained"
+          color="secondary"
+          component={Link}
+          to={"/pricing"}
+        >
+          Spre pagina de subscribe
+        </Button>
+      </Grid>
     );
-  }
-  */
+  };
 
-  render() {
-    return this.state.activeSubscriber ? this.renderOk() : this.renderNotOk();
-  }
-}
+  const functiefct = () => {return activeSubscriber?renderOk():renderNotOk()}
 
-/*<div>
-        <Card>
-          <CardMedia
-            component="iframe"
-            height="560"
-            width="315"
-            title="test"
-            src={this.state.lectie.link}
-          />
-        </Card>
-      </div>*/
 
-/*
-async function canView() {
-await fetch(
-"https://" +
-window.location.host +
-"/subscribe/get_full_subscription_details/"
-)
-.then((response) => response.json())
-.then((data) => {
-//console.log(data);
-let bool = false;
-console.log(data.subscription.status);
-if (data.hasOwnProperty("Error")) return false;
-if (data.subscription.status == "active") bool = true;
-//console.log(bool);
-return bool;
-});
-
-return true;
+  return functiefct();
 }
 */
