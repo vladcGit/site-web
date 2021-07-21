@@ -10,9 +10,11 @@ import {
   Typography,
   makeStyles,
   Box,
+  IconButton,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { colors } from "./Util";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -60,7 +62,7 @@ export default function CardWithButton(tier) {
           borderColor: colors.alb,
         }}
         elevation={onFocus ? 10 : 0}
-        variant={onFocus?"elevation":"outlined"}
+        variant={onFocus ? "elevation" : "outlined"}
       >
         <CardActionArea>
           <div
@@ -123,19 +125,25 @@ export default function CardWithButton(tier) {
             //backgroundImage:`linear-gradient(45deg, ${colors.mov} 30%, ${colors.violetDeschis} 90%)`,
           }}
         >
-          <Button
-            onMouseOver={onMouseAction}
-            onMouseOut={onMouseAction}
-            variant={onFocus ? "contained" : "outlined"}
-            color="primary"
-            component={Link}
-            to={tier.link}
-            style={{
-              borderRadius: 20,
-            }}
-          >
-            {tier.buttonText}
-          </Button>
+          {tier.isLocked == null || tier.isLocked === false ? (
+            <Button
+              onMouseOver={onMouseAction}
+              onMouseOut={onMouseAction}
+              variant={onFocus ? "contained" : "outlined"}
+              color="primary"
+              component={Link}
+              to={tier.link}
+              style={{
+                borderRadius: 20,
+              }}
+            >
+              {tier.buttonText}
+            </Button>
+          ) : (
+            <IconButton disabled>
+              <LockOutlinedIcon color="secondary"/>
+            </IconButton>
+          )}
         </CardActions>
       </Card>
     </Grid>

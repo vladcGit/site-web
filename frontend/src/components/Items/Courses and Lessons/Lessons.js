@@ -34,6 +34,7 @@ export default class Lesson extends Component {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         this.setState({ lectii: data });
 
         //fac tiers pentru fiecare nume de curs
@@ -45,6 +46,11 @@ export default class Lesson extends Component {
           obj.description = [];
           obj.buttonText = "Acceseaza";
           obj.link=`/courses/${this.props.match.params.course_name}/${data[i].title}`;
+          //doar data[0] are ultima lectie vizionata si data din motive de trimis mai putine date
+          //daca te ai uitat deja la lectie sau a trecut o zi de la ultima lectie vizionata te poti uita la urmatoarea
+          var numarZile = (new Date().getTime() - Date.parse(data[0].data_ultima_lectie))/(1000 * 3600 * 24);
+          var decizie = obj.title.charAt(0) - data[0].last_viewed == 1 && numarZile>1
+          if(data[0].last_viewed < obj.title.charAt(0) && !decizie) obj.isLocked = true;
           //obj.image="/static/images/carte_vector.png"
           lista.push(obj);
         }
