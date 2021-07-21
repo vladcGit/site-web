@@ -1,6 +1,6 @@
 import React, { Component, useEffect,Suspense } from "react";
 import ReactPlayer from "react-player";
-import { Button, Grid } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import { Link, useParams } from "react-router-dom";
 import {
   tokenizeTitle,
@@ -113,11 +113,11 @@ export default class Lesson extends Component {
           />
         </div>
 
-        <WhiteTextTypography>{this.state.lectie.details}</WhiteTextTypography>
-        <WhiteTextTypography>
-          Abonamentul se incheie la date de{" "}
+        <Typography>{this.state.lectie.details}</Typography>
+        <Typography>
+          Abonamentul se incheie la data de{" "}
           {getStringDateFromUnixTime(this.state.unixTimestamp)}
-        </WhiteTextTypography>
+        </Typography>
       </Grid>
     );
   }

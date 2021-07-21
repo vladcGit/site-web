@@ -17,21 +17,26 @@ def get_lessons(request, course_title):
     # date lectie propriu-zise
     c = Courses.objects.get(name=course_title)
     lectii = list(Lessons.objects.filter(course=c).values())
-    # date despre ultima lectie vizionate
-    istoric_vizionare = ViewedLessons.objects.filter(user=request.user, curs=c)
-    # doar lectii[0] are ultima lectie vizionata din motive de trimis mai putine date
-    if istoric_vizionare.exists():
-        istoric = list(istoric_vizionare.values())[0]
-        lectii[0]['last_viewed'] = istoric['numar_lectie']
-        lectii[0]['data_ultima_lectie'] = istoric['data_ultima_lectie']
+    if request.user.is_authenticated:
+        # date despre ultima lectie vizionate
+        istoric_vizionare = ViewedLessons.objects.filter(user=request.user, curs=c)
+        # doar lectii[0] are ultima lectie vizionata din motive de trimis mai putine date
+        if istoric_vizionare.exists():
+            istoric = list(istoric_vizionare.values())[0]
+            lectii[0]['last_viewed'] = istoric['numar_lectie']
+            lectii[0]['data_ultima_lectie'] = istoric['data_ultima_lectie']
+        else:
+            ViewedLessons.objects.create(user=request.user, curs=c)
+            lectii[0]['last_viewed'] = 1
+            lectii[0]['data_ultima_lectie'] = datetime.now()
     else:
-        ViewedLessons.objects.create(user=request.user, curs=c)
-        lectii[0]['last_viewed'] = 1
+        lectii[0]['last_viewed'] = -1
         lectii[0]['data_ultima_lectie'] = datetime.now()
 
     return JsonResponse(lectii, safe=False)
 
 
+# mereu user-ul nu va fi null pentru ca react face redirect la signin
 @csrf_exempt
 def get_lesson_details(request, course_title, lesson_title):
     flag = True
