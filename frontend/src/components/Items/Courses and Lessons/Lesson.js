@@ -54,16 +54,14 @@ export default class Lesson extends Component {
         ) {
           window.location.replace("/pricing");
         } else {
+          this.setState({
+            unixTimestamp: data.subscription.current_period_end,
+          });
           fetch(this.state.url, requestOptions)
             .then((response) => response.json())
             .then((data) => {
-              this.setState({ lectie: data });
-            })
-            .then(() => {
-              this.setState({
-                canRender: true,
-                unixTimestamp: data.subscription.current_period_end,
-              });
+              if(data.hasOwnProperty("Error")) console.log("Nu ai acces, uita-te la altele");
+              this.setState({ lectie: data, canRender: true });
             });
         }
       });
