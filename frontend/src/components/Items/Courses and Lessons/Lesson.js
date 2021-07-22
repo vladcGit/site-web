@@ -1,13 +1,12 @@
-import React, { Component, useEffect,Suspense } from "react";
+import React, { Component, useEffect, Suspense } from "react";
 import ReactPlayer from "react-player";
-import { Button, Grid, Typography } from "@material-ui/core";
+import { Button, Grid, Typography, CircularProgress } from "@material-ui/core";
 import { Link, useParams } from "react-router-dom";
 import {
   tokenizeTitle,
   WhiteTextTypography,
   getStringDateFromUnixTime,
 } from "../Util";
-
 
 export default class Lesson extends Component {
   constructor(props) {
@@ -16,7 +15,7 @@ export default class Lesson extends Component {
 
   state = {
     lectie: [],
-    activeSubscriber: false,
+    canRender: false,
     time: 0.0,
     url: "",
     unixTimestamp: 0,
@@ -42,26 +41,31 @@ export default class Lesson extends Component {
       }),
     };
 
-    fetch(this.state.url, requestOptions)
+    fetch(
+      "https://" +
+        window.location.host +
+        "/subscribe/get_full_subscription_details/"
+    )
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ lectie: data });
-      })
-      .then(() => {
-        fetch(
-          "https://" +
-            window.location.host +
-            "/subscribe/get_full_subscription_details/"
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            if (data.hasOwnProperty("Error"))
-              this.state.activeSubscriber = false;
-            else if (data.subscription.status == "active") {
-              this.setState({activeSubscriber:true,unixTimestamp:data.subscription.current_period_end})
-            }
-          });
+        if (
+          data.hasOwnProperty("Error") ||
+          data.subscription.status != "active"
+        ) {
+          window.location.replace("/pricing");
+        } else {
+          fetch(this.state.url, requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+              this.setState({ lectie: data });
+            })
+            .then(() => {
+              this.setState({
+                canRender: true,
+                unixTimestamp: data.subscription.current_period_end,
+              });
+            });
+        }
       });
   }
 
@@ -83,7 +87,7 @@ export default class Lesson extends Component {
       });
   }
 
-  renderOk() {
+  renderReady() {
     return (
       <Grid
         container
@@ -122,7 +126,7 @@ export default class Lesson extends Component {
     );
   }
 
-  renderNotOk() {
+  renderNotReady() {
     return (
       <Grid
         container
@@ -130,31 +134,19 @@ export default class Lesson extends Component {
         direction="column"
         alignItems="center"
         justify="center"
-        style={{ minHeight: "70vh" }}
+        style={{ minHeight: "50vh" }}
       >
-        <WhiteTextTypography component="h1" variant="h2">
-          Nu aveti acces
-        </WhiteTextTypography>
-        <Button
-          variant="contained"
-          color="secondary"
-          component={Link}
-          to={"/pricing"}
-        >
-          Spre pagina de subscribe
-        </Button>
+        <CircularProgress />
       </Grid>
     );
   }
 
   render() {
-    var flag = this.state.activeSubscriber;
-    return flag ? this.renderOk() : this.renderNotOk();
+    return this.state.canRender ? this.renderReady() : this.renderNotReady();
   }
 }
 
-
-//component functional
+//component functional care probabil nu merge
 
 /*
 export default function Lesson() {
