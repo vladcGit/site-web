@@ -70,7 +70,7 @@ const tiers = [
       "Doar atat."
     ],
     buttonText: "Afla mai multe despre noi",
-    image: "/static/images/watercolour.jpg",
+    image: "/static/images/20670.jpg",
     link: "/about-us",
   },
   {
@@ -79,7 +79,7 @@ const tiers = [
       "Primele 7 zile sunt gratuite; daca nu esti multumit te poti dezabona cu o simpla apasare de buton.",
     ],
     buttonText: "Inregistreaza-te",
-    image: "/static/images/palms.jpg",
+    image: "/static/images/8294.jpg",
     link: "/signup",
   },
   {
@@ -88,7 +88,7 @@ const tiers = [
       "Fie ca te pregatesti sa devii medic, inginer sau programator, ti-am pregatit o oferta foarte buna.",
     ],
     buttonText: "Cursurile noastre",
-    image: "/static/images/forme.jpg",
+    image: "/static/images/4905784.jpg",
     link: "/courses",
   },
 ];

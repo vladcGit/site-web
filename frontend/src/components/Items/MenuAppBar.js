@@ -41,8 +41,10 @@ const MenuAppBar = (props) => {
     history.push(pageURL);
   };
 
-  const [onFocus,setOnFocus] = React.useState(false);
-  const onMouseAction = () => {setOnFocus(!onFocus)};
+  const [onFocus, setOnFocus] = React.useState(false);
+  const onMouseAction = () => {
+    setOnFocus(!onFocus);
+  };
 
   return (
     <div className={classes.root}>
@@ -59,7 +61,7 @@ const MenuAppBar = (props) => {
               onClick={() => handleButtonClick("/")}
               onMouseOver={onMouseAction}
               onMouseOut={onMouseAction}
-              color = {onFocus? "primary" : "default"}
+              color={onFocus ? "primary" : "default"}
             >
               Icar Academy
             </Button>
@@ -72,26 +74,17 @@ const MenuAppBar = (props) => {
           </div>
 
           <ButtonGroup color="primary">
-            <StyledButton
-              to="/courses"
-              className={classes.MenuButton}
-            >
-              {" "}
-              Cursuri{" "}
+            <StyledButton to="/pricing" className={classes.MenuButton}>
+              Preturi
             </StyledButton>
-            <StyledButton
-              to="/signup"
-              className={classes.MenuButton}
-            >
-              {" "}
-              Sign up{" "}
+            <StyledButton to="/courses" className={classes.MenuButton}>
+              Cursuri
             </StyledButton>
-            <StyledButton
-            to="/signin"
-              className={classes.MenuButton}
-            >
-              {" "}
-              Login{" "}
+            <StyledButton to="/signup" className={classes.MenuButton}>
+              Sign up
+            </StyledButton>
+            <StyledButton to="/signin" className={classes.MenuButton}>
+              Login
             </StyledButton>
             <IconButton
               //color="secondary"
