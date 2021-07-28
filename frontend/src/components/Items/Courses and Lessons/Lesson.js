@@ -1,147 +1,159 @@
-import React, { Component, useEffect, Suspense } from "react";
+import React, {Component, useEffect, Suspense} from "react";
 import ReactPlayer from "react-player";
-import { Button, Grid, Typography, CircularProgress } from "@material-ui/core";
-import { Link, useParams } from "react-router-dom";
+import {Button, Grid, Typography, CircularProgress} from "@material-ui/core";
+import {Link, useParams} from "react-router-dom";
 import {
-  tokenizeTitle,
-  WhiteTextTypography,
-  getStringDateFromUnixTime,
+    tokenizeTitle,
+    WhiteTextTypography,
+    getStringDateFromUnixTime,
 } from "../Util";
 
-export default class Lesson extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default class Lesson extends Component
+{
+    constructor(props)
+    {
+        super(props);
+    }
 
-  state = {
-    lectie: [],
-    canRender: false,
-    time: 0.0,
-    url: "",
-    unixTimestamp: 0,
-  };
-
-  componentDidMount() {
-    this.state.url =
-      "https://" +
-      window.location.host +
-      "/courses/api/getlesson/" +
-      this.props.match.params.course_name +
-      "/" +
-      this.props.match.params.lesson_title +
-      "/";
-
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        cod: "220620006969",
-      }),
+    state = {
+        lectie: [],
+        canRender: false,
+        time: 0.0,
+        url: "",
+        unixTimestamp: 0,
     };
 
-    fetch(
-      "https://" +
-        window.location.host +
-        "/subscribe/get_full_subscription_details/"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (
-          data.hasOwnProperty("Error") ||
-          data.subscription.status != "active"
-        ) {
-          window.location.replace("/pricing");
-        } else {
-          this.setState({
-            unixTimestamp: data.subscription.current_period_end,
-          });
-          fetch(this.state.url, requestOptions)
+    componentDidMount()
+    {
+        this.state.url =
+            "https://" +
+            window.location.host +
+            "/courses/api/getlesson/" +
+            this.props.match.params.course_name +
+            "/" +
+            this.props.match.params.lesson_title +
+            "/";
+
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                cod: "220620006969",
+            }),
+        };
+
+        fetch(
+            "https://" +
+            window.location.host +
+            "/subscribe/get_full_subscription_details/"
+        )
             .then((response) => response.json())
-            .then((data) => {
-              if(data.hasOwnProperty("Error")) console.log("Nu ai acces, uita-te la altele");
-              this.setState({ lectie: data, canRender: true });
+            .then((data) =>
+            {
+                if (
+                    data.hasOwnProperty("Error") ||
+                    data.subscription.status != "active"
+                )
+                {
+                    window.location.replace("/pricing");
+                } else
+                {
+                    this.setState({
+                        unixTimestamp: data.subscription.current_period_end,
+                    });
+                    fetch(this.state.url, requestOptions)
+                        .then((response) => response.json())
+                        .then((data) =>
+                        {
+                            if (data.hasOwnProperty("Error")) console.log("Nu ai acces, uita-te la altele");
+                            this.setState({lectie: data, canRender: true});
+                        });
+                }
             });
-        }
-      });
-  }
+    }
 
-  componentWillUnmount() {
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        cod: "220620006969",
-        time: this.state.time,
-      }),
-    };
-    fetch(this.state.url + "add/", requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
-  }
+    componentWillUnmount()
+    {
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                cod: "220620006969",
+                time: this.state.time,
+            }),
+        };
+        fetch(this.state.url + "add/", requestOptions)
+            .then((response) => response.json())
+            .then((data) =>
+            {
+                console.log(data);
+            });
+    }
 
-  renderReady() {
-    return (
-      <Grid
-        container
-        xs={12}
-        spacing={3}
-        direction="column"
-        alignItems="center"
-        justify="center"
-        style={{ minHeight: "70vh" }}
-      >
-        <WhiteTextTypography component="h1" variant="h2" gutterBottom>
-          {tokenizeTitle(this.state.lectie.title)}
-        </WhiteTextTypography>
-        <div
-          style={{
-            height: "40vh",
-          }}
-        >
-          <ReactPlayer
-            url={this.state.lectie.link}
-            //url={[{ src: `${this.state.lectie.link}`, type: "video/mp4" }]}
-            controls
-            type="video/mp4"
-            onProgress={(progress) =>
-              (this.state.time = progress.playedSeconds)
-            }
-          />
-        </div>
+    renderReady()
+    {
+        return (
+            <Grid
+                container
+                xs={12}
+                spacing={3}
+                direction="column"
+                alignItems="center"
+                justify="center"
+                style={{minHeight: "70vh"}}
+            >
+                <WhiteTextTypography component="h1" variant="h2" gutterBottom>
+                    {tokenizeTitle(this.state.lectie.title)}
+                </WhiteTextTypography>
+                <div
+                    style={{
+                        height: "40vh",
+                    }}
+                >
+                    <ReactPlayer
+                        url={this.state.lectie.link}
+                        //url={[{ src: `${this.state.lectie.link}`, type: "video/mp4" }]}
+                        controls
+                        type="video/mp4"
+                        onProgress={(progress) =>
+                            (this.state.time = progress.playedSeconds)
+                        }
+                    />
+                </div>
 
-        <Typography>{this.state.lectie.details}</Typography>
-        <Typography>
-          Abonamentul se incheie la data de{" "}
-          {getStringDateFromUnixTime(this.state.unixTimestamp)}
-        </Typography>
-      </Grid>
-    );
-  }
+                <Typography>{this.state.lectie.details}</Typography>
+                <Typography>
+                    Abonamentul se incheie la data de{" "}
+                    {getStringDateFromUnixTime(this.state.unixTimestamp)}
+                </Typography>
+            </Grid>
+        );
+    }
 
-  renderNotReady() {
-    return (
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justify="center"
-        style={{ minHeight: "50vh" }}
-      >
-        <CircularProgress />
-      </Grid>
-    );
-  }
+    renderNotReady()
+    {
+        return (
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+                style={{minHeight: "50vh"}}
+            >
+                <CircularProgress/>
+            </Grid>
+        );
+    }
 
-  render() {
-    return this.state.canRender ? this.renderReady() : this.renderNotReady();
-  }
+    render()
+    {
+        return this.state.canRender ? this.renderReady() : this.renderNotReady();
+    }
 }
 
 //component functional care probabil nu merge

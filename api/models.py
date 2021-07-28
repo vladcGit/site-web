@@ -1,5 +1,5 @@
 from django.contrib.auth.models import AbstractUser
-
+from django.db import models
 from django.dispatch import receiver
 from django.urls import reverse
 from django_rest_passwordreset.signals import reset_password_token_created
@@ -14,6 +14,7 @@ from django.contrib.sites.models import Site
 # probabil va trebui sa schimb daca am nevoie de alte campuri
 
 class CustomUser(AbstractUser):
+    had_trial = models.BooleanField(default=False, null=False)
     def __str__(self):
         return self.email
 

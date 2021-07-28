@@ -1,3 +1,4 @@
+from courses.models import ViewedLessons
 import stripe
 from django.shortcuts import render
 from django.conf import settings
@@ -124,6 +125,7 @@ def cancel_subscription(request):
         client = StripeCustomer.objects.get(user=user)
         stripe.Subscription.delete(client.stripeSubscriptionId)
         client.delete()
+        ViewedLessons.objects.filter(user=user).delete()
         return JsonResponse({'Succes':'OK'});
     return JsonResponse({'Error':'Bad Request'});
 
