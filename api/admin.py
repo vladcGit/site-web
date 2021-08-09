@@ -11,6 +11,9 @@ class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     model = CustomUser
     list_display = ['email']
+    fieldsets = UserAdmin.fieldsets + (
+    ('Trial', {'fields': ('had_trial',)}),
+)
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

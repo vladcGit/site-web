@@ -15,6 +15,7 @@ import PasswordResetForm from "./Items/Password Reset/PasswordResetForm";
 import NewPasswordForm from "./Items/Password Reset/NewPasswordForm";
 import ResetPasswordEmailSent from "./Items/Password Reset/ResetPasswordEmailSent";
 import PaginaDezabonare from "./Items/PaginaDezabonare";
+import Termeni from "./Items/Termeni";
 
 import {
     BrowserRouter as Router,
@@ -97,6 +98,9 @@ export default class HomePage extends Component
                             {localStorage.getItem("token") === null ? (
                                 <Redirect to="signin"/>
                             ) : <PaginaDezabonare/>}
+                        </Route>
+                        <Route exact path="/terms">
+                            <Termeni/>
                         </Route>
                     </Switch>
                     <Footer/>

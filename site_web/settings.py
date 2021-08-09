@@ -24,7 +24,9 @@ SECRET_KEY = 'django-insecure-v-_ahcxoka6tvs=e!ej@1p&9lki_ztu+99s=6@)4=_i&&q71q5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.15', '127.0.0.1','192.168.0.102','192.168.100.28','vladconst.pythonanywhere.com','192.168.1.15']
+ALLOWED_HOSTS = ['192.168.1.15', '192.168.1.5', '127.0.0.1', '192.168.0.102',
+                 '192.168.100.28', 'vladconst.pythonanywhere.com', '192.168.1.15',
+                 '192.168.56.1', '*']
 
 # Application definition
 
@@ -147,7 +149,6 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 }
 
 
-
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
@@ -160,13 +161,14 @@ ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory' #mandatory daca vreau sa fie obligatorie confirmarea
+# mandatory daca vreau sa fie obligatorie confirmarea
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 LOGIN_URL = SITE_NAME+'/signin'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-#mail trimis pe bune
+# mail trimis pe bune
 '''
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -193,5 +195,3 @@ STRIPE_PRICE_ID = 'price_1IxFu2G3BrIJ6aWBH5Bch0wk'
 STRIPE_TRIAL_PRICE = 'price_1JCVfHG3BrIJ6aWBgtvhhEFn'
 
 STRIPE_ENDPOINT_SECRET = 'whsec_BzAiRlqXiumckbS3X0L3vzLLJUlFxNBB'
-
-

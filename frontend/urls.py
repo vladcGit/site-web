@@ -16,4 +16,5 @@ urlpatterns = [
     path('new_password/<str:token>',index),
     path('reset_successful',index),
     path('unsubscribe',index),
+    path('terms',index),
 ]
