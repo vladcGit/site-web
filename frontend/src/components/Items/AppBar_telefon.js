@@ -15,7 +15,10 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Collapse,
 } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+import CloseIcon from "@material-ui/icons/Close";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
@@ -40,6 +43,12 @@ const useStyles = makeStyles((theme) => ({
   sizeLogo: {
     height: "50px",
     width: "50px",
+  },
+  alert: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
   },
 }));
 
@@ -76,6 +85,7 @@ const MenuAppBar = (props) => {
   };
 
   const [state, setState] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const toggleDrawer = (isOpen) => (event) => {
     if (
       event &&
@@ -88,6 +98,28 @@ const MenuAppBar = (props) => {
 
   return (
     <div className={classes.root}>
+      <div className={classes.alert}>
+        <Collapse in={open}>
+          <Alert
+            severity="info"
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+          >
+            Prin navigarea pe site esti de acord cu{" "}
+            <a href="/terms">termenii si conditiile noastre</a>
+          </Alert>
+        </Collapse>
+      </div>
       <AppBar
         position="static"
         style={{ background: "transparent", boxShadow: "none" }}
