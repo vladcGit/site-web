@@ -115,8 +115,8 @@ const MenuAppBar = (props) => {
               </IconButton>
             }
           >
-            Prin navigarea pe site esti de acord cu{" "}
-            <a href="/terms">termenii si conditiile noastre</a>
+            Folosim module de tip cookie pentru a ne oferi serviciile. Prin navigarea pe site esti de acord cu{" "}
+            <a href="/terms">termenii si conditiile noastre</a>.
           </Alert>
         </Collapse>
       </div>

@@ -20,6 +20,7 @@ class Lessons(models.Model):
     link = models.CharField(max_length=100, null=False)
     details = models.CharField(max_length=400, null=True)
     time_played = models.FloatField(default=0,null=False)
+    video=models.BinaryField(max_length=None,null=True)
 
     def __str__(self):
         return self.title

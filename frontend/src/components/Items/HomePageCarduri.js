@@ -10,10 +10,12 @@ import {
   CardActionArea,
   CardMedia,
   CardContent,
+  Button,
 } from "@material-ui/core";
 
-import { WhiteTextTypography } from "./Util";
+import { StyledButton, WhiteTextTypography, colors } from "./Util";
 import CardWithButton from "./CardWithButton";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -68,6 +70,9 @@ const useStyles = makeStyles((theme) => ({
   },
   spacingItem: {
     padding: theme.spacing(2, 0, 2),
+  },
+  textAlb: {
+    color: colors.alb,
   },
 }));
 
@@ -145,111 +150,149 @@ export default function HomePageCarduri() {
           ))}
         </Grid>
       </Container>
-      <div className={classes.distantat}>
-        <Typography
-          align="center"
-          variant={window.innerWidth <= 768 ? "h5" : "h3"}
+      <div /*style={{backgroundImage: "linear-gradient(45deg, #454ADE 30%, #1B1F3B 90%)",opacity:1}}*/>
+        <div className={classes.distantat}>
+          <Typography
+            align="center"
+            variant={window.innerWidth <= 768 ? "h5" : "h3"}
+            className={window.innerWidth <= 768 ? classes.textAlb : null}
+          >
+            De ce credem ca abordarea noastra este cea corecta?
+          </Typography>
+        </div>
+        <Box
+          className={classes.distantat}
+          display="flex"
+          flexDirection="row"
+          flexWrap="wrap"
+          justifyContent="space-around"
         >
-          De ce credem ca abordarea noastra este cea corecta?
-        </Typography>
+          <img
+            alt=""
+            src={"/static/images/pngcarti.png"}
+            style={{ flex: 1, maxHeight: "200px", maxWidth: "200px" }}
+          />
+          <Box style={{ flexGrow: 1, maxWidth: "500px" }}>
+            <Typography
+              component="h2"
+              variant={window.innerWidth <= 768 ? "h6" : "h5"}
+              align="center"
+              className={window.innerWidth <= 768 ? classes.textAlb : null}
+            >
+              Sesiuni de invatare "bite-sized"
+            </Typography>
+            <Typography
+              component="h2"
+              variant={window.innerWidth <= 768 ? "subtitle2" : "subtitle1"}
+              align="center"
+              color="textSecondary"
+              className={window.innerWidth <= 768 ? classes.textAlb : null}
+            >
+              Studiile arata ca o cantitate mica de informatie este retinuta mai
+              bine de catre creierul nostru. Abordarea uzuala din invatamantul
+              romanesc este exact inversa.
+            </Typography>
+          </Box>
+        </Box>
+        <Box
+          className={classes.distantat}
+          display="flex"
+          flexDirection="row"
+          flexWrap="wrap"
+          justifyContent="space-around"
+        >
+          <Box style={{ flexGrow: 1, maxWidth: "500px" }}>
+            <Typography
+              component="h2"
+              variant={window.innerWidth <= 768 ? "h6" : "h5"}
+              align="center"
+              className={window.innerWidth <= 768 ? classes.textAlb : null}
+            >
+              Selectivitatea informatiei
+            </Typography>
+            <Typography
+              component="h2"
+              variant={window.innerWidth <= 768 ? "subtitle2" : "subtitle1"}
+              align="center"
+              color="textSecondary"
+              className={window.innerWidth <= 768 ? classes.textAlb : null}
+            >
+              O mare parte din ce se invata la liceu nu va fi folosita
+              niciodata. Noi credem ca e mai bine sa ne concentram pe ceea ce
+              conteaza.
+            </Typography>
+          </Box>
+          <img
+            alt=""
+            src={"/static/images/clipart1879433.png"}
+            style={{ flex: 1, maxHeight: "200px", maxWidth: "200px" }}
+          />
+        </Box>
+        <Box
+          className={classes.distantat}
+          display="flex"
+          flexDirection="row"
+          flexWrap="wrap"
+          justifyContent="space-around"
+        >
+          <img
+            alt=""
+            src={"/static/images/clipart380322.png"}
+            style={{ flex: 1, maxHeight: "200px", maxWidth: "200px" }}
+          />
+          <Box style={{ flexGrow: 1, maxWidth: "500px" }}>
+            <Typography
+              component="h2"
+              variant={window.innerWidth <= 768 ? "h6" : "h5"}
+              align="center"
+              className={window.innerWidth <= 768 ? classes.textAlb : null}
+            >
+              Mai mult timp liber
+            </Typography>
+            <Typography
+              component="h2"
+              variant={window.innerWidth <= 768 ? "subtitle2" : "subtitle1"}
+              align="center"
+              color="textSecondary"
+              className={window.innerWidth <= 768 ? classes.textAlb : null}
+            >
+              Eliminarea drumurilor pana la meditatii si eficientizarea timpului
+              de invatare ii permit elevului sa aiba mai mult timp la
+              dispozitie. De asemenea, oferim si resurse gratuite pentru
+              invatare si teme pentru cei care vor sa foloseasca productiv acest
+              timp.
+            </Typography>
+          </Box>
+        </Box>
       </div>
-      <Box
-        className={classes.distantat}
-        display="flex"
-        flexDirection="row"
-        flexWrap="wrap"
-        justifyContent="space-around"
+      <Grid
+        container
+        justify="center"
+        alignItems="center"
+        direction="column"
+        style={{ marginTop: "180px" }}
       >
-        
-        <img
-          alt=""
-          src={"/static/images/pngcarti.png"}
-          style={{ flex: 1, maxHeight: "200px", maxWidth: "200px" }}
-        />
-        <Box style={{ flex: 1, maxWidth: "500px" }}>
+        <Grid item xs={window.innerWidth <= 768 ? 12 : 6}>
           <Typography
-            component="h2"
-            variant={window.innerWidth <= 768 ? "h6" : "h5"}
             align="center"
+            variant={window.innerWidth <= 768 ? "h6" : "h4"}
+            style={{ marginBottom: "50px" }}
+            className={window.innerWidth <= 768 ? classes.textAlb : null}
           >
-            Sesiuni de invatare "bite-sized"
+            Nu in ultimul rand, cand inveti pentru tine, nu pentru nota sau alti
+            factori externi, inveti mult mai bine.
           </Typography>
-          <Typography
-            component="h2"
-            variant={window.innerWidth <= 768 ? "subtitle2" : "subtitle1"}
-            align="center"
-            color="textSecondary"
-          >
-            Studiile arata ca o cantitate mica de informatie este retinuta mai
-            bine de catre creierul nostru. Abordarea uzuala din invatamantul
-            romanesc este exact inversa.
-          </Typography>
-        </Box>
-      </Box>
-      <Box
-        className={classes.distantat}
-        display="flex"
-        flexDirection="row"
-        flexWrap="wrap"
-        justifyContent="space-around"
-      >
-        <Box style={{ flex: 1, maxWidth: "500px" }}>
-          <Typography
-            component="h2"
-            variant={window.innerWidth <= 768 ? "h6" : "h5"}
-            align="center"
-          >
-            Selectivitatea informatiei
-          </Typography>
-          <Typography
-            component="h2"
-            variant={window.innerWidth <= 768 ? "subtitle2" : "subtitle1"}
-            align="center"
-            color="textSecondary"
-          >
-            O mare parte din ce se invata la liceu nu va fi folosita niciodata.
-            Noi credem ca e mai bine sa ne concentram pe ceea ce conteaza.
-          </Typography>
-        </Box>
-        <img
-          alt=""
-          src={"/static/images/clipart1879433.png"}
-          style={{ flex: 1, maxHeight: "200px", maxWidth: "200px" }}
-        />
-      </Box>
-      <Box
-        className={classes.distantat}
-        display="flex"
-        flexDirection="row"
-        flexWrap="wrap"
-        justifyContent="space-around"
-      >
-        <img
-          alt=""
-          src={"/static/images/clipart380322.png"}
-          style={{ flex: 1, maxHeight: "200px", maxWidth: "200px" }}
-        />
-        <Box style={{ flex: 1, maxWidth: "500px" }}>
-          <Typography
-            component="h2"
-            variant={window.innerWidth <= 768 ? "h6" : "h5"}
-            align="center"
-          >
-            Mai mult timp liber
-          </Typography>
-          <Typography
-            component="h2"
-            variant={window.innerWidth <= 768 ? "subtitle2" : "subtitle1"}
-            align="center"
-            color="textSecondary"
-          >
-            Eliminarea drumurilor pana la meditatii si eficientizarea timpului
-            de invatare ii permit elevului sa aiba mai mult timp la dispozitie.
-            De asemenea, oferim si resurse gratuite pentru invatare si teme
-            pentru cei care vor sa foloseasca productiv acest timp.
-          </Typography>
-        </Box>
-      </Box>
+        </Grid>
+        <Button
+          component={Link}
+          to="/pricing"
+          size="large"
+          color="primary"
+          variant="contained"
+        >
+          Incearca gratuit
+        </Button>
+      </Grid>
     </React.Fragment>
   );
 }

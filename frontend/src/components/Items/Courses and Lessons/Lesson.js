@@ -15,12 +15,26 @@ export default class Lesson extends Component
         super(props);
     }
 
+    async getUrlStreamForMostRecentMP4OnDb() {
+      fetch("http://localhost:4000/ytdl/streamMP4")
+        .then(re => re.blob())
+        .then(blob => URL.createObjectURL(blob))
+        .then(url => {
+          this.setState({ playerSource: url });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  
+
     state = {
         lectie: [],
         canRender: false,
         time: 0.0,
         url: "",
         unixTimestamp: 0,
+        videoSrc: null,
     };
 
     componentDidMount()
@@ -68,6 +82,7 @@ export default class Lesson extends Component
                         .then((data) =>
                         {
                             if (data.hasOwnProperty("Error")) console.log("Nu ai acces, uita-te la altele");
+                            fetch(this.state.url+"blob/",requestOptions).then(re=>re.blob()).then(blob => URL.createObjectURL(blob)).then(url=>this.setState({ videoSrc: url }))
                             this.setState({lectie: data, canRender: true});
                         });
                 }
@@ -115,13 +130,20 @@ export default class Lesson extends Component
                     }}
                 >
                     <ReactPlayer
-                        url={this.state.lectie.link}
+                        //url={this.state.lectie.link}
                         //url={[{ src: `${this.state.lectie.link}`, type: "video/mp4" }]}
+                        url={this.state.videoSrc}
                         controls
                         type="video/mp4"
                         onProgress={(progress) =>
                             (this.state.time = progress.playedSeconds)
                         }
+                        config={{ file: { 
+                          attributes: {
+                            //controlsList: 'nodownload'  //<- this is the important bit
+                            onContextMenu: e => e.preventDefault()
+                          }
+                      }}}
                     />
                 </div>
 
