@@ -116,6 +116,16 @@ export default function HomePageCarduri() {
     <React.Fragment>
       <CssBaseline /> {/* Hero unit */}
       <Container maxWidth="md" component="main" className={classes.heroContent}>
+        <Typography
+          style={{ color: "red" }}
+          component="h1"
+          variant={window.innerWidth <= 768 ? "h6" : "h6"}
+          align="center"
+        >
+          Mai avem putin de lucru pana sa deschidem complet site-ul. Daca iti
+          doresti, iti poti crea un cont pentru a primi un mail de la noi cand
+          acest lucru se va intampla.
+        </Typography>
         <WhiteTextTypography
           component="h1"
           variant={window.innerWidth <= 768 ? "h3" : "h2"}
@@ -150,7 +160,8 @@ export default function HomePageCarduri() {
           ))}
         </Grid>
       </Container>
-      <div /*style={{backgroundImage: "linear-gradient(45deg, #454ADE 30%, #1B1F3B 90%)",opacity:1}}*/>
+      <div /*style={{backgroundImage: "linear-gradient(45deg, #454ADE 30%, #1B1F3B 90%)",opacity:1}}*/
+      >
         <div className={classes.distantat}>
           <Typography
             align="center"

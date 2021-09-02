@@ -64,60 +64,53 @@ export default function CardWithButton(tier) {
         elevation={onFocus ? 10 : 0}
         variant={onFocus ? "elevation" : "outlined"}
       >
-        <CardActionArea>
-          <div
+        <div
+          style={{
+            display: "flex",
+            alignItem: "center",
+            justifyContent: "center",
+          }}
+        >
+          <CardMedia
             style={{
-              display: "flex",
-              alignItem: "center",
-              justifyContent: "center",
+              width: "auto",
+              maxHeight: "140px",
             }}
-          >
-            <CardMedia
-              style={{
-                width: "auto",
-                maxHeight: "140px",
-              }}
-              component="img"
-              image={onFocus ? tier.image1 : tier.image2}
-              //title="Contemplative Reptile"
-            />
-          </div>
-          <CardContent
-            style={
-              {
-                //backgroundImage:`linear-gradient(45deg, ${colors.mov} 5%, ${colors.violetDeschis} 90%)`,
-                //backgroundColor:colors.portocaliu
-              }
+            component="img"
+            image={onFocus ? tier.image1 : tier.image2}
+            //title="Contemplative Reptile"
+          />
+        </div>
+        <CardContent
+          style={
+            {
+              //backgroundImage:`linear-gradient(45deg, ${colors.mov} 5%, ${colors.violetDeschis} 90%)`,
+              //backgroundColor:colors.portocaliu
             }
-          >
-            <div className={classes.cardPricing}>
-              <Typography
-                component="h4"
-                variant="h5"
-                color="textPrimary"
-                gutterBottom
-              >
-                <Box fontWeight="fontWeightBold" m={1} align="center">
-                  {tier.title}
+          }
+        >
+          <div className={classes.cardPricing}>
+            <Typography
+              component="h4"
+              variant="h5"
+              color="textPrimary"
+              gutterBottom
+            >
+              <Box fontWeight="fontWeightBold" m={1} align="center">
+                {tier.title}
+              </Box>
+            </Typography>
+          </div>
+          <ul>
+            {tier.description.map((line) => (
+              <Typography component="h5" variant="h6" align="center" key={line}>
+                <Box fontWeight="fontWeightLight" m={1}>
+                  {line}
                 </Box>
               </Typography>
-            </div>
-            <ul>
-              {tier.description.map((line) => (
-                <Typography
-                  component="h5"
-                  variant="h6"
-                  align="center"
-                  key={line}
-                >
-                  <Box fontWeight="fontWeightLight" m={1}>
-                    {line}
-                  </Box>
-                </Typography>
-              ))}
-            </ul>
-          </CardContent>
-        </CardActionArea>
+            ))}
+          </ul>
+        </CardContent>
         <CardActions
           style={{
             justifyContent: "center",
