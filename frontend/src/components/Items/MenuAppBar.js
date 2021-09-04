@@ -1,6 +1,6 @@
 import React from "react";
 import AccountBox from "@material-ui/icons/AccountBox";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import {
   AppBar,
   ButtonGroup,
@@ -12,7 +12,7 @@ import {
   Collapse,
 } from "@material-ui/core";
 import { colors, StyledButton } from "./Util";
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from "@material-ui/icons/Close";
 import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   MenuButton: {
     //borderRadius: 30,
     //backgroundColor: colors.galbenInchis,
+    marginRight: "10px",
   },
   leftSide: {
     marginLeft: "auto",
@@ -45,6 +46,12 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
+  flexbox: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+  },
 }));
 
 const MenuAppBar = (props) => {
@@ -56,14 +63,11 @@ const MenuAppBar = (props) => {
     history.push(pageURL);
   };
 
-  const [onFocus, setOnFocus] = React.useState(false);
   const [open, setOpen] = React.useState(true);
-  const onMouseAction = () => {
-    setOnFocus(!onFocus);
-  };
+
+  const isLoggedIn = localStorage.getItem("token") !== null;
 
   return (
-    
     <div className={classes.root}>
       <div className={classes.alert}>
         <Collapse in={open}>
@@ -82,57 +86,69 @@ const MenuAppBar = (props) => {
               </IconButton>
             }
           >
-            Folosim module de tip cookie pentru a ne oferi serviciile. Prin navigarea pe site esti de acord cu {" "}
+            Folosim module de tip cookie pentru a ne oferi serviciile. Prin
+            navigarea pe site esti de acord cu{" "}
             <a href="/terms">termenii si conditiile noastre</a>.
           </Alert>
         </Collapse>
       </div>
-      <AppBar
-        position="static"
-        style={{ background: "transparent", boxShadow: "none" }}
-        elevation={0}
-      >
+      <AppBar position="static" color="transparent" elevation={5}>
         <Toolbar>
-          <div className={classes.leftSide}>
-            <Button
-              variant="contained"
-              size="large"
-              onClick={() => handleButtonClick("/")}
-              onMouseOver={onMouseAction}
-              onMouseOut={onMouseAction}
-              color={onFocus ? "primary" : "default"}
-            >
-              Icar Academy
-            </Button>
-            <Avatar
-              className={classes.logo}
-              alt="Logo prima pagina"
-              src="/static/images/logo.jpeg"
-              style={{ border: "3px solid lightseagreen" }}
-            />
-          </div>
+          <div className={classes.flexbox}>
+            <div style={{ display: "flex" }}>
+              <StyledButton size="large" onClick={() => handleButtonClick("/")}>
+                Icar Academy
+              </StyledButton>
+              <Avatar
+                className={classes.logo}
+                alt="Logo prima pagina"
+                src="/static/images/logo.jpeg"
+                style={{ border: "3px solid lightseagreen" }}
+              />
+            </div>
+            <div>
+              <StyledButton
+                onClick={() => handleButtonClick("/pricing")}
+                className={classes.MenuButton}
+              >
+                Preturi
+              </StyledButton>
+              <StyledButton
+                onClick={() => handleButtonClick("/courses")}
+                className={classes.MenuButton}
+              >
+                Cursuri
+              </StyledButton>
 
-          <ButtonGroup color="primary" className={classes.buttonGroup}>
-            <StyledButton to="/pricing" className={classes.MenuButton}>
-              Preturi
-            </StyledButton>
-            <StyledButton to="/courses" className={classes.MenuButton}>
-              Cursuri
-            </StyledButton>
-            <StyledButton to="/signup" className={classes.MenuButton}>
-              Sign up
-            </StyledButton>
-            <StyledButton to="/signin" className={classes.MenuButton}>
-              Login
-            </StyledButton>
-            <IconButton
-              //color="secondary"
-              onClick={() => handleButtonClick("/myaccount")}
-              className={classes.MenuButton}
-            >
-              <AccountBox />
-            </IconButton>
-          </ButtonGroup>
+              <StyledButton
+                onClick={() => handleButtonClick("/signup")}
+                className={classes.MenuButton}
+                style={{
+                  display: isLoggedIn ? "none" : "inline",
+                }}
+              >
+                Sign up
+              </StyledButton>
+              <StyledButton
+                onClick={() => handleButtonClick("/signin")}
+                className={classes.MenuButton}
+                style={{
+                  display: isLoggedIn ? "none" : "inline",
+                }}
+              >
+                Login
+              </StyledButton>
+              <StyledButton
+                //color="secondary"
+                onClick={() => handleButtonClick("/myaccount")}
+                style={{
+                  display: isLoggedIn ? "inline" : "none",
+                }}
+              >
+                Contul meu
+              </StyledButton>
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
     </div>

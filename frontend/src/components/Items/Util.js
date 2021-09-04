@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { Button, Card, Typography, withStyles, Grid } from "@material-ui/core";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function tokenizeTitle(s) {
   let rez = "";
@@ -36,6 +36,14 @@ const WhiteTextTypography = withStyles({
     color: "#FFFFFF",
   },
 })(Typography);
+
+const DivAlb = (props) => {
+  return (
+    <div style={{ backgroundColor: "white" }} {...props}>
+      {props.children}
+    </div>
+  );
+};
 
 function getStringDateFromUnixTime(unixTime) {
   let data = new Date(unixTime * 1000);
@@ -90,59 +98,43 @@ function SimpleTextPage() {
   );
 }
 
-class StyledCard extends Component {
-  state = { onFocus: false };
-  onMouseOver = () => this.setState({ onFocus: true });
+const StyledCard = (props) => {
+  const [onFocus, setOnFocus] = React.useState(false);
+  const onMouseAction = () => setOnFocus(!onFocus);
+  return (
+    <Card
+      onMouseOver={onMouseAction}
+      onMouseOut={onMouseAction}
+      raised={onFocus}
+      style={{
+        borderRadius: 25,
+        borderStyle: "solid",
+        borderColor: colors.alb,
+      }}
+      elevation={onFocus ? 10 : 0}
+      variant={onFocus ? "elevation" : "outlined"}
+      {...props}
+    >
+      {props.children}
+    </Card>
+  );
+};
 
-  onMouseOut = () => this.setState({ onFocus: false });
-
-  render() {
-    return (
-      <Card
-        onMouseOver={this.onMouseOver}
-        onMouseOut={this.onMouseOut}
-        raised={this.state.onFocus}
-        style={{
-          borderRadius: 25,
-          borderStyle: "solid",
-          borderColor: colors.alb,
-        }}
-        elevation={this.state.onFocus ? 10 : 0}
-        variant={this.state.onFocus ? "elevation" : "outlined"}
-      >
-        {this.props.children}
-      </Card>
-    );
-  }
-}
-
-class StyledButton extends Component {
-  state = { onFocus: false };
-  onMouseOver = () => this.setState({ onFocus: true });
-
-  onMouseOut = () => this.setState({ onFocus: false });
-
-  render() {
-    return (
-      <Button
-        onMouseOver={this.onMouseOver}
-        onMouseOut={this.onMouseOut}
-        variant={this.state.onFocus ? "contained" : "text"}
-        color="primary"
-        component={Link}
-        to={this.props.to}
-        style={{
-          borderRadius:
-            this.props.border === undefined
-              ? 0
-              : this.props.border /*backgroundColor:colors.galbenInchis*/,
-        }}
-      >
-        {this.props.children}
-      </Button>
-    );
-  }
-}
+const StyledButton = (props) => {
+  const [onFocus, setOnFocus] = React.useState(false);
+  const onMouseAction = () => setOnFocus(!onFocus);
+  return (
+    <Button
+      onMouseOver={onMouseAction}
+      onMouseOut={onMouseAction}
+      variant="contained"
+      color={onFocus ? "secondary" : "default"}
+      {...props}
+    >
+      {props.children}
+    </Button>
+  );
+};
 
 export {
   tokenizeTitle,
@@ -152,4 +144,5 @@ export {
   SimpleTextPage,
   StyledCard,
   StyledButton,
+  DivAlb,
 };

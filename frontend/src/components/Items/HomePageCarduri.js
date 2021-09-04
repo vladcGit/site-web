@@ -6,14 +6,10 @@ import {
   Container,
   Box,
   Typography,
-  Card,
-  CardActionArea,
-  CardMedia,
-  CardContent,
   Button,
 } from "@material-ui/core";
 
-import { StyledButton, WhiteTextTypography, colors } from "./Util";
+import { WhiteTextTypography, colors, DivAlb } from "./Util";
 import CardWithButton from "./CardWithButton";
 import { Link } from "react-router-dom";
 
@@ -25,48 +21,11 @@ const useStyles = makeStyles((theme) => ({
       listStyle: "none",
     },
   },
-  appBar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  toolbar: {
-    flexWrap: "wrap",
-  },
-  toolbarTitle: {
-    flexGrow: 1,
-  },
-  link: {
-    margin: theme.spacing(1, 1.5),
-  },
   heroContent: {
     padding: theme.spacing(3, 0, 5),
   },
   distantat: {
     padding: theme.spacing(20, 0, 0),
-  },
-  cardHeader: {
-    /*
-        backgroundColor:
-          theme.palette.type === "light"
-            ? theme.palette.primary
-            : theme.palette.primary,
-            */
-    //backgroundImage: "linear-gradient(45deg, #34435e 5%, #6369d1 90%)",
-  },
-  cardPricing: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "baseline",
-    marginBottom: theme.spacing(2),
-  },
-  footer: {
-    borderTop: `1px solid ${theme.palette.divider}`,
-    marginTop: theme.spacing(8),
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-    [theme.breakpoints.up("sm")]: {
-      paddingTop: theme.spacing(6),
-      paddingBottom: theme.spacing(6),
-    },
   },
   spacingItem: {
     padding: theme.spacing(2, 0, 2),
@@ -115,53 +74,48 @@ export default function HomePageCarduri() {
   return (
     <React.Fragment>
       <CssBaseline /> {/* Hero unit */}
-      <Container maxWidth="md" component="main" className={classes.heroContent}>
-        <Typography
-          style={{ color: "red" }}
-          component="h1"
-          variant={window.innerWidth <= 768 ? "h6" : "h6"}
-          align="center"
+      <div style={{ height: "100vh" }}>
+        <Container
+          maxWidth="md"
+          component="main"
+          className={classes.heroContent}
         >
-          Mai avem putin de lucru pana sa deschidem complet site-ul. Daca iti
-          doresti, iti poti crea un cont pentru a primi un mail de la noi cand
-          acest lucru se va intampla.
-        </Typography>
-        <WhiteTextTypography
-          component="h1"
-          variant={window.innerWidth <= 768 ? "h3" : "h2"}
-          align="center"
-          gutterBottom
-        >
-          <Box fontWeight="fontWeightBold" m={1}>
-            Icar Academy
-          </Box>
-        </WhiteTextTypography>
-        <WhiteTextTypography variant="h4" align="center" component="p">
-          Ca meditatiile, dar mai bine si mai ieftin!
-        </WhiteTextTypography>
-      </Container>
-      {/* End hero unit */}
-      <Container maxWidth="lg" component="main">
-        <WhiteTextTypography
-          component="h2"
-          variant={window.innerWidth <= 768 ? "subtitle1" : "h6"}
-          align="center"
-          gutterBottom
-          className={classes.spacingItem}
-        >
-          <Box fontWeight="fontWeightBold" m={1}>
-            Aducem eficienta, cooperarea si simplitatea in educatie.
-          </Box>
-        </WhiteTextTypography>
-        <Grid container spacing={5} alignItems="stretch">
-          {tiers.map((tier) => (
-            // Enterprise card is full width at sm breakpoint
-            <CardWithButton {...tier} />
-          ))}
-        </Grid>
-      </Container>
-      <div /*style={{backgroundImage: "linear-gradient(45deg, #454ADE 30%, #1B1F3B 90%)",opacity:1}}*/
-      >
+          <WhiteTextTypography
+            component="h1"
+            variant={window.innerWidth <= 768 ? "h3" : "h2"}
+            align="center"
+            gutterBottom
+          >
+            <Box fontWeight="fontWeightBold" m={1}>
+              Icar Academy
+            </Box>
+          </WhiteTextTypography>
+          <WhiteTextTypography variant="h4" align="center" component="p">
+            Ca meditatiile, dar mai bine si mai ieftin!
+          </WhiteTextTypography>
+        </Container>
+        {/* End hero unit */}
+        <Container maxWidth="lg" component="main">
+          <WhiteTextTypography
+            component="h2"
+            variant={window.innerWidth <= 768 ? "subtitle1" : "h6"}
+            align="center"
+            gutterBottom
+            className={classes.spacingItem}
+          >
+            <Box fontWeight="fontWeightBold" m={1}>
+              Aducem eficienta, cooperarea si simplitatea in educatie.
+            </Box>
+          </WhiteTextTypography>
+          <Grid container spacing={5} alignItems="stretch">
+            {tiers.map((tier) => (
+              // Enterprise card is full width at sm breakpoint
+              <CardWithButton {...tier} />
+            ))}
+          </Grid>
+        </Container>
+      </div>
+      <div style={{ backgroundColor: "white" }}>
         <div className={classes.distantat}>
           <Typography
             align="center"
