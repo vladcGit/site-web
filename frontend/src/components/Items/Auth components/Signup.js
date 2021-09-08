@@ -50,7 +50,7 @@ export default function SignUp() {
 
   // functia responsabila pentru signup
   // seteaza un token in browserul clientului
-  function handleButtonClick(_email, _password, _first_name, _last_name) {
+  async function handleButtonClick(_email, _password, _first_name, _last_name) {
     const requestOptions = {
       method: "POST",
       headers: {
@@ -65,19 +65,17 @@ export default function SignUp() {
       }),
     };
 
-    fetch("/api/auth/register/", requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        localStorage.clear();
-        if (data.detail && data.detail === "Verification e-mail sent.") {
-          window.location.replace("/reset_successful");
-        } else {
-          setError(true);
-          const firstKey = Object.keys(data)[0];
-          const message = data[firstKey];
-          setErrorMessage(firstKey + ": " + message);
-        }
-      });
+    const response = await fetch("/api/auth/register/", requestOptions);
+    const data = response.json();
+    localStorage.clear();
+    if (data.detail && data.detail === "Verification e-mail sent.") {
+      window.location.replace("/reset_successful");
+    } else {
+      setError(true);
+      const firstKey = Object.keys(data)[0];
+      const message = data[firstKey];
+      setErrorMessage(firstKey + ": " + message);
+    }
   }
 
   return (

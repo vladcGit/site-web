@@ -235,9 +235,9 @@ export default function HomePageCarduri() {
         justify="center"
         alignItems="center"
         direction="column"
-        style={{ marginTop: "180px" }}
+        style={{ marginTop: "180px", backgroundColor: "white" }}
       >
-        <Grid item xs={window.innerWidth <= 768 ? 12 : 6}>
+        <Grid xs={window.innerWidth <= 768 ? 12 : 6}>
           <Typography
             align="center"
             variant={window.innerWidth <= 768 ? "h6" : "h4"}

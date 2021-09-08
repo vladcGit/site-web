@@ -45,7 +45,7 @@ export default function PasswordResetForm() {
 
   // functia responsabila pentru signin
   // seteaza un token in browserul clientului
-  function handleButtonClick(_email) {
+  async function handleButtonClick(_email) {
     const requestOptions = {
       method: "POST",
       headers: {
@@ -56,20 +56,17 @@ export default function PasswordResetForm() {
       }),
     };
 
-    fetch("/api/password_reset/", requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        if (data.status == "OK") {
-          window.location.replace("/reset_successful");
-        } else {
-          localStorage.clear();
-          setError(true);
-          var firstKey = Object.keys(data)[0];
-          var message = data[firstKey];
-          setErrorMessage(firstKey + ": " + message);
-        }
-      });
+    const response = await fetch("/api/password_reset/", requestOptions);
+    const data = await response.json();
+    if (data.status == "OK") {
+      window.location.replace("/reset_successful");
+    } else {
+      localStorage.clear();
+      setError(true);
+      var firstKey = Object.keys(data)[0];
+      var message = data[firstKey];
+      setErrorMessage(firstKey + ": " + message);
+    }
   }
 
   return (

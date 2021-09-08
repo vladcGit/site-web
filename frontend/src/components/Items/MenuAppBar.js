@@ -1,17 +1,14 @@
 import React from "react";
-import AccountBox from "@material-ui/icons/AccountBox";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import {
   AppBar,
-  ButtonGroup,
   Toolbar,
-  Button,
   IconButton,
   Avatar,
   makeStyles,
   Collapse,
 } from "@material-ui/core";
-import { colors, StyledButton } from "./Util";
+import { StyledButton } from "./Util";
 import CloseIcon from "@material-ui/icons/Close";
 import Alert from "@material-ui/lab/Alert";
 

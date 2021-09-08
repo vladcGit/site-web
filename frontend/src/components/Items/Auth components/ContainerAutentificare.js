@@ -26,36 +26,48 @@ const ContainerAutentificare = (props) => {
   const [borderRadius, setBorderRadius] = React.useState([60, -16]);
   return (
     <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        marginTop: "40px",
-      }}
+      style={
+        {
+          /*minHeight: "90vh"*/
+        }
+      }
     >
-      <Grid
-        xs={3}
+      <div
         style={{
-          backgroundColor: "#fff",
-          borderRadius: "25px",
-          boxShadow: `${borderRadius[0]}px ${borderRadius[1]}px #888888`,
-          transition: "box-shadow 500ms",
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "40px",
         }}
       >
-        <Container
-          onMouseOver={() => setBorderRadius([0, 0])}
-          onMouseOut={() => setBorderRadius([60, -16])}
-          component="main"
-          maxWidth="xs"
+        <Grid
+          xs={3}
+          style={{
+            backgroundColor: "#fff",
+            borderRadius: "25px",
+            boxShadow:
+              window.innerWidth <= 768
+                ? "none"
+                : `${borderRadius[0]}px ${borderRadius[1]}px #888888`,
+            transition: "box-shadow 500ms",
+            minWidth: window.innerWidth <= 768 ? "90vw" : "auto",
+          }}
         >
-          <CssBaseline />
-          <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            {props.children}
-          </div>
-        </Container>
-      </Grid>
+          <Container
+            onMouseOver={() => setBorderRadius([0, 0])}
+            onMouseOut={() => setBorderRadius([60, -16])}
+            component="main"
+            maxWidth="xs"
+          >
+            <CssBaseline />
+            <div className={classes.paper}>
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+              {props.children}
+            </div>
+          </Container>
+        </Grid>
+      </div>
     </div>
   );
 };

@@ -49,7 +49,7 @@ export default function SignIn() {
 
   // functia responsabila pentru signin
   // seteaza un token in browserul clientului
-  function handleButtonClick(_email, _password) {
+  async function handleButtonClick(_email, _password) {
     const requestOptions = {
       method: "POST",
       headers: {
@@ -61,21 +61,19 @@ export default function SignIn() {
       }),
     };
 
-    fetch("/api/auth/login/", requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.key) {
-          localStorage.clear();
-          localStorage.setItem("token", data.key);
-          window.location.replace("");
-        } else {
-          localStorage.clear();
-          setError(true);
-          const firstKey = Object.keys(data)[0];
-          const message = data[firstKey];
-          setErrorMessage(firstKey + ": " + message);
-        }
-      });
+    const response = await fetch("/api/auth/login/", requestOptions);
+    const data = await response.json();
+    if (data.key) {
+      localStorage.clear();
+      localStorage.setItem("token", data.key);
+      window.location.replace("");
+    } else {
+      localStorage.clear();
+      setError(true);
+      const firstKey = Object.keys(data)[0];
+      const message = data[firstKey];
+      setErrorMessage(firstKey + ": " + message);
+    }
   }
 
   return (

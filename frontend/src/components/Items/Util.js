@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Card, Typography, withStyles, Grid } from "@material-ui/core";
+import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { useParams } from "react-router-dom";
 
 function tokenizeTitle(s) {
@@ -13,23 +14,6 @@ function tokenizeTitle(s) {
   }
   return rez;
 }
-
-//nu merge
-//
-/*
-function canViewLesson()
-{
-    if (localStorage.getItem("token") === null) return false;
-    fetch("/subscribe/get_full_subscription_details/")
-        .then((response) => response.json())
-        .then((data) =>
-        {
-            if (data.hasOwnProperty("Error")) return false;
-            if (data.subscription.status != "active") return false;
-            return true;
-        });
-}
-*/
 
 const WhiteTextTypography = withStyles({
   root: {
@@ -78,6 +62,8 @@ const colors = {
   griDeschis: "#c7c7c7",
   gri: "#C0C0C0",
   alb: "#FFFFFF",
+  roz: "#D90368",
+  portocaliu: "#FF7F11",
 };
 
 function SimpleTextPage() {
@@ -123,18 +109,21 @@ const StyledCard = (props) => {
 const StyledButton = (props) => {
   const [onFocus, setOnFocus] = React.useState(false);
   const onMouseAction = () => setOnFocus(!onFocus);
+  //const redTheme = createTheme({ palette: { primary: { main: "#f50057" } } });
   return (
     <Button
       onMouseOver={onMouseAction}
       onMouseOut={onMouseAction}
       variant="contained"
-      color={onFocus ? "secondary" : "default"}
+      color={onFocus ? props.myColor : "default"}
       {...props}
     >
       {props.children}
     </Button>
   );
 };
+
+StyledButton.defaultProps = { myColor: "secondary" };
 
 export {
   tokenizeTitle,

@@ -1,19 +1,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import { culori } from "./Util";
+import { colors } from "./Util";
 
 const useStyles = makeStyles({
-  container: {
-    position: "absolute",
-    left: "50%",
-    top: "50%",
-    transform: "translate(-50%, -50%)",
-    textAlign: "center",
-  },
   btn: {
     border: "none",
-    margin: 20,
     width: 250,
     height: 65,
     borderRadius: 6,
@@ -28,7 +20,7 @@ const useStyles = makeStyles({
     },
   },
   btn1: {
-    backgroundImage: `linear-gradient(45deg, ${culori.portocaliu}, #EE5A24, ${culori.roz})`,
+    backgroundImage: `linear-gradient(45deg, ${colors.portocaliu}, #EE5A24, ${colors.roz})`,
   },
 });
 
@@ -37,7 +29,7 @@ export default function GradientButton(props) {
   return (
     <>
       <div /*className={classes.container}*/>
-        <Button className={`${classes.btn} ${classes.btn1}`}>
+        <Button className={`${classes.btn} ${classes.btn1}`} {...props}>
           {props.children}
         </Button>
       </div>

@@ -16,6 +16,7 @@ import NewPasswordForm from "./Items/Auth components/NewPasswordForm";
 import ResetPasswordEmailSent from "./Items/Auth components/ResetPasswordEmailSent";
 import PaginaDezabonare from "./Items/PaginaDezabonare";
 import Termeni from "./Items/Termeni";
+import HomePage2 from "./Items/HomePage2";
 
 import {
   BrowserRouter as Router,
@@ -40,7 +41,7 @@ export default class HomePage extends Component {
           {window.innerWidth <= 768 ? <AppBar_telefon /> : <MenuAppBar />}
           <Switch>
             <Route exact path="/">
-              <HomePageCarduri />
+              <HomePage2 />
             </Route>
             <Route exact path="/about-us">
               <AboutPage />

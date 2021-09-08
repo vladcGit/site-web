@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
+/*@import url("https://fonts.googleapis.com/css?family=Nunito:400,700");*/
 * {
   transition: all 0.3s ease-out;
 }
 h3 {
   color: #262626;
-  font-size: 17px;
-  line-height: 24px;
+  font-size: 30px;
+  line-height: 47px;
   font-weight: 700;
   margin-bottom: 4px;
 }
@@ -16,7 +16,7 @@ p {
   color: #666;
 }
 p.small {
-  font-size: 14px;
+  font-size: 20px;
 }
 .go-corner {
   display: flex;
@@ -28,7 +28,7 @@ p.small {
   overflow: hidden;
   top: 0;
   right: 0;
-  background-color: #00838d;
+  background-color: #f50057;
   border-radius: 0 4px 0 32px;
 }
 .go-arrow {
@@ -40,7 +40,10 @@ p.small {
 .card1 {
   display: block;
   position: relative;
-  max-width: 240px;
+  /*dimensiuni custom puse de mine*/
+  width: 240px;
+  height: 180px;
+  /**/
   background-color: #f2f8f9;
   border-radius: 4px;
   padding: 32px 24px;
@@ -48,6 +51,7 @@ p.small {
   text-decoration: none;
   z-index: 0;
   overflow: hidden;
+  text-align: center;
 }
 .card1:before {
   content: "";
@@ -55,7 +59,7 @@ p.small {
   z-index: -1;
   top: -16px;
   right: -16px;
-  background: #00838d;
+  background: #f50057;
   height: 32px;
   width: 32px;
   border-radius: 32px;
@@ -64,7 +68,8 @@ p.small {
   transition: transform 0.25s ease-out;
 }
 .card1:hover:before {
-  transform: scale(21);
+  /*aici se mareste daca tranzitia nu acopera tot cardul*/
+  transform: scale(24);
 }
 .card1:hover p {
   transition: all 0.3s ease-out;
@@ -73,4 +78,11 @@ p.small {
 .card1:hover h3 {
   transition: all 0.3s ease-out;
   color: #fff;
+}
+.card1:hover .icon {
+  transition: all 0.3s ease-out;
+  color: #fff;
+}
+.disabled {
+  cursor: context-menu !important;
 }

@@ -7,9 +7,6 @@ import {
   IconButton,
   Avatar,
   makeStyles,
-  Menu,
-  MenuItem,
-  withStyles,
   SwipeableDrawer,
   List,
   ListItem,
@@ -51,27 +48,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-const StyledMenu = withStyles({
-  paper: {
-    border: "1px solid #d3d4d5",
-    //backgroundColor: colors.galbenInchis,
-  },
-})((props) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "center",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "center",
-    }}
-    {...props}
-  />
-));
 
 const MenuAppBar = (props) => {
   const { history } = props;
@@ -115,7 +91,8 @@ const MenuAppBar = (props) => {
               </IconButton>
             }
           >
-            Folosim module de tip cookie pentru a ne oferi serviciile. Prin navigarea pe site esti de acord cu{" "}
+            Folosim module de tip cookie pentru a ne oferi serviciile. Prin
+            navigarea pe site esti de acord cu{" "}
             <a href="/terms">termenii si conditiile noastre</a>.
           </Alert>
         </Collapse>
