@@ -55,7 +55,7 @@ const tiers = [
 
 const useStyles = makeStyles((theme) => ({
   HeroContent: {
-    minHeight: "93vh",
+    minHeight: "94vh",
   },
   FlexContainer: {
     display: "flex",
@@ -109,7 +109,16 @@ const HomePage = () => {
     myRef.current.scrollIntoView();
     setVisible(false);
   };
-  const materii = ["matematica", "romana", "fizica", "chimia"];
+  const materii = [
+    "matematica",
+    "romana",
+    "fizica",
+    "chimia",
+    "informatica",
+    "biologia",
+    "engleza",
+    "franceza",
+  ];
   useEffect(() => {
     const handler = () => {
       setVisible(false);
@@ -149,14 +158,7 @@ const HomePage = () => {
 
           {!isPhone && (
             <Zoom in={true} timeout={timeout}>
-              <div
-                style={{
-                  position: "relative",
-                  bottom: "70px",
-                  pointerEvents: "none",
-                }}
-              >
-                {/*
+              {/*
                 <img
                   className={`${classes.Image} sBinalla`}
                   alt=""
@@ -164,8 +166,7 @@ const HomePage = () => {
                   src="/static/images/atom2.png"
                 />
               */}
-                <PlanetAnimation />
-              </div>
+              <PlanetAnimation />
             </Zoom>
           )}
         </div>
@@ -204,11 +205,7 @@ const HomePage = () => {
           minHeight: "60vh",
         }}
       >
-        <ScrollingText
-          titleBefore="Te ajutam cu "
-          items={materii}
-          titleAfter="Lorem ipsum doloret!"
-        />
+        <ScrollingText titleBefore="Te ajutam cu " items={materii} />
         <div
           style={{
             marginTop: "40px",
@@ -225,18 +222,16 @@ const HomePage = () => {
                 style={{ marginBottom: "40px" }}
               >
                 <AnimatedCardWithoutClick {...tier} />
-                <Button
+                <StyledButton
                   component={Link}
                   to={tier.link}
-                  color="primary"
-                  variant="contained"
                   style={{
                     //width: "50%",
                     marginTop: "20px",
                   }}
                 >
                   {tier.buttonText}
-                </Button>
+                </StyledButton>
               </div>
             );
           })}

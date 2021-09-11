@@ -1,4 +1,4 @@
-/*html {
+/* html {
   box-sizing: border-box;
   font-size: 62.5%;
 }
@@ -6,26 +6,16 @@ html *,
 html *:before,
 html *:after {
   box-sizing: inherit;
-}
-*/
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40vw;
-  height: 100vh;
-  overflow: hidden;
-}
+} */
 
 .system {
   position: relative;
-  display: inline-block;
   width: 100%;
   max-width: 700px;
   padding-top: 100%;
+  margin-top: 50px;
 }
-@media (min-width: 650px) {
+@media (min-width: 700px) {
   .system {
     padding-top: 700px;
   }
@@ -40,11 +30,9 @@ html *:after {
   position: absolute;
   top: 50%;
   left: 50%;
-
-  transform: translate(-50%, -50%);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 100%;
-
+  transform: translate(-50%, -50%);
   animation: spin infinite linear both;
 }
 .system__orbit:nth-child(1) {
@@ -117,18 +105,15 @@ html *:after {
 .system__orbit--pluto {
   animation-duration: 1028.6s;
 }
-
 .system__planet {
   position: absolute;
   top: 50%;
   left: -12px;
   width: 25px;
   height: 25px;
-
   border-radius: 100%;
   transform: translateY(-50%);
 }
-
 .system__icon {
   width: 100%;
   height: 100%;
