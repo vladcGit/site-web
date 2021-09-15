@@ -1,24 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  IconButton,
-  Grid,
-  Fade,
-  Slide,
-  Grow,
-  makeStyles,
-  Button,
-  Zoom,
-  Typography,
-  Box,
-} from "@material-ui/core";
+import { IconButton, Fade, Grow, makeStyles, Zoom } from "@material-ui/core";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import { Link } from "react-router-dom";
 import { StyledButton, WhiteTextTypography } from "./Util";
 import GradientButton from "./GradientButton";
-import AnimatedCardWithoutClick from "./AnimatedCardWithoutClick";
-import "./Homepage.css";
-import PlanetAnimation from "./PlanetAnimation";
-import ScrollingText from "./ScrollingText";
+import AnimatedCardWithoutClick from "./Animations/AnimatedCardWithoutClick";
+import PlanetAnimation from "./Animations/PlanetAnimation";
+import ScrollingText from "./Animations/ScrollingText";
+import Bookshelf from "./Animations/Bookshelf";
+import Astronaut from "./Animations/Astronaut";
+import Coffee from "./Animations/Coffee";
+import "/static/css/index.css";
 
 const tiers = [
   {
@@ -54,8 +46,19 @@ const tiers = [
 ];
 
 const useStyles = makeStyles((theme) => ({
+  FlexSpaceAround: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
   HeroContent: {
     minHeight: "94vh",
+  },
+  flex: {
+    display: "flex",
+    flexWrap: "wrap",
   },
   FlexContainer: {
     display: "flex",
@@ -78,18 +81,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     marginTop: window.innerHeight > 768 ? "20vh" : "0px",
   },
-  Image: {
-    //maxWidth: "30vw",
-    flex: 1,
-    maxHeight: "200px",
-    maxWidth: "200px",
-  },
   SpacedText: {
     marginBottom: "40px",
   },
   IconBtn: {
-    marginTop: "10px",
-    marginBottom: "50px",
     backgroundColor: "white",
   },
   distantat: {
@@ -97,6 +92,16 @@ const useStyles = makeStyles((theme) => ({
       window.innerWidth <= 768
         ? theme.spacing(10, 0, 0)
         : theme.spacing(20, 0, 0),
+  },
+  subliniere: {
+    backgroundImage: "linear-gradient(120deg, #f50057 0%, #b0003e 100%)",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "100% 0.2em",
+    backgroundPosition: "0 88%",
+    transition: "background-size 0.25s ease-in",
+    "&:hover": {
+      backgroundSize: "100% 88%",
+    },
   },
 }));
 const HomePage = () => {
@@ -120,9 +125,9 @@ const HomePage = () => {
     "franceza",
   ];
   useEffect(() => {
-    const handler = () => {
+    function handler() {
       setVisible(false);
-    };
+    }
     window.onscroll = handler;
     window.ontouchmove = handler;
   }, []);
@@ -158,60 +163,47 @@ const HomePage = () => {
 
           {!isPhone && (
             <Zoom in={true} timeout={timeout}>
-              {/*
-                <img
-                  className={`${classes.Image} sBinalla`}
-                  alt=""
-                  //src="https://picsum.photos/1920/1080"
-                  src="/static/images/atom2.png"
-                />
-              */}
-              <PlanetAnimation />
+              <div style={{ width: "100%", maxWidth: "700px" }}>
+                <PlanetAnimation />
+              </div>
             </Zoom>
           )}
         </div>
-        <Fade in={visible} timeout={timeout}>
-          <Grid
-            container
-            spacing={0}
-            direction="column"
-            alignItems="center"
-            justify="center"
-            style={{
-              position: "absolute",
-              bottom: 0,
-            }}
-            className="box bounce-1"
-          >
-            <IconButton
-              className={classes.IconBtn}
-              onClick={handleScrollButton}
-              color="inherit"
-            >
-              <ArrowDownwardIcon />
-            </IconButton>
-          </Grid>
-        </Fade>
+        <div
+          style={{
+            position: "fixed",
+            bottom: "40px",
+            left: "50%",
+            transform: "translateX(-50%)",
+          }}
+        >
+          <Fade in={visible} timeout={timeout}>
+            <div className={`box bounce-1 ${classes.FlexContainerColoana}`}>
+              <IconButton
+                className={classes.IconBtn}
+                onClick={handleScrollButton}
+                color="inherit"
+              >
+                <ArrowDownwardIcon />
+              </IconButton>
+            </div>
+          </Fade>
+        </div>
       </div>
       <div
         ref={myRef}
+        className={classes.FlexContainerColoana}
         style={{
-          display: "flex",
-          flexDirection: "column",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          alignItems: "center",
           backgroundColor: "#f50057",
           minHeight: "60vh",
         }}
       >
         <ScrollingText titleBefore="Te ajutam cu " items={materii} />
         <div
+          className={classes.flex}
           style={{
             marginTop: "40px",
             minWidth: "60vw",
-            display: "flex",
-            flexWrap: "wrap",
             justifyContent: isPhone ? "center" : "space-between",
           }}
         >
@@ -241,110 +233,77 @@ const HomePage = () => {
         className={classes.FlexContainerColoana}
         style={{ backgroundColor: "#00a575" }}
       >
-        <div style={{ maxWidth: "80vw", marginBottom: "100px" }}>
+        <div style={{ maxWidth: "90vw", marginBottom: "100px" }}>
           <div className={classes.distantat}>
             <WhiteTextTypography
               align="center"
               variant={window.innerWidth <= 768 ? "h5" : "h3"}
             >
-              De ce credem ca abordarea noastra este cea corecta?
+              De ce credem ca abordarea noastra este cea{" "}
+              <span className={classes.subliniere}> corecta</span>?
             </WhiteTextTypography>
           </div>
-          <Box
-            className={classes.distantat}
-            display="flex"
-            flexDirection="row"
-            flexWrap="wrap"
-            justifyContent="space-around"
-          >
-            <img
-              alt=""
-              src={"/static/images/pngcarti.png"}
-              className={classes.Image}
-            />
-            <Box style={{ flexGrow: 1, maxWidth: "500px" }}>
+          <div className={classes.FlexSpaceAround}>
+            {isPhone && <Bookshelf height={350} width={350} />}
+            {!isPhone && <Bookshelf height={450} width={450} />}
+            <div style={{ maxWidth: "500px" }}>
               <WhiteTextTypography
-                component="h2"
+                className={classes.SpacedText}
                 variant={window.innerWidth <= 768 ? "h6" : "h4"}
                 align="center"
-                className={window.innerWidth <= 768 ? classes.textAlb : null}
               >
                 Sesiuni de invatare "bite-sized"
               </WhiteTextTypography>
               <WhiteTextTypography
-                component="h2"
                 variant={window.innerWidth <= 768 ? "subtitle2" : "subtitle1"}
                 align="center"
                 color="textSecondary"
-                className={window.innerWidth <= 768 ? classes.textAlb : null}
               >
                 Studiile arata ca o cantitate mica de informatie este retinuta
                 mai bine de catre creierul nostru. Abordarea uzuala din
                 invatamantul romanesc este exact inversa.
               </WhiteTextTypography>
-            </Box>
-          </Box>
-          <Box
-            className={classes.distantat}
-            display="flex"
-            flexDirection="row"
-            flexWrap="wrap"
-            justifyContent="space-around"
+            </div>
+          </div>
+          <div
+            className={classes.FlexSpaceAround}
+            style={{ marginBottom: isPhone ? "0px" : "100px" }}
           >
-            <Box style={{ flexGrow: 1, maxWidth: "500px" }}>
+            {isPhone && <Astronaut />}
+            <div style={{ maxWidth: "500px" }}>
               <WhiteTextTypography
-                component="h2"
+                className={classes.SpacedText}
                 variant={window.innerWidth <= 768 ? "h6" : "h4"}
                 align="center"
-                className={window.innerWidth <= 768 ? classes.textAlb : null}
               >
                 Selectivitatea informatiei
               </WhiteTextTypography>
               <WhiteTextTypography
-                component="h2"
                 variant={window.innerWidth <= 768 ? "subtitle2" : "subtitle1"}
                 align="center"
                 color="textSecondary"
-                className={window.innerWidth <= 768 ? classes.textAlb : null}
               >
                 O mare parte din ce se invata la liceu nu va fi folosita
                 niciodata. Noi credem ca e mai bine sa ne concentram pe ceea ce
                 conteaza.
               </WhiteTextTypography>
-            </Box>
-            <img
-              alt=""
-              src={"/static/images/clipart1879433.png"}
-              className={classes.Image}
-            />
-          </Box>
-          <Box
-            className={classes.distantat}
-            display="flex"
-            flexDirection="row"
-            flexWrap="wrap"
-            justifyContent="space-around"
-          >
-            <img
-              alt=""
-              src={"/static/images/clipart380322.png"}
-              className={classes.Image}
-            />
-            <Box style={{ flexGrow: 1, maxWidth: "500px" }}>
+            </div>
+            {!isPhone && <Astronaut />}
+          </div>
+          <div className={classes.FlexSpaceAround}>
+            <Coffee />
+            <div style={{ maxWidth: "500px" }}>
               <WhiteTextTypography
-                component="h2"
+                className={classes.SpacedText}
                 variant={window.innerWidth <= 768 ? "h6" : "h4"}
                 align="center"
-                className={window.innerWidth <= 768 ? classes.textAlb : null}
               >
                 Mai mult timp liber
               </WhiteTextTypography>
               <WhiteTextTypography
-                component="h2"
                 variant={window.innerWidth <= 768 ? "subtitle2" : "subtitle1"}
                 align="center"
                 color="textSecondary"
-                className={window.innerWidth <= 768 ? classes.textAlb : null}
               >
                 Eliminarea drumurilor pana la meditatii si eficientizarea
                 timpului de invatare ii permit elevului sa aiba mai mult timp la
@@ -352,17 +311,13 @@ const HomePage = () => {
                 invatare si teme pentru cei care vor sa foloseasca productiv
                 acest timp.
               </WhiteTextTypography>
-            </Box>
-          </Box>
+            </div>
+          </div>
         </div>
       </div>
       <div
-        style={{
-          backgroundColor: "#4E38C5",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
+        style={{ backgroundColor: "#4E38C5" }}
+        className={classes.FlexContainerColoana}
       >
         <WhiteTextTypography
           align="center"
@@ -370,7 +325,7 @@ const HomePage = () => {
           style={{
             marginTop: "40px",
             marginBottom: "40px",
-            maxWidth: isPhone ? "none" : "85vw",
+            maxWidth: isPhone ? "95vw" : "85vw",
           }}
         >
           E timpul sa incepi sa investesti in tine

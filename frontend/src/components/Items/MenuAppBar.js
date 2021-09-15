@@ -7,6 +7,7 @@ import {
   Avatar,
   makeStyles,
   Collapse,
+  Button,
 } from "@material-ui/core";
 import { StyledButton } from "./Util";
 import CloseIcon from "@material-ui/icons/Close";
@@ -25,8 +26,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   MenuButton: {
-    //borderRadius: 30,
-    //backgroundColor: colors.galbenInchis,
     marginRight: "10px",
   },
   leftSide: {
@@ -60,7 +59,9 @@ const MenuAppBar = (props) => {
     history.push(pageURL);
   };
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(
+    localStorage.getItem("acceptCookies") === null
+  );
 
   const isLoggedIn = localStorage.getItem("token") !== null;
 
@@ -71,20 +72,21 @@ const MenuAppBar = (props) => {
           <Alert
             severity="info"
             action={
-              <IconButton
-                aria-label="close"
+              <Button
                 color="inherit"
                 size="small"
                 onClick={() => {
                   setOpen(false);
+                  localStorage.setItem("acceptCookies", true);
                 }}
               >
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
+                {/* <CloseIcon fontSize="inherit" /> */}
+                Ok
+              </Button>
             }
           >
             Folosim module de tip cookie pentru a ne oferi serviciile. Prin
-            navigarea pe site esti de acord cu{" "}
+            apasarea butonului esti de acord cu{" "}
             <a href="/terms">termenii si conditiile noastre</a>.
           </Alert>
         </Collapse>

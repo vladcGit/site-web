@@ -57,11 +57,13 @@ const MenuAppBar = (props) => {
   const handleButtonClick = (pageURL) => {
     history.push(pageURL);
     //handleClose();
-    setState(false);
+    setDrawer(false);
   };
 
-  const [state, setState] = React.useState(false);
-  const [open, setOpen] = React.useState(true);
+  const [drawer, setDrawer] = React.useState(false);
+  const [open, setOpen] = React.useState(
+    localStorage.getItem("acceptCookies") === null
+  );
   const toggleDrawer = (isOpen) => (event) => {
     if (
       event &&
@@ -69,7 +71,7 @@ const MenuAppBar = (props) => {
       (event.key === "Tab" || event.key === "Shift")
     )
       return;
-    setState(isOpen);
+    setDrawer(isOpen);
   };
 
   return (
@@ -79,20 +81,20 @@ const MenuAppBar = (props) => {
           <Alert
             severity="info"
             action={
-              <IconButton
-                aria-label="close"
+              <Button
                 color="inherit"
                 size="small"
                 onClick={() => {
                   setOpen(false);
+                  localStorage.setItem("acceptCookies", true);
                 }}
               >
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
+                Ok
+              </Button>
             }
           >
             Folosim module de tip cookie pentru a ne oferi serviciile. Prin
-            navigarea pe site esti de acord cu{" "}
+            apasarea butonului esti de acord cu{" "}
             <a href="/terms">termenii si conditiile noastre</a>.
           </Alert>
         </Collapse>
@@ -108,7 +110,7 @@ const MenuAppBar = (props) => {
           </IconButton>
           <SwipeableDrawer
             anchor="left"
-            open={state}
+            open={drawer}
             onClose={toggleDrawer(false)}
             onOpen={toggleDrawer(true)}
           >

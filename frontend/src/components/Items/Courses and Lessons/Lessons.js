@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Grid, Typography, Container } from "@material-ui/core";
 import { tokenizeTitle, colors } from "../Util";
 import CardWithButton from "../CardWithButton";
-import AnimatedCard from "../AnimatedCard";
+import AnimatedCard from "../Animations/AnimatedCard";
 
 export default class Lesson extends Component {
   state = { lectii: [], tiers: [] };

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Grid, Container } from "@material-ui/core";
 import { tokenizeTitle } from "../Util";
 import CardWithButton from "../CardWithButton";
-import AnimatedCard from "../AnimatedCard";
+import AnimatedCard from "../Animations/AnimatedCard";
 
 const Courses = () => {
   const [tiers, setTiers] = React.useState([]);
