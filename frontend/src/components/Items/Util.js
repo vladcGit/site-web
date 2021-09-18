@@ -52,19 +52,29 @@ function getStringDateFromUnixTime(unixTime) {
 }
 
 const colors = {
-  galbenInchisRgb: [237, 185, 14],
-  galbenInchis: "#EDB90E",
-  portocaliuRgb: [242, 107, 23],
-  movRgb: [127, 71, 166],
-  mov: "#7F47A6",
-  movDeschisRgb: [162, 116, 164],
-  violetDeschis: "#BF6BFA",
-  griDeschis: "#c7c7c7",
-  gri: "#C0C0C0",
-  alb: "#FFFFFF",
-  roz: "#D90368",
+  albastru: "#3F51B5",
+  roz: "#f50057",
+  rozInchis: "#D90368",
+  verdeDeschis: "#00a575",
+  verdeInchis: "#00916E",
+  mov: "#4e38c5",
   portocaliu: "#FF7F11",
+  portocaliuInchis: "#EE5A24",
+  gri: "#C0C0C0",
+  griInchis: "#888888",
+  alb: "#FFFFFF",
 };
+
+function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? [
+        parseInt(result[1], 16),
+        parseInt(result[2], 16),
+        parseInt(result[3], 16),
+      ]
+    : null;
+}
 
 function SimpleTextPage() {
   let { text } = useParams();
@@ -134,4 +144,5 @@ export {
   StyledCard,
   StyledButton,
   DivAlb,
+  hexToRgb,
 };

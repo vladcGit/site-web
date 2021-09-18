@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     textTransform: "uppercase",
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     cursor: "pointer",
-    color: "#fff",
+    color: colors.alb,
     backgroundSize: "200%",
     transition: "0.4s",
     "&:hover": {
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     },
   },
   btn1: {
-    backgroundImage: `linear-gradient(45deg, ${colors.portocaliu}, #EE5A24, ${colors.roz})`,
+    backgroundImage: `linear-gradient(45deg, ${colors.portocaliu}, ${colors.portocaliuInchis}, ${colors.rozInchis})`,
   },
 });
 

@@ -1,23 +1,11 @@
 import App from "./components/App";
-import { colors as culoriJson } from "./components/Items/Util";
+import { colors as culoriJson, hexToRgb } from "./components/Items/Util";
 
 var colors = new Array(
-  /*
-      [62,35,255],
-      [60,255,60],
-      [255,35,98],
-      [45,175,230],
-      [255,0,255],
-      [255,128,0]
-      */
-  [63, 81, 181],
-  [0, 145, 110],
-  [0, 165, 117],
-  [78, 56, 197]
-  /*
-  [252, 170, 103],
-  [1, 38, 34]
-  */
+  hexToRgb(culoriJson.albastru),
+  hexToRgb(culoriJson.verdeInchis),
+  hexToRgb(culoriJson.verdeDeschis),
+  hexToRgb(culoriJson.mov)
 );
 
 var step = 0;

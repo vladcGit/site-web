@@ -7,6 +7,7 @@ import {
   makeStyles,
   Container,
 } from "@material-ui/core";
+import { colors } from "../Util";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,12 +43,12 @@ const ContainerAutentificare = (props) => {
         <Grid
           xs={3}
           style={{
-            backgroundColor: "#fff",
+            backgroundColor: colors.alb,
             borderRadius: "25px",
             boxShadow:
               window.innerWidth <= 768
                 ? "none"
-                : `${borderRadius[0]}px ${borderRadius[1]}px #888888`,
+                : `${borderRadius[0]}px ${borderRadius[1]}px ${colors.griInchis}`,
             transition: "box-shadow 500ms",
             minWidth: window.innerWidth <= 768 ? "90vw" : "auto",
           }}

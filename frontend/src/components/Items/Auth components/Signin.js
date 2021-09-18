@@ -65,7 +65,8 @@ export default function SignIn() {
     const data = await response.json();
     if (data.key) {
       localStorage.clear();
-      localStorage.setItem("token", data.key);
+      if (localStorage.getItem("acceptCookies") === true)
+        localStorage.setItem("token", data.key);
       window.location.replace("");
     } else {
       localStorage.clear();

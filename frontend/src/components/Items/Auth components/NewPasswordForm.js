@@ -1,10 +1,15 @@
 import React, { useEffect } from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import { Collapse, Snackbar } from "@material-ui/core";
 import { useParams } from "react-router-dom";
+import {
+  Collapse,
+  IconButton,
+  makeStyles,
+  Typography,
+  TextField,
+  Button,
+} from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+import CloseIcon from "@material-ui/icons/Close";
 import ContainerAutentificare from "./ContainerAutentificare";
 
 const useStyles = makeStyles((theme) => ({
@@ -14,9 +19,6 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-  },
-  snackbarStyleViaContentProps: {
-    backgroundColor: "#b71c1c",
   },
 }));
 
@@ -70,7 +72,7 @@ export default function NewPasswordForm() {
       setErrorMessage(firstKey + ": " + message);
     }
   }
-  //TODO sa scap de snackbar si sa fac ca la signup si login
+
   return (
     <ContainerAutentificare>
       <Typography component="h1" variant="h5">
@@ -100,18 +102,25 @@ export default function NewPasswordForm() {
           Schimbare parola
         </Button>
       </form>
-
       <Collapse in={error}>
-        <Snackbar
-          open={error}
-          autoHideDuration={6000}
-          onClose={() => setError(false)}
-          message={errorMessage}
-          ContentProps={{
-            "aria-describedby": "message-id",
-            className: classes.snackbarStyleViaContentProps,
-          }}
-        ></Snackbar>
+        <Alert
+          severity="error"
+          variant="filled"
+          action={
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setError(false);
+              }}
+            >
+              <CloseIcon fontSize="inherit" />
+            </IconButton>
+          }
+        >
+          {errorMessage}
+        </Alert>
       </Collapse>
     </ContainerAutentificare>
   );

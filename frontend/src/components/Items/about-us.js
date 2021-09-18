@@ -8,7 +8,7 @@ import {
   makeStyles,
   Container,
 } from "@material-ui/core";
-import { WhiteTextTypography, StyledCard } from "./Util";
+import { WhiteTextTypography, StyledCard, colors } from "./Util";
 
 /*
 const AboutPage = () => {
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   cardTitle: {
-    color: "#ffffff",
+    color: colors.alb,
   },
 }));
 
