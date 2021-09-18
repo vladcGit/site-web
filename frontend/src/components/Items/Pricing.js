@@ -116,7 +116,7 @@ export default function Pricing() {
     const response = await fetch(
       "subscribe/create-checkout-session/" + stripePriceId + "/"
     );
-    const sesiune = response.json();
+    const sesiune = await response.json();
     return stripe.redirectToCheckout({ sessionId: sesiune.sessionId });
   }
 

@@ -12,12 +12,10 @@ const lines = [
   "in ideea ca putem invata din ele si imbunatati site-ul.",
 ];
 
-function handleCancelButton() {
-  fetch("subscribe/cancel-subscription/")
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    });
+async function handleCancelButton() {
+  const response = await fetch("/subscribe/cancel-subscription/");
+  const data = await response.json();
+  console.log(data);
   window.location.href = "/myaccount";
 }
 
@@ -49,7 +47,7 @@ export default function PaginaDezabonare() {
         variant="contained"
         color="secondary"
         size="large"
-        onClick={() => handleCancelButton()}
+        onClick={handleCancelButton}
       >
         Confirma Dezabonare
       </Button>
