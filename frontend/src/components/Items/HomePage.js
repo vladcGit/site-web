@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { IconButton, Fade, Grow, makeStyles, Zoom } from "@material-ui/core";
+import {
+  IconButton,
+  Fade,
+  Grow,
+  makeStyles,
+  Zoom,
+  Typography,
+} from "@material-ui/core";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import { StyledButton, WhiteTextTypography, colors } from "./Util";
 import GradientButton from "./GradientButton";
@@ -134,6 +141,17 @@ const HomePage = () => {
   return (
     <React.Fragment>
       <div className={classes.HeroContent}>
+        <WhiteTextTypography
+          style={{
+            textAlign: "center",
+            position: "relative",
+            top: "40px",
+            textDecoration: "underline",
+          }}
+        >
+          Acesta este doar un demo ca sa ne laudam cu cat de bine arata site-ul,
+          dar promitem ca va fi functional in curand
+        </WhiteTextTypography>
         <div
           className={classes.FlexContainer}
           style={{ minHeight: isPhone ? "50vh" : "70vh" }}

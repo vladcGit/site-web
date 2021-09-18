@@ -12,23 +12,19 @@ export default class Lesson extends Component {
     lectie: [],
     canRender: false,
     time: 0.0,
-    url: "",
+    url:
+      "https://" +
+      window.location.host +
+      "/courses/api/getlesson/" +
+      this.props.match.params.course_name +
+      "/" +
+      this.props.match.params.lesson_title +
+      "/",
     unixTimestamp: 0,
     videoSrc: null,
   };
 
   componentDidMount() {
-    this.setState({
-      url:
-        "https://" +
-        window.location.host +
-        "/courses/api/getlesson/" +
-        this.props.match.params.course_name +
-        "/" +
-        this.props.match.params.lesson_title +
-        "/",
-    });
-
     const requestOptions = {
       method: "POST",
       headers: {
@@ -46,10 +42,9 @@ export default class Lesson extends Component {
           "/subscribe/get_full_subscription_details/"
       );
       let data = await abonament.json();
-
       if (
         data.hasOwnProperty("Error") ||
-        data.subscription.status != "active"
+        data.subscription.status !== "active"
       ) {
         window.location.replace("/pricing");
       } else {
@@ -133,11 +128,11 @@ export default class Lesson extends Component {
           />
         </div>
 
-        <Typography>{this.state.lectie.details}</Typography>
-        <Typography>
+        <WhiteTextTypography>{this.state.lectie.details}</WhiteTextTypography>
+        <WhiteTextTypography>
           Abonamentul se incheie la data de{" "}
           {getStringDateFromUnixTime(this.state.unixTimestamp)}
-        </Typography>
+        </WhiteTextTypography>
       </Grid>
     );
   }

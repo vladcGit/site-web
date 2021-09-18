@@ -6,12 +6,17 @@ import {
   Grid,
   makeStyles,
   Container,
+  Collapse,
+  IconButton,
 } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+import CloseIcon from "@material-ui/icons/Close";
 import { colors } from "../Util";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(5),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -23,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ContainerAutentificare = (props) => {
+  const { error, errorMessage, onCloseError } = props;
   const classes = useStyles();
   const [borderRadius, setBorderRadius] = React.useState([60, -16]);
   return (
@@ -61,6 +67,24 @@ const ContainerAutentificare = (props) => {
           >
             <CssBaseline />
             <div className={classes.paper}>
+              <Collapse in={error} style={{ marginBottom: "20px" }}>
+                <Alert
+                  severity="error"
+                  variant="filled"
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => onCloseError(false)}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                >
+                  {errorMessage}
+                </Alert>
+              </Collapse>
               <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />
               </Avatar>

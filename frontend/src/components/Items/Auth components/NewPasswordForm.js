@@ -1,15 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {
-  Collapse,
-  IconButton,
-  makeStyles,
-  Typography,
-  TextField,
-  Button,
-} from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
-import CloseIcon from "@material-ui/icons/Close";
+import { makeStyles, Typography, TextField, Button } from "@material-ui/core";
 import ContainerAutentificare from "./ContainerAutentificare";
 
 const useStyles = makeStyles((theme) => ({
@@ -73,7 +64,11 @@ export default function NewPasswordForm() {
   }
 
   return (
-    <ContainerAutentificare>
+    <ContainerAutentificare
+      error={error}
+      errorMessage={errorMessage}
+      onCloseError={setError}
+    >
       <Typography component="h1" variant="h5">
         Schimbare parola
       </Typography>
@@ -101,26 +96,6 @@ export default function NewPasswordForm() {
           Schimbare parola
         </Button>
       </form>
-      <Collapse in={error}>
-        <Alert
-          severity="error"
-          variant="filled"
-          action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setError(false);
-              }}
-            >
-              <CloseIcon fontSize="inherit" />
-            </IconButton>
-          }
-        >
-          {errorMessage}
-        </Alert>
-      </Collapse>
     </ContainerAutentificare>
   );
 }

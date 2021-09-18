@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import {
-  Collapse,
-  IconButton,
   Button,
   TextField,
   Link,
@@ -9,8 +7,6 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
-import CloseIcon from "@material-ui/icons/Close";
 import ContainerAutentificare from "./ContainerAutentificare";
 
 const useStyles = makeStyles((theme) => ({
@@ -42,6 +38,12 @@ export default function SignIn() {
       }
     };
     document.addEventListener("keydown", listener);
+    if (localStorage.getItem("acceptCookies") !== "true") {
+      setError(true);
+      setErrorMessage(
+        "E nevoie sa acceptati modulele cookies ca sa va puteti autentifica pe site."
+      );
+    }
     return () => {
       document.removeEventListener("keydown", listener);
     };
@@ -76,7 +78,11 @@ export default function SignIn() {
   }
 
   return (
-    <ContainerAutentificare>
+    <ContainerAutentificare
+      error={error}
+      errorMessage={errorMessage}
+      onCloseError={setError}
+    >
       <Typography component="h1" variant="h5">
         Autentificare
       </Typography>
@@ -130,27 +136,6 @@ export default function SignIn() {
           </Grid>
         </Grid>
       </form>
-
-      <Collapse in={error} style={{ marginTop: "20px" }}>
-        <Alert
-          severity="error"
-          variant="filled"
-          action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setError(false);
-              }}
-            >
-              <CloseIcon fontSize="inherit" />
-            </IconButton>
-          }
-        >
-          {errorMessage}
-        </Alert>
-      </Collapse>
     </ContainerAutentificare>
   );
 }

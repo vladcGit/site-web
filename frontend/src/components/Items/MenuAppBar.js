@@ -254,7 +254,7 @@ const MenuAppBar = (props) => {
                 }}
               >
                 {/* <CloseIcon fontSize="inherit" /> */}
-                Ok
+                Accepta
               </Button>
             }
           >
