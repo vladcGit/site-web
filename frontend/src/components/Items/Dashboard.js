@@ -16,8 +16,8 @@ async function handleLogoutButton() {
 
   const response = await fetch("/api/auth/logout/", requestOptions);
   const data = await response.json();
-  localStorage.clear();
-  window.location.replace("");
+  localStorage.removeItem("token");
+  window.location.href = "/";
 }
 
 const Dashboard = () => {
@@ -41,7 +41,7 @@ const Dashboard = () => {
 
     const request = async () => {
       if (localStorage.getItem("token") === null) {
-        window.location.replace("");
+        window.location.href = "/";
       } else {
         //get user email
         const response = await fetch("/api/auth/user/", requestOptions);

@@ -66,10 +66,9 @@ export default function SignUp() {
     };
 
     const response = await fetch("/api/auth/register/", requestOptions);
-    const data = response.json();
-    localStorage.clear();
+    const data = await response.json();
     if (data.detail && data.detail === "Verification e-mail sent.") {
-      window.location.replace("/reset_successful");
+      window.location.href = "/reset_successful";
     } else {
       setError(true);
       const firstKey = Object.keys(data)[0];

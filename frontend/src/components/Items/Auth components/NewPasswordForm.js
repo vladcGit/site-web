@@ -63,9 +63,8 @@ export default function NewPasswordForm() {
       requestOptions
     );
     const data = await response.json();
-    if (data.status == "OK") window.location.replace("/signin");
+    if (data.status == "OK") window.location.href = "/signin";
     else {
-      localStorage.clear();
       setError(true);
       var firstKey = Object.keys(data)[0];
       var message = data[firstKey];

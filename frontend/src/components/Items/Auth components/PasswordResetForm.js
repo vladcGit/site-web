@@ -59,9 +59,8 @@ export default function PasswordResetForm() {
     const response = await fetch("/api/password_reset/", requestOptions);
     const data = await response.json();
     if (data.status == "OK") {
-      window.location.replace("/reset_successful");
+      window.location.href = "/reset_successful";
     } else {
-      localStorage.clear();
       setError(true);
       var firstKey = Object.keys(data)[0];
       var message = data[firstKey];
