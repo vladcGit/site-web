@@ -1,0 +1,17 @@
+stripe login
+stripe listen --forward-to http://127.0.0.1:8000/subscribe/webhook/
+stripe listen --forward-to https://vladconst.pythonanywhere.com/subscribe/webhook/
+
+with tabelul_meu as (select sum(time_played) as timp_total_site from courses_lessons)
+select distinct name,sum(time_played) timp_total_curs,timp_total_site,100*sum(time_played)/timp_total_site 
+from courses_lessons lectii,courses_courses cursuri,tabelul_meu where cursuri.id = lectii.course_id group by name
+
+
+select distinct name,round(sum(time_played),2) timp_total_curs,
+(select round(sum(time_played),2) from courses_lessons) as timp_total_site,
+round(100*sum(time_played)/(select sum(time_played) from courses_lessons),2)||' %' as procent
+from courses_lessons lectii,courses_courses cursuri 
+where cursuri.id = lectii.course_id group by name
+
+
+Set-ExecutionPolicy Unrestricted -Scope Process

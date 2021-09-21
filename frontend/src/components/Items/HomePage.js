@@ -147,10 +147,11 @@ const HomePage = () => {
             position: "relative",
             top: "40px",
             textDecoration: "underline",
+            paddingBottom: isPhone ? "60px" : "0",
           }}
         >
           Acesta este doar un demo ca sa ne laudam cu cat de bine arata site-ul,
-          dar promitem ca va fi functional in curand
+          dar promitem ca va fi functional in curand.
         </WhiteTextTypography>
         <div
           className={classes.FlexContainer}
