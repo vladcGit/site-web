@@ -1,6 +1,9 @@
 frontend/static/images/inutile/
 
-/node_modules
+frontend/node_modules
+.vscode
+*.pyc
+
 /.pnp
 .pnp.js
 
