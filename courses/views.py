@@ -2,7 +2,7 @@ from datetime import datetime, date
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from .models import Courses, Lessons, ViewedLessons
-from django.http import JsonResponse,HttpResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from json import loads
 # Create your views here.
@@ -22,7 +22,8 @@ def get_lessons(request, course_title):
             del lectie['video']
     if request.user.is_authenticated:
         # date despre ultima lectie vizionate
-        istoric_vizionare = ViewedLessons.objects.filter(user=request.user, curs=c)
+        istoric_vizionare = ViewedLessons.objects.filter(
+            user=request.user, curs=c)
         # doar lectii[0] are ultima lectie vizionata din motive de trimis mai putine date
         if istoric_vizionare.exists():
             istoric = list(istoric_vizionare.values())[0]
@@ -64,12 +65,14 @@ def get_lesson_details(request, course_title, lesson_title):
                 delta = today - data_ultima_lectie
                 # calculez diferenta intre ce acceseaza si ce are voie
                 diferenta = int(lectie['title'][0]) - istoric['numar_lectie']
-                # daca are acces direct la cursul asta sau e urmatorul si 
+                # daca are acces direct la cursul asta sau e urmatorul si
                 # a trecut mai mult de o zi flag ramane True
                 if diferenta > 1 or (diferenta == 1 and delta.days < 1):
                     flag = False
             else:
                 flag = False
+            # linie adaugata pentru beta
+            flag = True
             if flag:
                 istoric_vizionare = istoric_vizionare[0]
                 if diferenta == 1:
@@ -93,6 +96,7 @@ def add_time_played(request, course_title, lesson_title):
             return JsonResponse({"Succes": "OK"})
     return JsonResponse({"Error": "Nu aveti acces"})
 
+
 @csrf_exempt
 def get_video_blob(request, course_title, lesson_title):
     flag = True
@@ -115,7 +119,7 @@ def get_video_blob(request, course_title, lesson_title):
                 delta = today - data_ultima_lectie
                 # calculez diferenta intre ce acceseaza si ce are voie
                 diferenta = int(lectie['title'][0]) - istoric['numar_lectie']
-                # daca are acces direct la cursul asta sau e urmatorul si 
+                # daca are acces direct la cursul asta sau e urmatorul si
                 # a trecut mai mult de o zi flag ramane True
                 if diferenta > 1 or (diferenta == 1 and delta.days < 1):
                     flag = False

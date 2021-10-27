@@ -31,9 +31,12 @@ export default class Lesson extends Component {
           (1000 * 3600 * 24);
         var decizie =
           obj.title.charAt(0) - data[0].last_viewed == 1 && numarZile > 1;
+
         if (data[0].last_viewed < obj.title.charAt(0) && !decizie)
           obj.isLocked = true;
         //obj.image="/static/images/carte_vector.png"
+        // linie adaugata pentru beta
+        obj.isLocked = false;
         lista.push(obj);
       }
       this.setState({ tiers: lista });
