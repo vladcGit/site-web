@@ -128,7 +128,7 @@ const HomePage = () => {
     "chimia",
     "informatica",
     "biologia",
-    "engleza",
+    "economia",
     "franceza",
   ];
   useEffect(() => {

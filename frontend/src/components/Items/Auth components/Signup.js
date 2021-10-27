@@ -63,7 +63,11 @@ export default function SignUp() {
 
     const response = await fetch("/api/auth/register/", requestOptions);
     const data = await response.json();
-    console.log(data);
+    //console.log(data);
+    if (data.key) {
+      window.location.href = "/signin";
+      return;
+    }
     if (data.detail && data.detail === "Verification e-mail sent.") {
       window.location.href = "/reset_successful";
     } else {

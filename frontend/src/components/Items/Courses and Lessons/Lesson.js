@@ -36,36 +36,46 @@ export default class Lesson extends Component {
     };
 
     const request = async () => {
+      /*
       const abonament = await fetch(
         "https://" +
           window.location.host +
           "/subscribe/get_full_subscription_details/"
       );
       let data = await abonament.json();
+      //modificat pentru beta
+      
       if (
         data.hasOwnProperty("Error") ||
         data.subscription.status !== "active"
-      ) {
+      )
+      
+
+      if (false) {
         window.location.replace("/pricing");
+        return;
       } else {
         this.setState({
           unixTimestamp: data.subscription.current_period_end,
         });
       }
 
+      */
       const response = await fetch(this.state.url, requestOptions);
-      data = await response.json();
+      let data = await response.json();
 
       if (data.hasOwnProperty("Error"))
         console.log("Nu ai acces, uita-te la altele");
-
+      /*
       const blobResponse = await fetch(
         this.state.url + "blob/",
         requestOptions
       );
+  
       const blob = await blobResponse.blob();
       const urlVideo = await URL.createObjectURL(blob);
-      this.setState({ videoSrc: urlVideo, lectie: data, canRender: true });
+        */
+      this.setState({ lectie: data, canRender: true });
     };
 
     request();
@@ -110,8 +120,8 @@ export default class Lesson extends Component {
         >
           <ReactPlayer
             //url={this.state.lectie.link}
-            //url={[{ src: `${this.state.lectie.link}`, type: "video/mp4" }]}
-            url={this.state.videoSrc}
+            url={this.state.lectie.link}
+            //url={this.state.videoSrc}
             controls
             type="video/mp4"
             onProgress={(progress) =>
@@ -126,13 +136,21 @@ export default class Lesson extends Component {
               },
             }}
           />
+
+          {/* <iframe
+            style={{ width: "60vw", height: "40vh" }}
+            src={this.state.lectie.link}
+            allowfullscreen
+            scrolling="no"
+            allow="encrypted-media;"
+          ></iframe> */}
         </div>
 
         <WhiteTextTypography>{this.state.lectie.details}</WhiteTextTypography>
-        <WhiteTextTypography>
+        {/* <WhiteTextTypography>
           Abonamentul se incheie la data de{" "}
           {getStringDateFromUnixTime(this.state.unixTimestamp)}
-        </WhiteTextTypography>
+        </WhiteTextTypography> */}
       </Grid>
     );
   }

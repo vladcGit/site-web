@@ -162,7 +162,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 
 # mandatory daca vreau sa fie obligatorie confirmarea
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 LOGIN_URL = SITE_NAME+'/signin'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 
@@ -175,7 +175,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'icaracademyro@gmail.com'
-EMAIL_HOST_PASSWORD = 'sfantulsava69'
+EMAIL_HOST_PASSWORD = 'sfantulsava58'
 '''
 
 REST_FRAMEWORK = {
