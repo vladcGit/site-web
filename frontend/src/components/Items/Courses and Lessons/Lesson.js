@@ -110,15 +110,22 @@ export default class Lesson extends Component {
         justify="center"
         style={{ minHeight: "70vh" }}
       >
-        <WhiteTextTypography component="h1" variant="h2" gutterBottom>
-          {tokenizeTitle(this.state.lectie.title)}
-        </WhiteTextTypography>
+        <div style={{ maxWidth: "80vw", textAlign: "center" }}>
+          <WhiteTextTypography
+            component="h1"
+            variant={window.innerWidth <= 768 ? "h5" : "h2"}
+            gutterBottom
+          >
+            {tokenizeTitle(this.state.lectie.title)}
+          </WhiteTextTypography>
+        </div>
         <div
           style={{
             height: "40vh",
           }}
         >
           <ReactPlayer
+            style={{ maxWidth: "80vw" }}
             //url={this.state.lectie.link}
             url={this.state.lectie.link}
             //url={this.state.videoSrc}
@@ -146,7 +153,9 @@ export default class Lesson extends Component {
           ></iframe> */}
         </div>
 
-        <WhiteTextTypography>{this.state.lectie.details}</WhiteTextTypography>
+        <WhiteTextTypography
+          dangerouslySetInnerHTML={{ __html: this.state.lectie.details }}
+        />
         {/* <WhiteTextTypography>
           Abonamentul se incheie la data de{" "}
           {getStringDateFromUnixTime(this.state.unixTimestamp)}

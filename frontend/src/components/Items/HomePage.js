@@ -7,6 +7,7 @@ import {
   makeStyles,
   Zoom,
   Typography,
+  Button,
 } from "@material-ui/core";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import { StyledButton, WhiteTextTypography, colors } from "./Util";
@@ -141,18 +142,6 @@ const HomePage = () => {
   return (
     <React.Fragment>
       <div className={classes.HeroContent}>
-        <WhiteTextTypography
-          style={{
-            textAlign: "center",
-            position: "relative",
-            top: "40px",
-            textDecoration: "underline",
-            paddingBottom: isPhone ? "60px" : "0",
-          }}
-        >
-          Acesta este doar un demo ca sa ne laudam cu cat de bine arata site-ul,
-          dar promitem ca va fi functional in curand.
-        </WhiteTextTypography>
         <div
           className={classes.FlexContainer}
           style={{ minHeight: isPhone ? "50vh" : "70vh" }}
@@ -174,9 +163,21 @@ const HomePage = () => {
                 Aducem eficienta, cooperarea si simplitatea in educatie. Poti
                 incerca gratuit serviciul nostru.
               </WhiteTextTypography>
-              <GradientButton component={Link} to="/pricing">
+              {/* <GradientButton component={Link} to="/pricing">
                 Vezi oferta
-              </GradientButton>
+              </GradientButton> */}
+              <a
+                href="https://docs.google.com/forms/d/1TI9EqIe0d9UncjEkCa4oW5dGqZjERaGUak-7ljNqwOs/viewform?edit_requested=true"
+                style={{
+                  backgroundColor: "white",
+                  color: "black",
+                  padding: "15px 25px",
+                  textDecoration: "none",
+                  borderRadius: "10px",
+                }}
+              >
+                Da-ne feedback
+              </a>
             </div>
           </Grow>
 
